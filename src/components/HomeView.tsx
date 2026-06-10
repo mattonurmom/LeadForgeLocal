@@ -50,7 +50,7 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
       {/* SEAMLESS INFINITE SCROLL CAROUSEL OF SERVICE VERTICALS */}
       <div className="bg-slate-950/80 border-b border-slate-900/50 py-2 text-center">
         <span className="text-[10px] sm:text-xs font-bold text-slate-400 tracking-wider uppercase font-mono px-4 block">
-          Online services to cover professional services alongside home trade contractors
+          Online visibility management to cover professional services alongside home trade contractors
         </span>
       </div>
 
