@@ -28,7 +28,7 @@ export default function Footer({ setTab, setShowAdminHub }: FooterProps) {
             </div>
             <div>
               <span className="font-display text-lg font-bold text-white tracking-tight">LeadForge Local</span>
-              <span className="block text-[9px] text-slate-500 uppercase tracking-widest">An M&H OnlineServices Company</span>
+              <span className="block text-[9px] text-slate-500 uppercase tracking-widest">Local Business Growth Service</span>
             </div>
           </div>
           
@@ -37,7 +37,7 @@ export default function Footer({ setTab, setShowAdminHub }: FooterProps) {
           </p>
 
           <div className="text-[10px] text-slate-500">
-            <span>Primary division of</span> • <strong className="text-slate-450">M&H OnlineServices, LLC</strong>
+            <span>LeadForge Local is a local business growth service focused on helping small businesses improve their online presence, visibility, and lead generation systems.</span>
           </div>
         </div>
 
@@ -86,14 +86,19 @@ export default function Footer({ setTab, setShowAdminHub }: FooterProps) {
 
       </div>
 
-      {/* Underbar terms copyrights */}
-      <div className="bg-slate-950/60 py-6 text-center text-[10.5px] border-t border-slate-900 text-slate-500">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <span>© {new Date().getFullYear()} LeadForge Local. An M&H OnlineServices company. All rights reserved.</span>
-          <div className="flex gap-4">
-            <span className="cursor-pointer hover:text-slate-350">Service Terms</span>
-            <span className="cursor-pointer hover:text-slate-350">Privacy Protection</span>
-            <span className="cursor-pointer hover:text-slate-350" onClick={() => { setShowAdminHub(true); window.scrollTo({ top: 0, behavior: "smooth" }); }}>Owner Desk</span>
+      {/* Disclaimer section */}
+      <div className="bg-slate-950/40 py-6 border-t border-slate-900 text-[10.5px] text-slate-500 leading-relaxed">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-4">
+          <p className="max-w-4xl mx-auto text-left sm:text-center">
+            <strong>Disclaimer:</strong> LeadForge Local does not guarantee specific rankings, revenue, lead volume, or sales results. Services are designed to improve online presence, customer trust, visibility, and lead generation opportunities. Results vary by business, market, competition, and consistency.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2 border-t border-slate-900">
+            <span>© {new Date().getFullYear()} LeadForge Local. All rights reserved.</span>
+            <div className="flex gap-4">
+              <span className="cursor-pointer hover:text-slate-350">Service Terms</span>
+              <span className="cursor-pointer hover:text-slate-350">Privacy Protection</span>
+              <span className="cursor-pointer hover:text-slate-350" onClick={() => { setShowAdminHub(true); window.scrollTo({ top: 0, behavior: "smooth" }); }}>Owner Desk</span>
+            </div>
           </div>
         </div>
       </div>

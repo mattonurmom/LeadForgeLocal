@@ -82,7 +82,7 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
             <div className="lg:col-span-7 space-y-6 lg:pr-4">
               <div className="inline-flex items-center gap-2 rounded-full bg-blue-500/10 border border-blue-500/30 px-3.5 py-1 text-xs font-semibold tracking-wide text-sky-400">
                 <span className="h-1.5 w-1.5 rounded-full bg-sky-400 animate-pulse"></span>
-                An M&H OnlineServices Company
+                LeadForge Local Business Growth Service
               </div>
               
               <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.1]">
@@ -93,8 +93,34 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
               </h1>
               
               <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl">
-                We help local service providers, home contractors, medical clinics, legal professionals, and dining venues improve their online presence, attract nearby customers, generate steady phone inquiries, and increase cash revenue. No complex jargon—just direct results through Google Maps SEO, high-converting websites, review pipelines, and smart missed-call response automations.
+                LeadForge Local helps small business owners improve their online presence, attract nearby customers, and convert searchers into active projects. 
               </p>
+              
+              <div className="py-2 space-y-1.5 text-slate-300 text-xs sm:text-sm font-medium">
+                <p className="text-sky-400 font-bold block pb-1">LeadForge Local helps businesses secure:</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2">
+                  <div className="flex items-center gap-2">
+                    <span className="h-2 w-2 rounded-full bg-sky-400"></span>
+                    <span>More Calls</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="h-2 w-2 rounded-full bg-sky-400"></span>
+                    <span>More Leads</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="h-2 w-2 rounded-full bg-sky-400"></span>
+                    <span>More Customers</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="h-2 w-2 rounded-full bg-sky-400"></span>
+                    <span>Stronger Online Visibility</span>
+                  </div>
+                  <div className="col-span-1 sm:col-span-2 flex items-center gap-2">
+                    <span className="h-2 w-2 rounded-full bg-sky-400"></span>
+                    <span>A More Professional Online Presence</span>
+                  </div>
+                </div>
+              </div>
 
               {/* CTAs */}
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4">
@@ -137,8 +163,8 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
                 {/* Simulated Google Map Result */}
                 <div className="bg-slate-950/80 border border-slate-800/80 rounded-xl p-4 mb-4">
                   <div className="flex items-center justify-between pb-2 border-b border-slate-850">
-                    <span className="text-[10px] font-mono font-bold text-slate-500">GOOGLE MAP PACK SEARCH</span>
-                    <span className="rounded-full bg-blue-500/10 px-1.5 py-0.5 text-[9px] font-bold text-sky-400 uppercase">MAP PACK TOP 3</span>
+                    <span className="text-[10px] font-mono font-bold text-slate-500">DEMONSTRATION SAMPLE</span>
+                    <span className="rounded-full bg-blue-500/10 px-1.5 py-0.5 text-[9px] font-bold text-sky-400 uppercase">MAP PACK ACCELERATOR</span>
                   </div>
                   <div className="flex items-start gap-3 mt-3">
                     <div className="bg-blue-600 text-white rounded-lg p-2.5">
@@ -164,7 +190,7 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
                     <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider block mb-1">Monthly inbound calls</span>
                     <div className="flex items-baseline gap-1.5">
                       <span className="text-2xl font-bold text-white font-display">184</span>
-                      <span className="text-[10px] font-bold text-green-400">+237%</span>
+                      <span className="text-[10px] font-bold text-green-400">+35%</span>
                     </div>
                   </div>
                   <div className="bg-gradient-to-br from-slate-950 to-blue-950/40 border border-slate-800/80 rounded-xl p-4">
@@ -192,7 +218,7 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
               {/* Foreground float badge */}
               <div className="absolute -bottom-4 right-4 bg-blue-600 rounded-xl p-3 border border-blue-500 text-white shadow-xl flex items-center gap-2 max-w-[170px] hidden sm:flex">
                 <ShieldCheck className="h-5 w-5 text-white flex-shrink-0" />
-                <span className="text-[10px] font-bold tracking-tight leading-snug">Zero Long-term Risk Retainers</span>
+                <span className="text-[10px] font-bold tracking-tight leading-snug">Demonstration Graphic. Results Vary.</span>
               </div>
 
             </div>
@@ -548,8 +574,8 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
                 a: "We help home service companies get more local client jobs by ranking their business listings in Google Maps, building fast trade websites, and implementing instant missed-call responses."
               },
               {
-                q: "Who is LeadForge Local? Is there a parent group?",
-                a: "Yes! LeadForge Local is a specialized contractor growth brand operating proudly under M&H OnlineServices, providing advanced, cloud-enabled agency tech at affordable local prices."
+                q: "What is LeadForge 's primary focus?",
+                a: "LeadForge Local is a specialized local business growth service focused on helping small businesses improve their online presence, search visibility, and lead generation systems."
               },
               {
                 q: "Do I have to sign binding long-term plans?",

@@ -52,7 +52,7 @@ export default function Navbar({ currentTab, setTab, showAdminHub, setShowAdminH
               <span className="font-display text-xl font-bold tracking-tight text-white animate-fadeIn">LeadForge</span>
               <span className="rounded bg-blue-500/15 px-1.5 py-0.5 text-[10px] font-bold tracking-wide text-sky-400 uppercase">Local</span>
             </div>
-            <span className="block text-[9px] text-slate-400 tracking-wider">M&H OnlineServices</span>
+            <span className="block text-[9px] text-slate-400 tracking-wider">Local Visibility Support</span>
           </div>
         </button>
 
@@ -161,7 +161,7 @@ export default function Navbar({ currentTab, setTab, showAdminHub, setShowAdminH
             </div>
             
             <div className="pt-4 text-center border-t border-slate-900">
-              <span className="text-[11px] text-slate-400 font-medium">An M&H OnlineServices company</span>
+              <span className="text-[11px] text-slate-400 font-medium">Local Visibility & Lead Capture</span>
             </div>
           </div>
         </div>

@@ -172,7 +172,7 @@ export default function ServicesView({ setTab }: ServicesViewProps) {
 
                 {/* Footer action */}
                 <div className="pt-6 mt-6 border-t border-slate-800/80 flex items-center justify-between">
-                  <span className="text-[10px] text-slate-405 font-semibold">M&H Division Setup Standards</span>
+                  <span className="text-[10px] text-slate-400 font-semibold">LeadForge Technical Setup Standards</span>
                   <button
                     onClick={handleAuditCta}
                     className="text-xs font-bold text-sky-400 hover:text-sky-305 flex items-center gap-1 cursor-pointer"

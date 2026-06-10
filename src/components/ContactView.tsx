@@ -72,9 +72,9 @@ export default function ContactView({ onAddContactLead }: ContactViewProps) {
             <div className="space-y-6">
               
               <div>
-                <span className="text-[10px] text-sky-400 font-bold uppercase tracking-wider block mb-1">M&H Agency Division</span>
+                <span className="text-[10px] text-sky-400 font-bold uppercase tracking-wider block mb-1">Local Growth Service</span>
                 <h3 className="font-display font-extrabold text-white text-xl">LeadForge Local HQ</h3>
-                <span className="block text-slate-400 text-xs mt-0.5">An M&H OnlineServices company.</span>
+                <span className="block text-slate-400 text-xs mt-0.5">Helping small businesses improve visibility and lead generation.</span>
               </div>
 
               <div className="space-y-4 text-xs font-sans text-slate-300">
@@ -212,7 +212,7 @@ export default function ContactView({ onAddContactLead }: ContactViewProps) {
                     value={formData.message}
                     onChange={handleChange}
                     className="w-full bg-slate-950 border border-slate-850 rounded-xl text-xs px-3.5 py-3 text-white focus:outline-none focus:border-blue-500 resize-none"
-                    placeholder="e.g., We are a plumbing company looking to rank top 3 in the local maps pack and save missed calls..."
+                    placeholder="e.g., We are a plumbing company looking to improve our local visibility and save missed calls..."
                   />
                 </div>
 

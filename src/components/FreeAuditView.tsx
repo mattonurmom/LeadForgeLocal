@@ -196,7 +196,7 @@ Priority Discoveries:
             </div>
 
             <div className="text-center font-medium text-xs text-slate-500">
-              <span>Thank you for choosing LeadForge Local. An M&H OnlineServices company.</span>
+              <span>Thank you for choosing LeadForge Local.</span>
             </div>
 
           </div>
@@ -309,7 +309,7 @@ Priority Discoveries:
 
               <div className="flex items-center justify-center gap-2 pt-2 border-t border-slate-800 text-[10px] text-slate-500">
                 <ShieldCheck className="h-4 w-4 text-slate-400" />
-                <span>We strictly respect contract privacy. No spam. Secure M&H protocols.</span>
+                <span>We strictly respect contact privacy. No spam. Secure encryption protocols.</span>
               </div>
 
             </form>

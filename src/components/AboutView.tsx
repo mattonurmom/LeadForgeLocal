@@ -35,7 +35,7 @@ export default function AboutView({ setTab }: AboutViewProps) {
             <div className="lg:col-span-7 space-y-6">
               <div className="inline-flex items-center gap-1.5 rounded-full bg-slate-900 border border-slate-800 px-3 py-1 text-[11px] font-bold text-sky-400">
                 <Building2 className="h-3.5 w-3.5 text-sky-400" />
-                An M&H OnlineServices Company
+                Local Business Growth Service
               </div>
 
               <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-white leading-tight">
@@ -50,7 +50,7 @@ export default function AboutView({ setTab }: AboutViewProps) {
                   We saw honest, hardworking local business owners—plumbers, concrete builders, roofers, landscapers—getting overcharged by lazy agencies or lost in complex algorithms. Many were leaking dozens of high-paying calls simply because their Google maps pin was unoptimized or they missed client inquiries on active job sites.
                 </p>
                 <p>
-                  That's why we founded <strong>LeadForge Local</strong> as a dedicated agency division under the <strong>M&H OnlineServices</strong> corporate family. By combining M&H's advanced container hosting and automations infrastructure with localized, hyper-targeted trade copy, we designed a client-finding machine that operates fractionally at a tiny segment of traditional agency overheads.
+                  That's why we founded <strong>LeadForge Local</strong>. By combining advanced digital tools and automation setups with localized, hyper-targeted marketing copy, we designed a client-acquisition and visibility system that operates at a tiny segment of traditional agency overheads.
                 </p>
                 <p>
                   We don't build long, confusing tech contracts. We build simple, incredibly high-speed digital tools, optimize your maps pack directory properly, and install immediate call text-back systems that preserve incoming cash flow from day one.
@@ -73,7 +73,7 @@ export default function AboutView({ setTab }: AboutViewProps) {
               </div>
             </div>
 
-            {/* Large visually polished side card representing M&H Parent association details */}
+            {/* Large visually polished side card representing standard details */}
             <div className="lg:col-span-5 bg-slate-900 text-white rounded-2xl p-8 border border-slate-800 relative">
               <div className="absolute top-0 right-0 h-24 w-24 bg-blue-600/10 blur-2xl pointer-events-none rounded-full" />
               
@@ -83,10 +83,10 @@ export default function AboutView({ setTab }: AboutViewProps) {
                 </div>
 
                 <div className="space-y-2">
-                  <span className="text-[10px] text-sky-400 font-bold uppercase tracking-wider block">Enterprise-backed Security</span>
-                  <h3 className="font-display font-extrabold text-white text-lg">Backed by M&H OnlineServices</h3>
+                  <span className="text-[10px] text-sky-400 font-bold uppercase tracking-wider block">Professional Operations</span>
+                  <h3 className="font-display font-extrabold text-white text-lg">Optimized Technical Systems</h3>
                   <p className="text-xs text-slate-300 leading-relaxed">
-                    By operating as a proud, integrated division of M&H OnlineServices, LeadForge Local has instant, native access to high-performance web servers, advanced cloud databases, and certified SMS communication servers.
+                    LeadForge Local provides small businesses with access to premium cloud-hosting, secure communication pipelines, and certified SMS communication channels designed to support high reliability.
                   </p>
                 </div>
 

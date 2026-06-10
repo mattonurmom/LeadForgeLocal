@@ -10,7 +10,7 @@ export const SERVICES: ServiceItem[] = [
     priceTag: "$150",
     benefits: [
       "Designed to improve local search visibility",
-      "Removes competitor duplicates and hijackers",
+      "Removes duplicate listings and profile errors",
       "Syncs accurate operating hours and phone contact fields",
       "Establishes correct trade classification on Google Maps"
     ],
@@ -431,7 +431,7 @@ export const PACKAGES: PackageItem[] = [
   },
   {
     id: "pkg-premium",
-    name: "Monthly Marketing Management",
+    name: "Premium Marketing Package",
     price: "$999 / mo",
     tagline: "Complete marketing management designed to bolster your online presence and client trust.",
     badge: "Complete Growth",
@@ -463,30 +463,30 @@ export const PORTFOLIO: PortfolioItem[] = [
     title: "VIP Plumbing Revamp (Sample Demonstration Project)",
     category: "Website & Google Business Optimization",
     description: "An outdated layout with missing reviews was costing this veteran plumber high-paying drain cleanups and re-piping jobs in their city.",
-    beforeImg: "VIP Plumbing (Demonstration Example: Slow loading, non-responsive, 12 Reviews, map pack rank #18, lost calls)",
-    afterImg: "VIP Plumbing Redesigned (Demonstration Example: High-speed Vite architecture, 4.9 Star Review System, ranking top 3 local pack)",
+    beforeImg: "VIP Plumbing (Sample Business Profile Cleanup: Slow loading, non-responsive, 12 reviews, unoptimized profile, missed calls)",
+    afterImg: "VIP Plumbing Redesigned (Demonstration Website Redesign: High-speed Vite layout, professional review support system, improved map pack visibility)",
     metric: "Demonstration Example",
-    metricLabel: "Designed to help increase calls 2x-3x based on typical client audits",
-    details: "We redesigned their layout into a mobile-first appointment visual funnel and launched automated review collection. Listing jumped to map pack top 3 within 40 days."
+    metricLabel: "Designed to help increase calls based on typical client audits",
+    details: "We redesigned their layout into a mobile-first appointment landing visual funnel and launched automated review collection to help strengthen their online presence."
   },
   {
     id: "port-roofer",
     title: "Apex Roofing Optimization (Sample Demonstration Project)",
     category: "Google Business Pack & Missed Call Setup",
     description: "Owner was frequently on roofs and missed 35% of incoming homeowner calls, losing them directly to rival fast builders.",
-    beforeImg: "Apex Roofers (Demonstration Example: No visual posts, missed calls left with no response, ranking on map page 3)",
-    afterImg: "Active LeadForge Loop (Demonstration Example: Missed Call auto-text back, 3 localized visual updates per week, top-3 map pack visibility)",
+    beforeImg: "Apex Roofers (Sample Lead Flow Concept: No visual profile updates, missed calls with no backup response, low visibility)",
+    afterImg: "Active LeadForge Loop (Potential Online Presence Upgrade: Missed call instant auto-text response, localized business profile updates, improved map pack search visibility)",
     metric: "Demonstration Example",
     metricLabel: "Designed to rescue missed opportunities immediately via SMS text-back",
-    details: "We updated and verified their citations, then turned on Missed Call Text-Back. Now, every missed caller gets texted in 4 seconds, booking roof evaluations with no manual effort."
+    details: "We updated and cleaned up business citation details, then turned on Missed Call Text-Back. Now, every missed caller gets an immediate automated text reply, helping secure opportunities with no manual effort."
   },
   {
     id: "port-hvac",
     title: "Comfort King HVAC System Setup (Sample Demonstration Project)",
     category: "Mini Web Setup & Facebook Loop",
     description: "An active business with zero digital references besides a broken Facebook group. Homeowners couldn't easily review plans.",
-    beforeImg: "Comfort King (Demonstration Example: No website, basic text profile, manual appointment books, zero Google visibility)",
-    afterImg: "Comfort Landing Engine (Demonstration Example: Clean brand guide colors, interactive air quote estimator tool, optimized pages)",
+    beforeImg: "Comfort King (Example Visibility Improvement: No website, incomplete social profile, manual calendar bookings, low online visibility)",
+    afterImg: "Comfort Landing Engine (Demonstration Website Redesign: Clean brand guide colors, interactive air quote estimator concept, optimized layout)",
     metric: "Demonstration Example",
     metricLabel: "Projected value recovered on first-month deployment based on typical client audits",
     details: "Implemented the 'Starter Local' system. Local customers have secure appointment scheduling, capturing high-intent furnace swap calls that transformed their calendar."
@@ -503,8 +503,8 @@ export const FAQ: FaqItem[] = [
   {
     id: "faq-2",
     category: "General",
-    question: "Who is LeadForge Local? Is there a parent group?",
-    answer: "Yes! LeadForge Local is proud to operate as a specialized corporate division of M&H OnlineServices. This lets us leverage established technical frameworks, enterprise-grade cloud integrations, and extensive regional marketing expertise to give local business owners affordable access to world-class tools."
+    question: "Who is LeadForge Local?",
+    answer: "LeadForge Local is a professional small business growth service focused on helping local businesses improve their online presence, visibility, and lead generation systems. We believe in clear pricing, simple setups, and real results."
   },
   {
     id: "faq-3",
@@ -714,13 +714,13 @@ export const AUDIT_TEMPLATE = `# LEADFORGE LOCAL - SIMPLE BUSINESS VISIBILITY AU
 
 ## BUSINESS UNDER REVIEW: [Insert Local Business Name]
 **DATE OF EVALUATION:** ${new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
-**EVALUATION ENGINE:** LeadForge Local (An M&H OnlineServices Company)
+**EVALUATION ENGINE:** LeadForge Local Business Growth Service
 
 ---
 
 ### Part 1: Diagnostic Metrics & Scores
 1. **Google Business Profile Score:** ⭐⭐⭐☆☆ (Claimed but lacks citations / missing active posts)
-2. **Organic Local Rankings (Map Pack):** Page 2, Page 3 (Not ranking in top 3 "Map 3-Pack" in priority town)
+2. **Organic Local Rankings (Map Pack):** Page 2, Page 3 (Not optimized in primary service area)
 3. **Mobile response & Speed Index:** ⚠️ Outdated (3.4s load time, small call touch-targets)
 4. **Social Heartbeat Alert:** ❌ Inactive (Last Facebook page update: Over 6 months ago)
 5. **Trust Validation Index:** ⚠️ Weak (Lacks real-time Google review stream badge on homepage)
@@ -741,7 +741,7 @@ export const AUDIT_TEMPLATE = `# LEADFORGE LOCAL - SIMPLE BUSINESS VISIBILITY AU
 2. **Launch Review QR Cards** - Give field specialists custom review codes to request 5-star feedback instantly ($49/mo).
 3. **Turn on Auto-Text Responders** - Instantly text missed callers to secure emergency jobs ($100 setup).
 
-**Estimated Opportunity:** +30% to +50% increase in monthly appointment call volume without paid ads.
+**Potential Improvement Example:** Helps improve client engagement and search visibility. Results vary by business, market, and competition.
 
 ---
 **Prepared By:** LeadForge Local Outreach Team | www.leadforgelocal.com`;
@@ -749,7 +749,7 @@ export const AUDIT_TEMPLATE = `# LEADFORGE LOCAL - SIMPLE BUSINESS VISIBILITY AU
 export const PROPOSAL_TEMPLATE = `# PREMIUM BUSINESS GROWTH PROPOSAL
 
 **PREPARED FOR:** [Insert Prospect Business Name]
-**PREPARED BY:** LeadForge Local (An M&H OnlineServices Company)
+**PREPARED BY:** LeadForge Local Business Growth Service
 **ESTIMATED TIMELINE:** 2-3 Weeks from Ignition
 
 ---
@@ -760,7 +760,7 @@ Most trade service providers lose high-paying plumbing, roofing, or electrical p
 ---
 
 ## 2. Identified Objectives
-*   Rank your contracting business in the Google Map Pack top 3.
+*   Improve visibility and customer trust in the Google Map Pack.
 *   Fix mobile loading page delays and integrate interactive calling CTA buttons.
 *   Secure 100% of missed contractor line ringers with immediate auto-SMS callbacks.
 *   Increase Google 5-star review quantity significantly to build local buyer confidence.
@@ -790,13 +790,13 @@ export const OUTREACH_TEMPLATES: OutreachTemplate[] = [
     name: "30-Second Elevator Sales Pitch",
     type: "Follow-up",
     tips: "Speak slowly, clearly, and keep your focus entirely on their incoming calls and customer bookings.",
-    content: "Hi! I'm with LeadForge Local, an M&H OnlineServices company. We help local service contractors like plumbers and roofers get more phone calls and client jobs right here in [City Name]. Most contractors are losing business because they don't appear in the top spots on Google Maps or because they miss busy phone calls on site. We set up simple, low-cost automations that instantly text back missed callers and optimize your Google listing to rank in Google Maps so you never lose high-paying jobs to your competitors. Is securing more steady calls something your team is currently focused on?"
+    content: "Hi! I'm with LeadForge Local. We help local service contractors like plumbers and roofers get more phone calls and client jobs right here in [City Name]. Most contractors are losing business because they don't appear in the top spots on Google Maps or because they miss busy phone calls on site. We set up simple, low-cost automations that instantly text back missed callers and optimize your Google listing to improve Google Maps search visibility so you never lose opportunities to your competitors. Is securing more steady calls something your team is currently focused on?"
   },
   {
     name: "Cold Facebook Message Template",
     type: "Facebook Message",
     tips: "Find local painters, landscapers, or cleaning companies on Facebook who are inactive and message them.",
-    content: "Hi [Business Owner Name]! 👋\n\nI was looking for local [Service Type, e.g., plumbers] in [City Name] today and noticed your Facebook page, but struggled to find your Google listing on the Map Pack. \n\nI did a quick audit of your online profiles and discovered 3 minor errors that are likely blocking customers from finding your phone number on Google. \n\nI created a quick, free 1-page Business Performance Audit detailing how to fix these errors yourself to get more calls in [City Name]. Can I drop the PDF link over to you right here? No pitch, just some helpful local tips!\n\nBest,\n[Your Name]\nLeadForge Local (An M&H OnlineServices Company)"
+    content: "Hi [Business Owner Name]! 👋\n\nI was looking for local [Service Type, e.g., plumbers] in [City Name] today and noticed your Facebook page, but struggled to find your Google listing on the Map Pack. \n\nI did a quick audit of your online profiles and discovered 3 minor errors that are likely blocking customers from finding your phone number on Google. \n\nI created a quick, free 1-page Business Performance Audit detailing how to fix these errors yourself to get more calls in [City Name]. Can I drop the PDF link over to you right here? No pitch, just some helpful local tips!\n\nBest,\n[Your Name]\nLeadForge Local Business Growth Service"
   },
   {
     name: "Cold Outreach Text Message (SMS)",
@@ -809,7 +809,7 @@ export const OUTREACH_TEMPLATES: OutreachTemplate[] = [
     type: "Email",
     subject: "Improvement Plan for [Business Name] - More calls in [City Name]",
     tips: "Keep your email brief, casual, and focused strictly on the free audit value.",
-    content: "Hi [Owner Name],\n\nI was researching [Service Trade, e.g., HVAC companies] in [City Name] and came across your website ([Website Link]). \n\nYou have a great business, but I noticed a couple of structural gaps that are causing you to lose high-value calls to other competitors in the neighborhood:\n\n1. Your website loads slowly on mobile devices, which causes up to 40% of page visitors to back out before they call.\n2. Your Google Business Profile is showing incomplete search categories, causing you to rank on map page 2 where clients rarely click.\n\nWe specialize in setting up fast, high-converting service websites and Google listings that generate steady customer calling streams. \n\nI've generated a free, custom 1-page Business performance audit for [Business Name] with tailored, straight-to-the-point instructions on how to patch these leaks. You can apply them yourself, or have us do it for you.\n\nWould you be open to reviewing the free report and a brief 5-minute call to discuss how to capture 10-15 more jobs per month?\n\nIf so, please let me know or book directly here: [Your Booking Link]\n\nWarm regards,\n\n[Your Name]\nLeadForge Local\nAn M&H OnlineServices Company\n[Your Phone Number]"
+    content: "Hi [Owner Name],\n\nI was researching [Service Trade, e.g., HVAC companies] in [City Name] and came across your website ([Website Link]). \n\nYou have a great business, but I noticed a couple of structural gaps that are causing you to lose high-value calls to other competitors in the neighborhood:\n\n1. Your website loads slowly on mobile devices, which causes up to 40% of page visitors to back out before they call.\n2. Your Google Business Profile is showing incomplete search categories, causing you to rank on map page 2 where clients rarely click.\n\nWe specialize in setting up fast, high-converting service websites and Google listings that generate steady customer calling streams. \n\nI've generated a free, custom 1-page Business performance audit for [Business Name] with tailored, straight-to-the-point instructions on how to patch these leaks. You can apply them yourself, or have us do it for you.\n\nWould you be open to reviewing the free report and a brief 5-minute call to discuss how to capture 10-15 more jobs per month?\n\nIf so, please let me know or book directly here: [Your Booking Link]\n\nWarm regards,\n\n[Your Name]\nLeadForge Local\n[Your Phone Number]"
   },
   {
     name: "Quick Lead Follow-Up Sequence",
@@ -821,7 +821,7 @@ export const OUTREACH_TEMPLATES: OutreachTemplate[] = [
 
 export const PLAIN_TEXT_GOOGLE_SITES = {
   header: `LEADFORGE LOCAL
-An M&H OnlineServices Company
+Business Growth Service
 Tagline: More Calls. More Leads. More Customers.`,
   homepage: `=== GOOGLE SITES COMPATIBLE PORT: HOMEPAGE ===
 
@@ -884,7 +884,7 @@ Headline: affordable Local SEO, Website Creation, and Lead Systems
   * Missed Call Text-back active SMS installation
   * Instant lead smartphone alerts
 
-- MONTHLY MARKETING MANAGEMENT ($999/mo Retainer)
+- PREMIUM MARKETING PACKAGE ($999/mo Retainer)
   * Premium custom trades website
   * Daily Google Maps postings & visual updates
   * Fully configured AI reception chatbot
@@ -892,9 +892,9 @@ Headline: affordable Local SEO, Website Creation, and Lead Systems
   faqPage: `=== GOOGLE SITES COMPATIBLE PORT: TOP QUESTIONS ===
 
 1. Does LeadForge Local have a licensing parent?
-   - Yes! LeadForge Local is a specialized small business brand of M&H OnlineServices, giving customers premium tech at direct contractor friendly prices.
+   - LeadForge Local is a dedicated business growth service focused on helping local small businesses improve their online presence and lead generation system, giving customers premium tech at direct contractor friendly prices.
 2. What is Missed Call Text-Back?
-   - If clients call and you don't answer because you're busy on a job, our system instantly shoots them a text. This saves up to 40% of leads from booking another constructor.
+   - If clients call and you don't answer because you're busy on a job, our system instantly shoots them a text. This helps save leads from booking another option.
 3. How long do local search results take to show?
-   - Core page cleanups index in 10 days. Map ranking leaps show solid compound gains between weeks 3 and 8.`
+   - Core page cleanups index in 10 days. Map pack search visibility leaps show solid compound gains between weeks 3 and 8.`
 };

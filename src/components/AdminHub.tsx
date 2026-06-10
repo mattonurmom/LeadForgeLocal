@@ -925,7 +925,7 @@ export default function AdminHub({ auditLeads, contactLeads, onClearLeads }: Adm
                   <div className="border-b-4 border-slate-900 pb-4 mb-4 text-center">
                     <span className="text-[10px] uppercase font-bold tracking-widest text-blue-600 block">LeadForge Local Evaluation</span>
                     <h4 className="font-display font-extrabold text-lg text-slate-950 tracking-tight uppercase">Simple Business Visibility Audit</h4>
-                    <span className="text-[9px] text-slate-400 block mt-1">An M&H OnlineServices company</span>
+                    <span className="text-[9px] text-slate-400 block mt-1">LeadForge Local Business Growth Service</span>
                   </div>
 
                   <div className="grid grid-cols-2 gap-4 bg-slate-50 p-3 rounded-lg border border-slate-200 mb-4 text-[11px]">
@@ -947,7 +947,7 @@ export default function AdminHub({ auditLeads, contactLeads, onClearLeads }: Adm
                         <span className="font-bold text-amber-600 bg-amber-50 px-1 rounded">⭐ Unoptimized Category Gaps</span>
                       </div>
                       <div className="flex justify-between border-b border-slate-100 py-1">
-                        <span>2. Organic Maps Index (Top 3 Map pack):</span>
+                        <span>2. Organic Maps Index (Google Map Pack):</span>
                         <span className="font-bold text-rose-600 bg-rose-50 px-1 rounded">❌ Page 3 Invisible</span>
                       </div>
                       <div className="flex justify-between border-b border-slate-100 py-1">
@@ -995,7 +995,7 @@ export default function AdminHub({ auditLeads, contactLeads, onClearLeads }: Adm
                   <div className="border-b-4 border-blue-600 pb-4 mb-4 text-center">
                     <span className="text-[10px] uppercase font-bold tracking-widest text-blue-600 block">LeadForge Local Pitch System</span>
                     <h4 className="font-display font-extrabold text-lg text-slate-950 tracking-tight uppercase">High Ticket Growth Proposal</h4>
-                    <span className="text-[9px] text-slate-400 block mt-1">An M&H OnlineServices company</span>
+                    <span className="text-[9px] text-slate-400 block mt-1">LeadForge Local Business Growth Service</span>
                   </div>
 
                   <p className="text-[11px] text-slate-600 mb-3">
