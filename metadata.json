@@ -1,0 +1,6 @@
+{
+  "name": "LeadForge Local",
+  "description": "Premium conversion-focused local marketing agency website, complete with lead-generating audits, service calculators, and interactive outreach tools.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

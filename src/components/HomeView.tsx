@@ -1,0 +1,618 @@
+import React from "react";
+import { 
+  ArrowRight, ShieldCheck, MapPin, PhoneCall, AlertTriangle, 
+  Users, CheckCircle2, TrendingUp, MessageSquare, Star, Settings 
+} from "lucide-react";
+
+const TICKER_ITEMS = [
+  { text: "Plumbing Services", emoji: "🚰" },
+  { text: "Lawyers & Attorneys", emoji: "⚖️" },
+  { text: "HVAC Specialists", emoji: "❄️" },
+  { text: "Doctors & Clinic Visits", emoji: "🩺" },
+  { text: "Roofers & Builders", emoji: "🏠" },
+  { text: "Restaurants & Cafes", emoji: "🍽️" },
+  { text: "Electrician Crews", emoji: "⚡" },
+  { text: "Dentists & Dental Clinics", emoji: "🦷" },
+  { text: "Landscaping Groups", emoji: "🌱" },
+  { text: "Chiropractic Care", emoji: "🦴" },
+  { text: "Recording Studios", emoji: "🎙️" },
+  { text: "Auto Mechanics", emoji: "🔧" },
+  { text: "Masseuses & Spas", emoji: "💆" },
+  { text: "Concrete Paving", emoji: "🧱" },
+  { text: "Mental Therapists", emoji: "🧠" },
+  { text: "Pest Control", emoji: "🐜" },
+  { text: "Private Coaches", emoji: "⚽" },
+  { text: "Mom & Pop Shops", emoji: "🏪" },
+  { text: "Physical Trainers", emoji: "💪" },
+  { text: "Locally-Owned Boutiques", emoji: "🛍️" },
+];
+
+interface HomeViewProps {
+  setTab: (tab: string) => void;
+  setShowAdminHub: (show: boolean) => void;
+}
+
+export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
+  
+  const handleAuditCta = () => {
+    setTab("audit");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleConsultCta = () => {
+    setTab("contact");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  return (
+    <div className="animate-fadeIn">
+      
+      {/* SEAMLESS INFINITE SCROLL CAROUSEL OF SERVICE VERTICALS */}
+      <div className="bg-slate-950/80 border-b border-slate-900/50 py-2 text-center">
+        <span className="text-[10px] sm:text-xs font-bold text-slate-400 tracking-wider uppercase font-mono px-4 block">
+          Online services to cover professional services alongside home trade contractors
+        </span>
+      </div>
+
+      <div className="relative bg-slate-950 border-b border-slate-900 py-3 overflow-hidden select-none">
+        <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-slate-950 to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-slate-950 to-transparent z-10 pointer-events-none" />
+        
+        <div className="flex w-max items-center animate-scroll">
+          {[...TICKER_ITEMS, ...TICKER_ITEMS].map((item, idx) => (
+            <div key={idx} className="flex items-center gap-2 text-xs font-semibold text-slate-300 mx-5 whitespace-nowrap">
+              <span className="text-sm">{item.emoji}</span>
+              <span className="tracking-tight">{item.text}</span>
+              <span className="h-1 w-1 rounded-full bg-blue-500/60 ml-4"></span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* SECTION 1: HERO SECTION - Dark Navy Blue with subtle gradients & mock graphics */}
+      <section className="relative overflow-hidden bg-slate-950 py-24 sm:py-32 border-b border-slate-900" id="home-hero">
+        {/* Ambient background blur circles */}
+        <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 h-[400px] w-[400px] rounded-full bg-blue-600/15 blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 h-[350px] w-[350px] rounded-full bg-sky-500/10 blur-[100px] pointer-events-none" />
+        
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+            
+            {/* Hero text */}
+            <div className="lg:col-span-7 space-y-6 lg:pr-4">
+              <div className="inline-flex items-center gap-2 rounded-full bg-blue-500/10 border border-blue-500/30 px-3.5 py-1 text-xs font-semibold tracking-wide text-sky-400">
+                <span className="h-1.5 w-1.5 rounded-full bg-sky-400 animate-pulse"></span>
+                An M&H OnlineServices Company
+              </div>
+              
+              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.1]">
+                More Calls. More Leads. <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-sky-400 to-blue-500">
+                  More Customers.
+                </span>
+              </h1>
+              
+              <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl">
+                We help local service providers, home contractors, medical clinics, legal professionals, and dining venues improve their online presence, attract nearby customers, generate steady phone inquiries, and increase cash revenue. No complex jargon—just direct results through Google Maps SEO, high-converting websites, review pipelines, and smart missed-call response automations.
+              </p>
+
+              {/* CTAs */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4">
+                <button
+                  onClick={handleAuditCta}
+                  id="hero-primary-cta"
+                  className="flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-7 py-4 text-sm font-bold text-white shadow-lg shadow-blue-500/20 hover:bg-blue-700 hover:shadow-blue-600/30 transition-all cursor-pointer active:scale-98"
+                >
+                  <span>Get My Free Business Audit</span>
+                  <ArrowRight className="h-4.5 w-4.5" />
+                </button>
+                
+                <button
+                  onClick={handleConsultCta}
+                  id="hero-secondary-cta"
+                  className="flex items-center justify-center gap-2 rounded-xl border border-slate-700 bg-slate-900/40 hover:bg-slate-900 px-7 py-4 text-sm font-bold text-white transition-all cursor-pointer"
+                >
+                  <span>Book Free Consultation</span>
+                </button>
+              </div>
+
+              {/* Value list */}
+              <div className="pt-6 border-t border-slate-900 flex items-center gap-3">
+                <div className="flex -space-x-2">
+                  <span className="h-7 w-7 rounded-full bg-blue-600 border border-slate-950 flex items-center justify-center text-[10px] shadow" title="Legal">⚖️</span>
+                  <span className="h-7 w-7 rounded-full bg-sky-500 border border-slate-950 flex items-center justify-center text-[10px] shadow" title="Dental">🦷</span>
+                  <span className="h-7 w-7 rounded-full bg-indigo-600 border border-slate-950 flex items-center justify-center text-[10px] shadow" title="Studios">🎙️</span>
+                  <span className="h-7 w-7 rounded-full bg-green-600 border border-slate-950 flex items-center justify-center text-[10px] shadow" title="Dining & shops">🏪</span>
+                </div>
+                <p className="text-xs text-slate-400 font-medium">
+                  Proven systems operating across <strong className="text-white font-bold">20+ distinct service niches</strong>, medical practices, local shops, and contractors.
+                </p>
+              </div>
+            </div>
+
+            {/* Hero graphics - stylized dashboards & metrics preview */}
+            <div className="lg:col-span-5 relative mt-6 lg:mt-0">
+              <div className="relative mx-auto max-w-[420px] rounded-2xl border border-slate-800 bg-slate-900/80 p-6 shadow-2xl backdrop-blur-sm">
+                
+                {/* Simulated Google Map Result */}
+                <div className="bg-slate-950/80 border border-slate-800/80 rounded-xl p-4 mb-4">
+                  <div className="flex items-center justify-between pb-2 border-b border-slate-850">
+                    <span className="text-[10px] font-mono font-bold text-slate-500">GOOGLE MAP PACK SEARCH</span>
+                    <span className="rounded-full bg-blue-500/10 px-1.5 py-0.5 text-[9px] font-bold text-sky-400 uppercase">MAP PACK TOP 3</span>
+                  </div>
+                  <div className="flex items-start gap-3 mt-3">
+                    <div className="bg-blue-600 text-white rounded-lg p-2.5">
+                      <MapPin className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-bold font-display text-white">VIP HVAC & Plumbing Services</h4>
+                      <div className="flex items-center gap-1 mt-0.5">
+                        <span className="text-[10px] font-bold text-yellow-400">4.9</span>
+                        <div className="flex gap-0.5 text-yellow-400">
+                          {Array(5).fill(0).map((_, i) => <Star key={i} className="h-2.5 w-2.5 fill-yellow-400 stroke-none" />)}
+                        </div>
+                        <span className="text-[9px] text-slate-400">(184 Reviews)</span>
+                      </div>
+                      <span className="text-[9.5px] text-slate-300 block mt-1">Open 24/7 • Serving Your Local Area</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Simulated Performance stats */}
+                <div className="grid grid-cols-2 gap-3 mb-4">
+                  <div className="bg-gradient-to-br from-slate-950 to-blue-950/40 border border-slate-800/80 rounded-xl p-4">
+                    <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider block mb-1">Monthly inbound calls</span>
+                    <div className="flex items-baseline gap-1.5">
+                      <span className="text-2xl font-bold text-white font-display">184</span>
+                      <span className="text-[10px] font-bold text-green-400">+237%</span>
+                    </div>
+                  </div>
+                  <div className="bg-gradient-to-br from-slate-950 to-blue-950/40 border border-slate-800/80 rounded-xl p-4">
+                    <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider block mb-1">Leads Secured via Text-back</span>
+                    <div className="flex items-baseline gap-1.5">
+                      <span className="text-2xl font-bold text-white font-display">43</span>
+                      <span className="text-[10px] font-bold text-sky-400">Saved</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Simulated Call Log interaction */}
+                <div className="bg-slate-950/50 rounded-xl p-3 border border-slate-800/30 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="h-2 w-2 rounded-full bg-blue-500 animate-pulse"></div>
+                    <div>
+                      <span className="block text-[10px] text-slate-400 leading-tight">Latest automated callback</span>
+                      <span className="font-bold text-xs text-white">"Got you booked for Tuesday at 9!"</span>
+                    </div>
+                  </div>
+                  <PhoneCall className="h-4.5 w-4.5 text-sky-400" />
+                </div>
+
+              </div>
+              {/* Foreground float badge */}
+              <div className="absolute -bottom-4 right-4 bg-blue-600 rounded-xl p-3 border border-blue-500 text-white shadow-xl flex items-center gap-2 max-w-[170px] hidden sm:flex">
+                <ShieldCheck className="h-5 w-5 text-white flex-shrink-0" />
+                <span className="text-[10px] font-bold tracking-tight leading-snug">Zero Long-term Risk Retainers</span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+            {/* SECTION 2: COMMON PROBLEMS SECTION - Visual alert indicators with frustrated owner photo */}
+      <section className="bg-slate-900 py-20 sm:py-24 border-b border-slate-800" id="home-problems">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
+            <div className="lg:col-span-6 space-y-6">
+              <span className="text-xs font-bold text-sky-400 uppercase tracking-widest block">The Local Marketing Challenge</span>
+              <h2 className="font-display text-3xl font-extrabold tracking-tight text-white sm:text-4xl leading-tight">
+                Are You Losing Clientele To Competitors Online?
+              </h2>
+              <p className="text-sm text-slate-300 leading-relaxed">
+                Most local business owners are losing customer jobs because their online presence is incomplete, outdated, difficult to find on phone search, or slow to respond.
+              </p>
+              
+              <div className="relative rounded-2xl overflow-hidden border border-slate-800 bg-slate-950/60 shadow-2xl max-w-lg aspect-video group">
+                <img 
+                  src="/src/assets/images/frustrated_laptop_1780974909506.png" 
+                  alt="Frustrated small business owner looking at computer screen" 
+                  className="w-full h-full object-cover opacity-90 group-hover:scale-102 transition-transform duration-500"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent flex items-end p-4">
+                  <p className="text-xs text-slate-300 font-medium">
+                    💻 <strong className="text-white font-bold">Stressed with tech?</strong> We remove the complexity and deliver calls directly to your phone.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="lg:col-span-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {[
+                  {
+                    title: "Not Enough Leads",
+                    desc: "Your phone lines are quiet, emails are empty, and you are relying entirely on volatile word-of-mouth recommendations."
+                  },
+                  {
+                    title: "Outdated, Slow Website",
+                    desc: "Your page loads slowly or is difficult to read on a mobile phone, causing prospects to close the screen instantly and hit 'back'."
+                  },
+                  {
+                    title: "Weak Google Presence",
+                    desc: "Your business is invisible on the Google map pack. Competitors rank high on the map while your company sits on page 3."
+                  },
+                  {
+                    title: "Poor Online Trust",
+                    desc: "Lacking a system to collect 5-star customer ratings makes you look unverified, causing buyers to question your capabilities."
+                  },
+                  {
+                    title: "Deserted Social Channels",
+                    desc: "Your Facebook corporate profile looks abandoned, hinting to potential neighborhood buyers that you might be out of business."
+                  },
+                  {
+                    title: "Missed Customer Phone Calls",
+                    desc: "When you are on site doing diagnostic work and cannot answer. Calling prospects hang up instantly to contact the next company."
+                  }
+                ].map((prob, idx) => (
+                  <div key={idx} className="bg-slate-950 border border-slate-800/80 rounded-xl p-5.5 shadow-sm hover:border-slate-705 transition-all relative overflow-hidden group">
+                    <div className="absolute top-0 left-0 h-1 w-full bg-rose-500/80" />
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-rose-500/10 text-rose-400 mb-3">
+                      <AlertTriangle className="h-4.5 w-4.5" />
+                    </div>
+                    <h3 className="font-display font-extrabold text-white text-sm mb-1">{prob.title}</h3>
+                    <p className="text-[11px] text-slate-350 leading-relaxed">{prob.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-8 text-center">
+            <button
+              onClick={handleAuditCta}
+              className="inline-flex items-center gap-1.5 font-bold text-xs uppercase tracking-wider text-sky-400 hover:text-sky-355 bg-slate-950 border border-slate-800 px-6 py-3 rounded-xl shadow-sm hover:bg-slate-900 transition-all cursor-pointer"
+            >
+              <span>Audit My Local Profiles Free</span>
+              <ArrowRight className="h-4 w-4" />
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      {/* SECTION 3: SERVICES SNEAK PEEK */}
+      <section className="bg-slate-950 py-20 sm:py-24 border-b border-slate-900" id="home-services">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+            <div className="max-w-2xl space-y-3">
+              <span className="text-xs font-bold text-sky-400 uppercase tracking-widest block">Proven Growth Arsenal</span>
+              <h2 className="font-display text-3xl font-extrabold tracking-tight text-white">
+                Our Core Local Growth Systems
+              </h2>
+              <p className="text-sm text-slate-300 leading-relaxed">
+                Simple, straightforward tactical packages built specifically to turn local searches into direct cashflow. No long-term locked commitments.
+              </p>
+            </div>
+            
+            <button
+              onClick={() => { setTab("services"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+              className="text-xs font-bold text-sky-400 hover:text-sky-350 flex items-center gap-1.5 cursor-pointer whitespace-nowrap self-start"
+            >
+              <span>Explore All 13 Services</span>
+              <ArrowRight className="h-4.5 w-4.5" />
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                title: "Google Business Cleanup",
+                badge: "Starting under $150",
+                desc: "Correct verification issues, fix secondary categories, sync operating hours & eliminate rival pins."
+              },
+              {
+                title: "Website Creation",
+                badge: "Starting under $500",
+                desc: "High-speed mobile trade layout designed specifically to capture tap click calls."
+              },
+              {
+                title: "Review & Reputation Setup",
+                badge: "Starting under $49/mo",
+                desc: "Generate consistent 5-star Google feedback easily using customized print-ready vehicle QR codes."
+              },
+              {
+                title: "Missed Call Text Back",
+                badge: "Starting under $100",
+                desc: "Instantly text busy unanswered incoming ringer signals, locking jobs before they call rivals."
+              }
+            ].map((ser, i) => (
+              <div key={i} className="bg-slate-900/55 hover:bg-slate-900 border border-slate-800 rounded-2xl p-5.5 transition-all shadow-sm flex flex-col justify-between">
+                <div>
+                  <span className="font-mono text-xs font-bold text-sky-400 block mb-2">{ser.badge}</span>
+                  <h3 className="font-display font-extrabold text-white text-sm mb-1.5">{ser.title}</h3>
+                  <p className="text-xs text-slate-300 leading-relaxed mb-4">{ser.desc}</p>
+                </div>
+                <button
+                  onClick={() => { setTab("services"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                  className="text-xs font-bold text-slate-300 hover:text-sky-405 flex items-center gap-1 text-left cursor-pointer"
+                >
+                  <span>Learn details</span>
+                  <ArrowRight className="h-3 w-3" />
+                </button>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* SECTION 4: HOW IT WORKS */}
+      <section className="bg-slate-900 py-20 sm:py-24 border-b border-slate-805 text-white" id="home-how-it-works">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          
+          <div className="text-center max-w-2xl mx-auto mb-16 space-y-4">
+            <span className="text-xs font-bold text-sky-400 uppercase tracking-widest block">The Frictionless Pipeline</span>
+            <h2 className="font-display text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+              Our 4-Step Business Growth Blueprint
+            </h2>
+            <p className="text-sm text-slate-300 leading-relaxed">
+              We focus on speed and immediate results. We set up critical foundations to generate fast client wins from week 1.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+            
+            {[
+              {
+                title: "1. Free Business Audit",
+                desc: "We analyze your regional citations, speed profiles, local keywords, and response vulnerabilities completely free."
+              },
+              {
+                title: "2. Custom Growth Strategy",
+                desc: "We deliver a clear, affordable blueprint outlining priority channels to unlock steady local customer bookings."
+              },
+              {
+                title: "3. Rapid Implementation",
+                desc: "We optimize your maps, activate review QR tools, launch your website, and enable text fallbacks in under two weeks."
+              },
+              {
+                title: "4. Accelerated Local Growth",
+                desc: "Your phone calls scale, reviews climb, and local search rankings lock down Page 1 authority."
+              }
+            ].map((step, idx) => (
+              <div key={idx} className="bg-slate-950 border border-slate-800 p-6 rounded-2xl hover:border-blue-500/50 transition-colors relative z-10">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-600 text-white font-display font-black text-sm mb-4 tracking-tighter">
+                  0{idx+1}
+                </div>
+                <h3 className="font-display font-extrabold text-white text-base mb-2">{step.title}</h3>
+                <p className="text-xs text-slate-350 leading-relaxed">{step.desc}</p>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* SECTION 5: WHY CHOOSE US */}
+      <section className="bg-slate-955 py-20 sm:py-24 border-b border-slate-900" id="home-why-us">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <div className="lg:col-span-6 space-y-6">
+              <span className="text-xs font-bold text-sky-450 uppercase tracking-widest block">The LeadForge Edge</span>
+              <h2 className="font-display text-3xl font-extrabold tracking-tight text-white sm:text-4xl leading-tight">
+                Why Contractors Partner With LeadForge Local
+              </h2>
+              <p className="text-sm text-slate-300 leading-relaxed">
+                We are local business specialists ourselves. We are not interested in fluffy corporate jargon, generic social media likes, or vanity metrics. We measure our successes purely by:
+              </p>
+
+              <div className="space-y-4 pt-2">
+                {[
+                  {
+                    title: "No Confusing Corporate Fluff",
+                    desc: "We talk in high-intent calls, property estimate volumes, and real dollars—never click-through impressions or abstract web telemetry."
+                  },
+                  {
+                    title: "Extreme Operational Value",
+                    desc: "Our division operations are optimized so we can sell premium custom trades websites starting under $500, with no high agency markups."
+                  },
+                  {
+                    title: "Month-to-Month Autonomy",
+                    desc: "You are never locked into long annual legal bindings. We earn our retainer every month based on performance and phone traffic."
+                  }
+                ].map((edge, idx) => (
+                  <div key={idx} className="flex gap-4">
+                    <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-blue-500/15 text-sky-400">
+                      <CheckCircle2 className="h-4.5 w-4.5" />
+                    </div>
+                    <div>
+                      <h4 className="font-display font-extrabold text-white text-sm mb-1">{edge.title}</h4>
+                      <p className="text-xs text-slate-350 leading-relaxed">{edge.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="lg:col-span-6 bg-slate-900 rounded-2xl p-8 border border-slate-800">
+              <div className="space-y-6">
+                <div className="flex items-center gap-1.5 text-yellow-400">
+                  {Array(5).fill(0).map((_, i) => <Star key={i} className="h-4 w-4 fill-yellow-400 stroke-none" />)}
+                </div>
+                
+                <p className="text-slate-200 italic font-medium text-sm leading-relaxed">
+                  "Before we hired LeadForge, running our cleaning business was a stressful cycle of expensive home advisor ads that led to tire-kickers. They claims our Google Maps profile, corrected our categories, and set up our custom missed line responder. Within three weeks, we had an extra 11 inbound cleaning calls, and saved two emergency re-cleans via immediate SMS. It paid for itself in days!"
+                </p>
+
+                <div className="flex items-center gap-3 pt-2 text-xs">
+                  <div className="bg-blue-600 text-white rounded-full h-10 w-10 flex items-center justify-center font-bold">
+                    MC
+                  </div>
+                  <div>
+                    <span className="font-bold text-white block">Markus & Clara Davies</span>
+                    <span className="text-slate-400 block">EcoSweep Cleaners • Dallas Region</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* SECTION 5.5: REAL PEOPLE COMMUNITIES GALLERY */}
+      <section className="bg-slate-900 py-20 border-b border-slate-800" id="home-community-gallery">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+            <span className="text-xs font-bold text-sky-400 uppercase tracking-widest block">Real Faces of Local Business</span>
+            <h2 className="font-display text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+              Engineered For Hardworking Teams In Our Communities
+            </h2>
+            <p className="text-sm text-slate-300 leading-relaxed font-normal text-slate-300">
+              We empower physical commerce, hometown services, and local dining venues, helping genuine business owners attract high-value inquiries without massive agency retainers.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {/* Owner card 1 */}
+            <div className="relative group overflow-hidden rounded-2xl border border-slate-800 bg-slate-950/65 p-6 flex flex-col md:flex-row gap-6 items-center">
+              <div className="w-32 h-32 md:w-36 md:h-36 rounded-xl overflow-hidden flex-shrink-0 border border-slate-800 shadow-md">
+                <img 
+                  src="/src/assets/images/restaurant_owner_1780974923718.png" 
+                  alt="Cozy bistro restaurant owner" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+              <div className="space-y-2 text-center md:text-left flex-1">
+                <span className="rounded bg-emerald-500/10 px-2 py-0.5 text-[9.5px] font-bold text-emerald-400 uppercase tracking-wider inline-block">
+                  Bistros & Dining
+                </span>
+                <h3 className="font-display font-extrabold text-white text-sm">"Fully booked during slow weekdays"</h3>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  "Our maps cleanup now coordinates menu highlights and booking keys directly. Local traffic grew by sixty-five percent inside our first month."
+                </p>
+                <span className="block text-[10.5px] text-slate-400 font-semibold">• Sarah & David Chen, Bistro Owners</span>
+              </div>
+            </div>
+
+            {/* Owner card 2 */}
+            <div className="relative group overflow-hidden rounded-2xl border border-slate-850 bg-slate-950/65 p-6 flex flex-col md:flex-row gap-6 items-center">
+              <div className="w-32 h-32 md:w-36 md:h-36 rounded-xl overflow-hidden flex-shrink-0 border border-slate-800 shadow-md">
+                <img 
+                  src="/src/assets/images/tradesman_worker_1780974939055.png" 
+                  alt="Tradesman plumber contractor crew" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+              <div className="space-y-2 text-center md:text-left flex-1">
+                <span className="rounded bg-blue-500/10 px-2 py-0.5 text-[9.5px] font-bold text-sky-400 uppercase tracking-wider inline-block">
+                  Home Trades
+                </span>
+                <h3 className="font-display font-extrabold text-white text-sm">"No more shared leads anxiety"</h3>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  "Direct pipeline calls mean we estimate jobs we own. The missed call text fallback system booked four emergency heating calls last week alone."
+                </p>
+                <span className="block text-[10.5px] text-slate-400 font-semibold">• Thomas Vance, HVAC Contractor</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 6: FAQ HIGHLIGHTS PREVIEW */}
+      <section className="bg-slate-950 py-20 sm:py-24 border-b border-slate-900" id="home-faq-preview">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          
+          <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
+            <span className="text-xs font-bold text-sky-400 uppercase tracking-widest block">Got Questions?</span>
+            <h2 className="font-display text-2xl font-extrabold tracking-tight text-white">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-xs text-slate-350 leading-relaxed">
+              We believe in simple answers. Here are our top homeowner & contractor inquiries.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {[
+              {
+                q: "What does LeadForge Local actually do?",
+                a: "We help home service companies get more local client jobs by ranking their business listings in Google Maps, building fast trade websites, and implementing instant missed-call responses."
+              },
+              {
+                q: "Who is LeadForge Local? Is there a parent group?",
+                a: "Yes! LeadForge Local is a specialized contractor growth brand operating proudly under M&H OnlineServices, providing advanced, cloud-enabled agency tech at affordable local prices."
+              },
+              {
+                q: "Do I have to sign binding long-term plans?",
+                a: "No! All our digital packages and recurring maintenance retentions operate purely month-to-month. Cancel anytime with standard 10 days notice."
+              },
+              {
+                q: "What is 'Missed Call Text Back' auto SMS?",
+                a: "If you miss a contractor call because you're busy, our system instantly fires an automated SMS to secure the client from contacting rival builders."
+              }
+            ].map((fq, idx) => (
+              <div key={idx} className="bg-slate-900 p-5 rounded-xl border border-slate-800 hover:border-slate-700 transition-colors">
+                <h4 className="font-display font-extrabold text-xs text-white mb-1.5">Q: {fq.q}</h4>
+                <p className="text-[11px] text-slate-350 leading-relaxed">A: {fq.a}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-10">
+            <button
+              onClick={() => { setTab("pricing"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+              className="text-xs font-bold text-sky-400 hover:text-sky-350 flex items-center justify-center gap-1.5 mx-auto cursor-pointer"
+            >
+              <span>View full 25 FAQ vault and package pricing</span>
+              <ArrowRight className="h-4 w-4" />
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      {/* SECTION 7: FINAL CALL TO ACTION BANNER */}
+      <section className="relative overflow-hidden bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 py-16 sm:py-20 text-white" id="home-cta-banner">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-6">
+          <span className="text-[10px] uppercase font-bold tracking-widest text-sky-400">Claim Your Regional Positioning</span>
+          <h2 className="font-display text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+            Ready To Convert Local Searches Into Paying Customers?
+          </h2>
+          <p className="text-xs text-slate-300 leading-relaxed max-w-2xl mx-auto">
+            Don't let competitor listings take another premium drainage job, roofing evaluation, or electrical swap in your area. Request your free evaluation blueprint now!
+          </p>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+            <button
+              onClick={handleAuditCta}
+              className="w-full sm:w-auto font-extrabold text-xs tracking-wide py-3.5 px-7 rounded-xl bg-blue-600 hover:bg-blue-700 text-white transition-all cursor-pointer shadow-lg active:scale-95 flex items-center justify-center gap-1"
+            >
+              <span>Claim Free Visibility Check</span>
+              <ArrowRight className="h-3.5 w-3.5" />
+            </button>
+            <button
+              onClick={handleConsultCta}
+              className="w-full sm:w-auto font-bold text-xs py-3.5 px-6 rounded-xl border border-slate-700 hover:bg-slate-900 text-white transition-all cursor-pointer"
+            >
+              <span>Book Strategy Conversation</span>
+            </button>
+          </div>
+
+          <span className="block text-[10px] text-slate-400">
+            No charge. No obligation. Direct, actionable value delivered inside 24 hours.
+          </span>
+        </div>
+      </section>
+
+    </div>
+  );
+}
