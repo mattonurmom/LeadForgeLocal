@@ -194,9 +194,9 @@ export default function AboutView({ setTab }: AboutViewProps) {
                     <Phone className="h-4 w-4 text-sky-400" />
                     <span>(682) 209-9273</span>
                   </a>
-                  <a href="mailto:m.h.onlineservices722@gmail.com" className="flex items-center gap-2.5 text-slate-300 hover:text-sky-400 transition-colors">
+                  <a href="mailto:support@leadforgelocal.com" className="flex items-center gap-2.5 text-slate-300 hover:text-sky-400 transition-colors">
                     <Mail className="h-4 w-4 text-sky-400" />
-                    <span>m.h.onlineservices722@gmail.com</span>
+                    <span>support@leadforgelocal.com</span>
                   </a>
                 </div>
               </div>
@@ -218,9 +218,9 @@ export default function AboutView({ setTab }: AboutViewProps) {
                     <Phone className="h-4 w-4 text-sky-400" />
                     <span>(469) 340-2871</span>
                   </a>
-                  <a href="mailto:m.h.onlineservices722@gmail.com" className="flex items-center gap-2.5 text-slate-305 hover:text-sky-400 transition-colors">
+                  <a href="mailto:support@leadforgelocal.com" className="flex items-center gap-2.5 text-slate-305 hover:text-sky-400 transition-colors">
                     <Mail className="h-4 w-4 text-sky-400" />
-                    <span>m.h.onlineservices722@gmail.com</span>
+                    <span>support@leadforgelocal.com</span>
                   </a>
                 </div>
               </div>
@@ -251,7 +251,7 @@ export default function AboutView({ setTab }: AboutViewProps) {
             Ready To Upgrade Your Online Presence?
           </h3>
           <p className="text-xs text-slate-350 leading-relaxed max-w-lg mx-auto">
-            Our team is online and ready to prepare your custom free performance audit. In under 24 hours, you will know exactly what citations are broken and how to rank Page 1 in your target town.
+            Our team is online and ready to prepare your custom free performance audit. In under 24 hours, you will know exactly what citations are broken and how to strengthen your online visibility in your target town.
           </p>
           <button
             onClick={() => { setTab("audit"); window.scrollTo({ top: 0, behavior: "smooth" }); }}

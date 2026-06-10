@@ -172,7 +172,7 @@ export default function PricingView({ setTab }: PricingViewProps) {
               Calculate Your Direct Local Marketing ROI
             </h2>
             <p className="text-sm text-slate-350 leading-relaxed max-w-lg mx-auto font-sans">
-              Select your specific trade or professional niche below, set your average job invoice value, and see how simple rank climbs transform your monthly revenue ledger.
+              Select your specific trade or professional niche below, set your average job invoice value, and see how simple visibility improvements support your monthly booking ledger.
             </p>
           </div>
 

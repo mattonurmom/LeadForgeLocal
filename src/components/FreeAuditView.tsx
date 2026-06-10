@@ -25,16 +25,19 @@ export default function FreeAuditView({ onAddAuditLead }: FreeAuditViewProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value} = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    if (errorMessage) setErrorMessage("");
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMessage("");
     if (!formData.name || !formData.businessName || !formData.email || !formData.phone) {
-      alert("Please enter Name, Business Name, Email, and Phone number.");
+      setErrorMessage("Please enter your name, business name, email, and phone number.");
       return;
     }
 
@@ -98,7 +101,7 @@ Priority Discoveries:
                 </div>
                 <div>
                   <span className="text-[10px] uppercase font-bold text-slate-400 block tracking-wider">Acquisition Received</span>
-                  <h3 className="font-display font-extrabold text-[#0E7490] text-lg">Diagnostics Queue Secured!</h3>
+                  <h3 className="font-display font-extrabold text-sky-400 text-lg">Diagnostics Queue Secured!</h3>
                 </div>
               </div>
 
@@ -205,6 +208,12 @@ Priority Discoveries:
           <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-lg max-w-xl mx-auto" id="audit-form-card">
             
             <form onSubmit={handleSubmit} className="space-y-5">
+              
+              {errorMessage && (
+                <div className="bg-rose-950/45 border border-rose-900/65 text-rose-250 p-3 rounded-xl text-xs flex items-center gap-2 text-rose-350 font-medium col-span-2">
+                  <span>⚠️ {errorMessage}</span>
+                </div>
+              )}
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>

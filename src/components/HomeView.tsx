@@ -406,7 +406,7 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
               },
               {
                 title: "4. Accelerated Local Growth",
-                desc: "Your phone calls scale, reviews climb, and local search rankings lock down Page 1 authority."
+                desc: "Your communications streamline, customer reviews grow, and your business enhances its local map pack visibility and search presence."
               }
             ].map((step, idx) => (
               <div key={idx} className="bg-slate-950 border border-slate-800 p-6 rounded-2xl hover:border-blue-500/50 transition-colors relative z-10">

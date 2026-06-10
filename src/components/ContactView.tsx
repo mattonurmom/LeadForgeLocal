@@ -21,16 +21,19 @@ export default function ContactView({ onAddContactLead }: ContactViewProps) {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    if (errorMessage) setErrorMessage("");
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMessage("");
     if (!formData.name || !formData.email || !formData.phone) {
-      alert("Name, Email, and Phone indicators are required.");
+      setErrorMessage("Name, Email, and Phone indicators are required.");
       return;
     }
 
@@ -96,7 +99,7 @@ export default function ContactView({ onAddContactLead }: ContactViewProps) {
                   </div>
                   <div>
                     <span className="block text-[10px] text-slate-500 font-bold uppercase">Corporate Mail</span>
-                    <strong className="text-white">m.h.onlineservices722@gmail.com</strong>
+                    <strong className="text-white">support@leadforgelocal.com</strong>
                   </div>
                 </div>
 
@@ -129,11 +132,11 @@ export default function ContactView({ onAddContactLead }: ContactViewProps) {
             
             {isCompleted ? (
               <div className="h-full flex flex-col justify-center items-center text-center space-y-4 py-8" id="contact-success-panel">
-                <div className="h-12 w-12 rounded-full bg-green-50 text-green-600 border border-green-200 flex items-center justify-center">
+                <div className="h-12 w-12 rounded-full bg-green-950/50 text-green-400 border border-green-800/60 flex items-center justify-center">
                   <CheckCircle2 className="h-6 w-6 stroke-[2.5]" />
                 </div>
-                <h3 className="font-display font-extrabold text-[#0F172A] text-lg">Inquiry Decoded!</h3>
-                <p className="text-xs text-slate-500 leading-relaxed max-w-xs">
+                <h3 className="font-display font-extrabold text-white text-lg">Inquiry Decoded!</h3>
+                <p className="text-xs text-slate-300 leading-relaxed max-w-xs">
                   We have successfully registered your call request in our LeadForge database. An outreach specialist will reach back quickly.
                 </p>
                 <button
@@ -141,7 +144,7 @@ export default function ContactView({ onAddContactLead }: ContactViewProps) {
                     setFormData({ name: "", email: "", phone: "", businessName: "", message: "" });
                     setIsCompleted(false);
                   }}
-                  className="rounded-xl border border-slate-250 hover:bg-slate-50 px-5 py-2.5 text-xs text-slate-700 font-bold transition-all cursor-pointer"
+                  className="rounded-xl border border-slate-800 hover:bg-slate-900 px-5 py-2.5 text-xs text-white font-bold transition-all cursor-pointer"
                 >
                   Post Another Message
                 </button>
@@ -150,6 +153,12 @@ export default function ContactView({ onAddContactLead }: ContactViewProps) {
               <form onSubmit={handleSubmit} className="space-y-4">
                 
                 <h3 className="font-display font-extrabold text-white text-base mb-2">Request Your Free Strategy Call</h3>
+
+                {errorMessage && (
+                  <div className="bg-rose-950/45 border border-rose-900/65 text-rose-250 p-3 rounded-xl text-xs flex items-center gap-2 text-rose-350 font-medium">
+                    <span>⚠️ {errorMessage}</span>
+                  </div>
+                )}
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
