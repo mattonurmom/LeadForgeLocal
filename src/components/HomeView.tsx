@@ -301,7 +301,7 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
               onClick={() => { setTab("services"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
               className="text-xs font-bold text-sky-400 hover:text-sky-350 flex items-center gap-1.5 cursor-pointer whitespace-nowrap self-start"
             >
-              <span>Explore All 13 Services</span>
+              <span>Explore All 25 Local Services</span>
               <ArrowRight className="h-4.5 w-4.5" />
             </button>
           </div>

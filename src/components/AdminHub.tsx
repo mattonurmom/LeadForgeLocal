@@ -1008,7 +1008,7 @@ export default function AdminHub({ auditLeads, contactLeads, onClearLeads }: Adm
                       Instead of charging expensive monthly corporate branding fees, we build three foundational pillars for <strong>{clientBusinessName}</strong> to capture maximum city searches:
                     </p>
                     <ul className="list-disc pl-4 space-y-1">
-                      <li><strong>Map Pack Dominance:</strong> Clean listing hours, local geo keywords, citation indexing.</li>
+                      <li><strong>Map Pack Optimization:</strong> Clean listing hours, local geo keywords, citation indexing.</li>
                       <li><strong>Digital Booking Funnel:</strong> A beautiful high speed 5-page trades layout with instant SMS lead alerting.</li>
                       <li><strong>Missed Call Text Back:</strong> Setup automated text responses in 5 seconds to win emergency requests.</li>
                     </ul>
@@ -1016,7 +1016,7 @@ export default function AdminHub({ auditLeads, contactLeads, onClearLeads }: Adm
                     <h5 className="font-bold border-b border-slate-200 pb-1 text-slate-950 uppercase text-[10px] pt-2">2. Budget Requirement</h5>
                     <div className="bg-slate-50 border border-slate-200 rounded-lg p-3 text-slate-800 flex justify-between items-center">
                       <div>
-                        <strong className="text-blue-700 block text-[11px]">Growth Engine Package</strong>
+                        <strong className="text-blue-700 block text-[11px]">Premium Growth Package</strong>
                         <span className="text-slate-500 text-[9px]">Google Business Sync, custom site & reviews loop</span>
                       </div>
                       <strong className="text-slate-900 text-sm">$499 / Month</strong>

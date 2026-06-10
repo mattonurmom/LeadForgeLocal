@@ -122,6 +122,21 @@ export const SERVICES: ServiceItem[] = [
     iconName: "FileText"
   },
   {
+    id: "web-audit",
+    title: "Website Audit & Optimization",
+    category: "Websites",
+    description: "Detailed evaluation of page loading speed, conversion flow, search guidelines, and mobile responsiveness.",
+    detailedDescription: "Many small business web pages look fine on desktops but lose over half of mobile visitors due to slow scripts or hidden forms. We run diagnostics to point out and fix structural flaws.",
+    priceTag: "$150-$300",
+    benefits: [
+      "Optimizes image assets and minifies scripts for speed",
+      "Corrects broken input forms and touch layout shifts",
+      "Designed to help improve user experience and engagement",
+      "Confirms schema markup and metadata align with search guidelines"
+    ],
+    iconName: "SearchCode"
+  },
+  {
     id: "lead-capture",
     title: "Lead Capture Setup",
     category: "Websites",
@@ -368,7 +383,7 @@ export const PACKAGES: PackageItem[] = [
     id: "pkg-starter",
     name: "Starter Local Package",
     price: "$299",
-    tagline: "Essential local footprint to get you found and trusted.",
+    tagline: "Essential local footprint designed to improve search visibility and built-in trust.",
     badge: "Startup Friendly",
     services: [
       "Google Business Profile Cleanup & Optimization",
@@ -378,21 +393,21 @@ export const PACKAGES: PackageItem[] = [
       "Basic On-Page Local SEO Targeting Home City"
     ],
     benefits: [
-      "Secures your business name on search radars",
-      "Gives customers an instant way to call you on mobile phones",
-      "Automates review collection to build early reputation in your town",
-      "No monthly overhead - pay once to lock in the setup"
+      "Designed to help nearby customers notice your business",
+      "Gives prospective clients an instant shortcut to dial you directly",
+      "Automates review triggers to support professional reputational growth",
+      "One-time setup with zero recurring obligations unless requested"
     ],
     upsellOpportunities: [
-      "Add Automated Call Text-Back for only $100 setup fee",
-      "Switch to Monthly Maintenance for $99/mo to keep active"
+      "Add Automated Call Text-Back for a small setup fee",
+      "Switch to Monthly Maintenance to support ongoing activity"
     ]
   },
   {
     id: "pkg-growth",
-    name: "Growth Engine Package",
+    name: "Premium Growth Package",
     price: "$499 / mo",
-    tagline: "Our most requested system to capture local search market share.",
+    tagline: "Our most requested system to organically improve local search presence and convert leads.",
     badge: "Best Value",
     isPopular: true,
     services: [
@@ -404,25 +419,25 @@ export const PACKAGES: PackageItem[] = [
       "SMS Lead Alert Setup to Business Owner Smart Device"
     ],
     benefits: [
-      "Ranks your business high in nearby cities and towns",
-      "Captures lost line opportunities with quick text fallback",
-      "Showcases your team, services, and locations elegantly",
-      "Establishes a stream of consistent qualified organic enquiries"
+      "Intended to improve your map prominence in nearby neighborhoods",
+      "Aims to rescue missed ringer opportunities via helpful SMS follow-up",
+      "Organizes and displays your local service history and credentials beautifully",
+      "Aims to support consistent inbound inquiries directly on your devices"
     ],
     upsellOpportunities: [
-      "Add 24/7 AI Lead Qualifier Chatbot for +$50/mo",
-      "Add targeted Google Ads PPC landing page for +$125 one-time"
+      "Add 24/7 AI Lead Qualifier Chatbot for a small monthly adjustment",
+      "Add targeted Google Ads PPC landing page for a one-time configuration"
     ]
   },
   {
     id: "pkg-premium",
-    name: "Aggressive Expansion Pack",
+    name: "Monthly Marketing Management",
     price: "$999 / mo",
-    tagline: "Total digital dominance designed to out-rank every competitor.",
-    badge: "Dominator Pack",
+    tagline: "Complete marketing management designed to bolster your online presence and client trust.",
+    badge: "Complete Growth",
     services: [
       "Premium Interactive Website with Custom Trade Tools",
-      "GBP Monthly Dominator Pack (3 Posts/Week + Daily Responses)",
+      "Google Business Profile Monthly Management (3 Posts/Week + Daily Responses)",
       "Facebook + Instagram Monthly Active Marketing",
       "24/7 AI Qualification Assistant Installed",
       "Advanced Multi-City Local SEO Content Pages",
@@ -430,14 +445,14 @@ export const PACKAGES: PackageItem[] = [
       "Dedicated Client Success Monthly Zoom Strategy Review"
     ],
     benefits: [
-      "Completely blankets your local region for high-intent search terms",
-      "Automates prospect screening so your office only talks to buyers",
-      "Builds a dominant local brand reputation that justifies premium pricing",
-      "Includes massive content library creation for long-term power"
+      "Extensively covers your primary operations across multiple local ZIP codes",
+      "Automates lead vetting so you can focus solely on serious buyers",
+      "Deepens local reputation to justify your quality trade rates",
+      "Ongoing strategic assets designed to help your team command local trust"
     ],
     upsellOpportunities: [
-      "Google Local Services Ads management (10% of ad spend budget)",
-      "Video review generation campaign setup for +$200 first month"
+      "Google Local Services Ads management setup support",
+      "Video review program initiation to build strong buyer trust"
     ]
   }
 ];
@@ -445,35 +460,35 @@ export const PACKAGES: PackageItem[] = [
 export const PORTFOLIO: PortfolioItem[] = [
   {
     id: "port-plumber",
-    title: "Complete Revamp for VIP Plumbing (Sample)",
+    title: "VIP Plumbing Revamp (Sample Demonstration Project)",
     category: "Website & Google Business Optimization",
     description: "An outdated layout with missing reviews was costing this veteran plumber high-paying drain cleanups and re-piping jobs in their city.",
-    beforeImg: "VIP Plumbing (Original UI: Slow loading, non-responsive, 12 Reviews, map pack rank #18, lost calls)",
-    afterImg: "VIP Plumbing Redesigned (High-speed Vite architecture, 4.9 Star Review System, ranking top 3 local pack)",
-    metric: "+237%",
-    metricLabel: "More Direct Inbound Calls",
+    beforeImg: "VIP Plumbing (Demonstration Example: Slow loading, non-responsive, 12 Reviews, map pack rank #18, lost calls)",
+    afterImg: "VIP Plumbing Redesigned (Demonstration Example: High-speed Vite architecture, 4.9 Star Review System, ranking top 3 local pack)",
+    metric: "Demonstration Example",
+    metricLabel: "Designed to help increase calls 2x-3x based on typical client audits",
     details: "We redesigned their layout into a mobile-first appointment visual funnel and launched automated review collection. Listing jumped to map pack top 3 within 40 days."
   },
   {
     id: "port-roofer",
-    title: "GBP Domination for Apex Roofing (Sample)",
+    title: "Apex Roofing Optimization (Sample Demonstration Project)",
     category: "Google Business Pack & Missed Call Setup",
     description: "Owner was frequently on roofs and missed 35% of incoming homeowner calls, losing them directly to rival fast builders.",
-    beforeImg: "Apex Roofers (No visual posts, missed calls left with no response, ranking on map page 3)",
-    afterImg: "Active LeadForge Loop (Missed Call auto-text back, 3 localized visual updates per week, top-3 map pack visibility)",
-    metric: "43 leads",
-    metricLabel: "Recovered via Missed Call SMS",
+    beforeImg: "Apex Roofers (Demonstration Example: No visual posts, missed calls left with no response, ranking on map page 3)",
+    afterImg: "Active LeadForge Loop (Demonstration Example: Missed Call auto-text back, 3 localized visual updates per week, top-3 map pack visibility)",
+    metric: "Demonstration Example",
+    metricLabel: "Designed to rescue missed opportunities immediately via SMS text-back",
     details: "We updated and verified their citations, then turned on Missed Call Text-Back. Now, every missed caller gets texted in 4 seconds, booking roof evaluations with no manual effort."
   },
   {
     id: "port-hvac",
-    title: "Bespoke System for Comfort King Air (Sample)",
+    title: "Comfort King HVAC System Setup (Sample Demonstration Project)",
     category: "Mini Web Setup & Facebook Loop",
     description: "An active business with zero digital references besides a broken Facebook group. Homeowners couldn't easily review plans.",
-    beforeImg: "Comfort King (No website, basic text profile, manual appointment books, zero Google visibility)",
-    afterImg: "Comfort Landing Engine (Clean brand guide colors, interactive air quote estimator tool, optimized pages)",
-    metric: "$14.2k",
-    metricLabel: "Additional Revenue in 30 Days",
+    beforeImg: "Comfort King (Demonstration Example: No website, basic text profile, manual appointment books, zero Google visibility)",
+    afterImg: "Comfort Landing Engine (Demonstration Example: Clean brand guide colors, interactive air quote estimator tool, optimized pages)",
+    metric: "Demonstration Example",
+    metricLabel: "Projected value recovered on first-month deployment based on typical client audits",
     details: "Implemented the 'Starter Local' system. Local customers have secure appointment scheduling, capturing high-intent furnace swap calls that transformed their calendar."
   }
 ];
@@ -646,7 +661,7 @@ export const SERVICE_PACKAGES_METADATA = {
   },
   premium: {
     title: "Premium Package",
-    description: "Relentless market conquest. Blankets the target area and isolates competition.",
+    description: "Extensive regional presence. Softly blankets the target towns to support local reach.",
     price: "$999/mo retainer",
     upsell: "Integration with advanced Google Ad campaigns"
   }
@@ -869,7 +884,7 @@ Headline: affordable Local SEO, Website Creation, and Lead Systems
   * Missed Call Text-back active SMS installation
   * Instant lead smartphone alerts
 
-- DOMINATION PACKAGE ($999/mo Retainer)
+- MONTHLY MARKETING MANAGEMENT ($999/mo Retainer)
   * Premium custom trades website
   * Daily Google Maps postings & visual updates
   * Fully configured AI reception chatbot

@@ -110,11 +110,11 @@ Given the following list of active local business leads stored in the LeadForge 
 ${JSON.stringify(leadContext, null, 2)}
 
 Provide a highly targeted, step-by-step Plain Text outreach blueprint and coordinator guide matching this client roster. 
-Tell me exactly what to do for each specific lead to convert them into a paying monthly customer (pricing packages are $199/mo Starter, $499/mo Growth: website+GBP, $899/mo Domination).
+Tell me exactly what to do for each specific lead to convert them into a paying monthly customer (pricing packages are $299 Starter Local, $499/mo Premium Growth, $999/mo Monthly Marketing Management).
 
 Format your response in beautiful Markdown:
 - Start with a professional header: "### 🤖 LeadForge AI Coordinator Playbook"
-- Focus heavily on correlating their specifics (e.g. if Gary Davidson has 'no existing website', recommend proposing our $499/mo website deployment package and pitching the missed-call text-back automation).
+- Focus heavily on correlating their specifics (e.g. if Gary Davidson has 'no existing website', recommend proposing our $499/mo Premium Growth package and pitching the missed-call text-back automation).
 - Provide 3-5 clear, concrete, sequential next-action bullets.
 - Mention specific names, business titles, and numbers with suggested copy-paste tips.
 - Keep the tone highly strategic, crisp, encouraging, and focused on gaining client retainers.
