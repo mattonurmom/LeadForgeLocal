@@ -33,7 +33,7 @@ export default function ContactView({ onAddContactLead }: ContactViewProps) {
     e.preventDefault();
     setErrorMessage("");
     if (!formData.name || !formData.email || !formData.phone) {
-      setErrorMessage("Name, Email, and Phone indicators are required.");
+      setErrorMessage("Name, Email, and Phone are required.");
       return;
     }
 
@@ -88,7 +88,7 @@ export default function ContactView({ onAddContactLead }: ContactViewProps) {
                   </div>
                   <div>
                     <span className="block text-[10px] text-slate-500 font-bold uppercase">Direct Phone Lines</span>
-                    <strong className="text-white block">Heather: (682) 209-9273</strong>
+                    <strong className="text-white block">Heather: (469) 751-7153</strong>
                     <strong className="text-white block">Matthew: (469) 340-2871</strong>
                   </div>
                 </div>
@@ -108,9 +108,9 @@ export default function ContactView({ onAddContactLead }: ContactViewProps) {
                     <MapPin className="h-4.5 w-4.5" />
                   </div>
                   <div>
-                    <span className="block text-[10px] text-slate-500 font-bold uppercase">Executive Coordinates</span>
+                    <span className="block text-[10px] text-slate-500 font-bold uppercase">Location</span>
                     <strong className="text-white block">Dallas, Texas & Regional Hubs</strong>
-                    <span className="text-[10px] text-slate-400 block mt-0.5">Matthew & Heather Tucker, Owners</span>
+                    <span className="text-[10px] text-slate-400 block mt-0.5">Matthew & Heather Eisan, Owners</span>
                   </div>
                 </div>
 
@@ -135,7 +135,7 @@ export default function ContactView({ onAddContactLead }: ContactViewProps) {
                 <div className="h-12 w-12 rounded-full bg-green-950/50 text-green-400 border border-green-800/60 flex items-center justify-center">
                   <CheckCircle2 className="h-6 w-6 stroke-[2.5]" />
                 </div>
-                <h3 className="font-display font-extrabold text-white text-lg">Inquiry Decoded!</h3>
+                <h3 className="font-display font-extrabold text-white text-lg">Request Received!</h3>
                 <p className="text-xs text-slate-300 leading-relaxed max-w-xs">
                   We have successfully registered your call request in our LeadForge database. An outreach specialist will reach back quickly.
                 </p>
@@ -152,7 +152,7 @@ export default function ContactView({ onAddContactLead }: ContactViewProps) {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 
-                <h3 className="font-display font-extrabold text-white text-base mb-2">Request Your Free Strategy Call</h3>
+                <h3 className="font-display font-extrabold text-white text-base mb-2">Book a Free Call</h3>
 
                 {errorMessage && (
                   <div className="bg-rose-950/45 border border-rose-900/65 text-rose-250 p-3 rounded-xl text-xs flex items-center gap-2 text-rose-350 font-medium">
@@ -174,7 +174,7 @@ export default function ContactView({ onAddContactLead }: ContactViewProps) {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-1.5">Your Corporate Email <span className="text-rose-500">*</span></label>
+                    <label className="block text-xs font-bold text-slate-300 mb-1.5">Your Email Address <span className="text-rose-500">*</span></label>
                     <input
                       type="email"
                       name="email"
@@ -189,7 +189,7 @@ export default function ContactView({ onAddContactLead }: ContactViewProps) {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-1.5">Inbound Call Line <span className="text-rose-500">*</span></label>
+                    <label className="block text-xs font-bold text-slate-300 mb-1.5">Your Phone Number <span className="text-rose-500">*</span></label>
                     <input
                       type="tel"
                       name="phone"
@@ -201,7 +201,7 @@ export default function ContactView({ onAddContactLead }: ContactViewProps) {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-1.5">Contractor Company Name</label>
+                    <label className="block text-xs font-bold text-slate-300 mb-1.5">Your Business Name</label>
                     <input
                       type="text"
                       name="businessName"
@@ -235,10 +235,10 @@ export default function ContactView({ onAddContactLead }: ContactViewProps) {
                     id="submit-contact-form-btn"
                   >
                     {isSubmitting ? (
-                      <span>SENDING SECURE DISPATCH ADVICE...</span>
+                      <span>Booking...</span>
                     ) : (
                       <>
-                        <span>REQUEST YOUR FREE STRATEGY CALL</span>
+                        <span>Book a Free Call</span>
                         <ArrowRight className="h-4.5 w-4.5" />
                       </>
                     )}
@@ -247,7 +247,7 @@ export default function ContactView({ onAddContactLead }: ContactViewProps) {
 
                 <div className="flex items-center justify-center gap-1.5 text-[10px] text-slate-400">
                   <ShieldCheck className="h-4 w-4" />
-                  <span>Carrier compliant SMS guidelines apply. No information leaks.</span>
+                  <span>Your info is safe. We never share or sell your contact details.</span>
                 </div>
 
               </form>

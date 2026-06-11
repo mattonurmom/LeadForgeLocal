@@ -177,7 +177,7 @@ export default function ServicesView({ setTab }: ServicesViewProps) {
                     onClick={handleAuditCta}
                     className="text-xs font-bold text-sky-400 hover:text-sky-305 flex items-center gap-1 cursor-pointer"
                   >
-                    <span>Request Audit & Quote</span>
+                    <span>Get My Free Business Audit</span>
                     <Check className="h-3.5 w-3.5" />
                   </button>
                 </div>
@@ -207,7 +207,7 @@ export default function ServicesView({ setTab }: ServicesViewProps) {
             onClick={handleAuditCta}
             className="font-extrabold text-xs py-3.5 px-6 rounded-xl bg-blue-600 hover:bg-blue-700 text-white transition-all cursor-pointer shadow-md inline-flex items-center gap-1"
           >
-            <span>Request Free Diagnostic Report Card</span>
+            <span>Get My Free Business Audit</span>
             <Check className="h-4 w-4" />
           </button>
         </div>

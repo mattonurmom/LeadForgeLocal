@@ -62,13 +62,13 @@ export default function AboutView({ setTab }: AboutViewProps) {
                   onClick={() => { setTab("audit"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
                   className="rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-3.5 px-6 shadow-md transition-all cursor-pointer"
                 >
-                  Request A Free Audit
+                  Get My Free Business Audit
                 </button>
                 <button
-                  onClick={() => { setTab("pricing"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                  onClick={() => { setTab("contact"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
                   className="rounded-xl border border-slate-800 hover:bg-slate-900 text-slate-300 font-semibold text-xs py-3.5 px-5 transition-all cursor-pointer"
                 >
-                  View Marketing Packages
+                  Book a Free Call
                 </button>
               </div>
             </div>
@@ -178,21 +178,21 @@ export default function AboutView({ setTab }: AboutViewProps) {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             
-            {/* Heather Tucker Card */}
+            {/* Heather Eisan Card */}
             <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 relative overflow-hidden group">
               <div className="absolute top-0 right-0 h-1.5 bg-blue-605 w-full" />
               <div className="space-y-4">
                 <div>
-                  <h3 className="font-display font-extrabold text-white text-lg">Heather Tucker</h3>
+                  <h3 className="font-display font-extrabold text-white text-lg">Heather Eisan</h3>
                   <span className="text-xs text-sky-400 font-bold block uppercase tracking-wider mt-0.5">Co-Founder & Client Success Director</span>
                 </div>
                 <p className="text-xs text-slate-300 leading-relaxed font-sans font-normal text-slate-300">
                   Heather manages our local onboarding schedules, citation reviews loops, and client partnership retention. She ensures your brand receives elite representation and persistent localized placement.
                 </p>
                 <div className="pt-3 border-t border-slate-800 space-y-2 text-xs font-medium">
-                  <a href="tel:6822099273" className="flex items-center gap-2.5 text-slate-300 hover:text-sky-400 transition-colors">
+                  <a href="tel:4697517153" className="flex items-center gap-2.5 text-slate-300 hover:text-sky-400 transition-colors">
                     <Phone className="h-4 w-4 text-sky-400" />
-                    <span>(682) 209-9273</span>
+                    <span>(469) 751-7153</span>
                   </a>
                   <a href="mailto:support@leadforgelocal.com" className="flex items-center gap-2.5 text-slate-300 hover:text-sky-400 transition-colors">
                     <Mail className="h-4 w-4 text-sky-400" />
@@ -202,12 +202,12 @@ export default function AboutView({ setTab }: AboutViewProps) {
               </div>
             </div>
 
-            {/* Matthew Tucker Card */}
+            {/* Matthew Eisan Card */}
             <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 relative overflow-hidden group">
               <div className="absolute top-0 right-0 h-1.5 bg-blue-605 w-full" />
               <div className="space-y-4">
                 <div>
-                  <h3 className="font-display font-extrabold text-white text-lg">Matthew Tucker</h3>
+                  <h3 className="font-display font-extrabold text-white text-lg">Matthew Eisan</h3>
                   <span className="text-xs text-sky-400 font-bold block uppercase tracking-wider mt-0.5">Co-Founder & Technical Operations Director</span>
                 </div>
                 <p className="text-xs text-slate-300 leading-relaxed font-sans font-normal text-slate-305">
@@ -257,7 +257,7 @@ export default function AboutView({ setTab }: AboutViewProps) {
             onClick={() => { setTab("audit"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
             className="inline-flex items-center gap-1.5 font-bold text-xs uppercase tracking-wider text-white bg-blue-600 hover:bg-blue-700 px-6 py-3.5 rounded-xl shadow-md cursor-pointer"
           >
-            <span>Request Your Free Visibility Audit</span>
+            <span>Get My Free Business Audit</span>
           </button>
         </div>
       </section>

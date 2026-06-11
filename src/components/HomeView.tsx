@@ -93,7 +93,7 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
               </h1>
               
               <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl">
-                LeadForge Local helps small business owners improve their online presence, attract nearby customers, and convert searchers into active projects. 
+                LeadForge Local helps small business owners improve their online presence, attract nearby customers, and turn online searches into booked jobs. 
               </p>
               
               <div className="py-2 space-y-1.5 text-slate-300 text-xs sm:text-sm font-medium">
@@ -138,7 +138,7 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
                   id="hero-secondary-cta"
                   className="flex items-center justify-center gap-2 rounded-xl border border-slate-700 bg-slate-900/40 hover:bg-slate-900 px-7 py-4 text-sm font-bold text-white transition-all cursor-pointer"
                 >
-                  <span>Book Free Consultation</span>
+                  <span>Book a Free Call</span>
                 </button>
               </div>
 
@@ -300,7 +300,7 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
               onClick={handleAuditCta}
               className="inline-flex items-center gap-1.5 font-bold text-xs uppercase tracking-wider text-sky-400 hover:text-sky-355 bg-slate-950 border border-slate-800 px-6 py-3 rounded-xl shadow-sm hover:bg-slate-900 transition-all cursor-pointer"
             >
-              <span>Audit My Local Profiles Free</span>
+              <span>Get My Free Business Audit</span>
               <ArrowRight className="h-4 w-4" />
             </button>
           </div>
@@ -314,7 +314,7 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
           
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <div className="max-w-2xl space-y-3">
-              <span className="text-xs font-bold text-sky-400 uppercase tracking-widest block">Proven Growth Arsenal</span>
+              <span className="text-xs font-bold text-sky-400 uppercase tracking-widest block">Our Core Services</span>
               <h2 className="font-display text-3xl font-extrabold tracking-tight text-white">
                 Our Core Local Growth Systems
               </h2>
@@ -380,7 +380,7 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-2xl mx-auto mb-16 space-y-4">
-            <span className="text-xs font-bold text-sky-400 uppercase tracking-widest block">The Frictionless Pipeline</span>
+            <span className="text-xs font-bold text-sky-400 uppercase tracking-widest block">How It Works</span>
             <h2 className="font-display text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
               Our 4-Step Business Growth Blueprint
             </h2>
@@ -431,7 +431,7 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
             <div className="lg:col-span-6 space-y-6">
               <span className="text-xs font-bold text-sky-450 uppercase tracking-widest block">The LeadForge Edge</span>
               <h2 className="font-display text-3xl font-extrabold tracking-tight text-white sm:text-4xl leading-tight">
-                Why Contractors Partner With LeadForge Local
+                Why Local Business Owners Choose LeadForge Local
               </h2>
               <p className="text-sm text-slate-300 leading-relaxed">
                 We are local business specialists ourselves. We are not interested in fluffy corporate jargon, generic social media likes, or vanity metrics. We measure our successes purely by:
@@ -448,7 +448,7 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
                     desc: "Our division operations are optimized so we can sell premium custom trades websites starting under $500, with no high agency markups."
                   },
                   {
-                    title: "Month-to-Month Autonomy",
+                    title: "No Long-Term Contracts",
                     desc: "You are never locked into long annual legal bindings. We earn our retainer every month based on performance and phone traffic."
                   }
                 ].map((edge, idx) => (
@@ -467,21 +467,23 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
 
             <div className="lg:col-span-6 bg-slate-900 rounded-2xl p-8 border border-slate-800">
               <div className="space-y-6">
-                <div className="flex items-center gap-1.5 text-yellow-400">
-                  {Array(5).fill(0).map((_, i) => <Star key={i} className="h-4 w-4 fill-yellow-400 stroke-none" />)}
+                <div className="flex items-center gap-2">
+                  <span className="rounded bg-sky-500/10 px-2 py-0.5 text-[10px] font-bold text-sky-400 uppercase tracking-wider inline-block border border-sky-500/20">
+                    Example Customer Scenario
+                  </span>
                 </div>
                 
-                <p className="text-slate-200 italic font-medium text-sm leading-relaxed">
-                  "Before we hired LeadForge, running our cleaning business was a stressful cycle of expensive home advisor ads that led to tire-kickers. They claims our Google Maps profile, corrected our categories, and set up our custom missed line responder. Within three weeks, we had an extra 11 inbound cleaning calls, and saved two emergency re-cleans via immediate SMS. It paid for itself in days!"
+                <p className="text-slate-305 font-normal text-sm leading-relaxed">
+                  "Before working with optimized setups, running our service trade was a stressful cycle of expensive home ads that led to shared tire-kickers. They claimed our Google Business profile, corrected our categories, and set up our missed-call SMS responder. Within a reasonable period, this secured consistent direct calls and saved several immediate emergency requests."
                 </p>
 
-                <div className="flex items-center gap-3 pt-2 text-xs">
-                  <div className="bg-blue-600 text-white rounded-full h-10 w-10 flex items-center justify-center font-bold">
-                    MC
+                <div className="flex items-center gap-3 pt-4 border-t border-slate-800/80 text-xs">
+                  <div className="bg-slate-950 text-slate-400 rounded px-2 py-0.5 font-mono text-[10px] border border-slate-800">
+                    Demonstration Model
                   </div>
                   <div>
-                    <span className="font-bold text-white block">Markus & Clara Davies</span>
-                    <span className="text-slate-400 block">EcoSweep Cleaners • Dallas Region</span>
+                    <span className="font-semibold text-white block">Typical Home Service Trade Scenario</span>
+                    <span className="text-slate-500 text-[10px] block mt-0.5">Illustrative setup targeting local visibility leaks</span>
                   </div>
                 </div>
               </div>
@@ -496,12 +498,12 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
       <section className="bg-slate-900 py-20 border-b border-slate-800" id="home-community-gallery">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-            <span className="text-xs font-bold text-sky-400 uppercase tracking-widest block">Real Faces of Local Business</span>
+            <span className="text-xs font-bold text-sky-400 uppercase tracking-widest block">Illustrative Target Verticals</span>
             <h2 className="font-display text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
               Engineered For Hardworking Teams In Our Communities
             </h2>
-            <p className="text-sm text-slate-300 leading-relaxed font-normal text-slate-300">
-              We empower physical commerce, hometown services, and local dining venues, helping genuine business owners attract high-value inquiries without massive agency retainers.
+            <p className="text-sm text-slate-350 leading-relaxed font-normal text-slate-300">
+              We focus on local visibility systems and direct response setups for physical commerce, hometown services, and local trade operations.
             </p>
           </div>
 
@@ -518,13 +520,13 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
               </div>
               <div className="space-y-2 text-center md:text-left flex-1">
                 <span className="rounded bg-emerald-500/10 px-2 py-0.5 text-[9.5px] font-bold text-emerald-400 uppercase tracking-wider inline-block">
-                  Bistros & Dining
+                  Example Cafe Scenario
                 </span>
-                <h3 className="font-display font-extrabold text-white text-sm">"Fully booked during slow weekdays"</h3>
-                <p className="text-xs text-slate-300 leading-relaxed">
-                  "Our maps cleanup now coordinates menu highlights and booking keys directly. Local traffic grew by sixty-five percent inside our first month."
+                <h3 className="font-display font-extrabold text-white text-sm">Typical Local Visibility Layout</h3>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  "Our maps listing coordinates menu highlights and direct booking links. Local visibility changes can significantly assist venue traffic."
                 </p>
-                <span className="block text-[10.5px] text-slate-400 font-semibold">• Sarah & David Chen, Bistro Owners</span>
+                <div className="text-[10px] text-slate-500 font-mono mt-2">Example Hospitality Concept Layout</div>
               </div>
             </div>
 
@@ -540,13 +542,13 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
               </div>
               <div className="space-y-2 text-center md:text-left flex-1">
                 <span className="rounded bg-blue-500/10 px-2 py-0.5 text-[9.5px] font-bold text-sky-400 uppercase tracking-wider inline-block">
-                  Home Trades
+                  Example HVAC Scenario
                 </span>
-                <h3 className="font-display font-extrabold text-white text-sm">"No more shared leads anxiety"</h3>
-                <p className="text-xs text-slate-300 leading-relaxed">
-                  "Direct pipeline calls mean we estimate jobs we own. The missed call text fallback system booked four emergency heating calls last week alone."
+                <h3 className="font-display font-extrabold text-white text-sm">Direct Pipeline Response Flow</h3>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  "Estimating jobs we own without paying massive lead hubs. A missed-call fallback solution secures emergency calls while busy on site."
                 </p>
-                <span className="block text-[10.5px] text-slate-400 font-semibold">• Thomas Vance, HVAC Contractor</span>
+                <div className="text-[10px] text-slate-500 font-mono mt-2">Example Service Trade Concept Layout</div>
               </div>
             </div>
           </div>
@@ -611,7 +613,7 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-6">
           <span className="text-[10px] uppercase font-bold tracking-widest text-sky-400">Claim Your Regional Positioning</span>
           <h2 className="font-display text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-            Ready To Convert Local Searches Into Paying Customers?
+            Ready To Turn Online Searches Into Booked Jobs?
           </h2>
           <p className="text-xs text-slate-300 leading-relaxed max-w-2xl mx-auto">
             Don't let competitor listings take another premium drainage job, roofing evaluation, or electrical swap in your area. Request your free evaluation blueprint now!
@@ -622,14 +624,14 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
               onClick={handleAuditCta}
               className="w-full sm:w-auto font-extrabold text-xs tracking-wide py-3.5 px-7 rounded-xl bg-blue-600 hover:bg-blue-700 text-white transition-all cursor-pointer shadow-lg active:scale-95 flex items-center justify-center gap-1"
             >
-              <span>Claim Free Visibility Check</span>
+              <span>Get My Free Business Audit</span>
               <ArrowRight className="h-3.5 w-3.5" />
             </button>
             <button
               onClick={handleConsultCta}
               className="w-full sm:w-auto font-bold text-xs py-3.5 px-6 rounded-xl border border-slate-700 hover:bg-slate-900 text-white transition-all cursor-pointer"
             >
-              <span>Book Strategy Conversation</span>
+              <span>Book a Free Call</span>
             </button>
           </div>
 

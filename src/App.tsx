@@ -9,6 +9,8 @@ import FreeAuditView from "./components/FreeAuditView";
 import ContactView from "./components/ContactView";
 import AdminHub from "./components/AdminHub";
 import Footer from "./components/Footer";
+import TermsView from "./components/TermsView";
+import PrivacyView from "./components/PrivacyView";
 import { AuditLead, ContactLead } from "./types";
 
 export default function App() {
@@ -180,6 +182,10 @@ export default function App() {
         return <FreeAuditView onAddAuditLead={handleAddAuditLead} />;
       case "contact":
         return <ContactView onAddContactLead={handleAddContactLead} />;
+      case "terms":
+        return <TermsView setTab={setTab} />;
+      case "privacy":
+        return <PrivacyView setTab={setTab} />;
       default:
         return <HomeView setTab={setTab} setShowAdminHub={setShowAdminHub} />;
     }

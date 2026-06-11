@@ -145,7 +145,7 @@ export default function PricingView({ setTab }: PricingViewProps) {
                         : "bg-slate-950 hover:bg-slate-850 hover:border-slate-705 border border-slate-800 text-white"
                     }`}
                   >
-                    Get My Free Audit First
+                    Get My Free Business Audit
                   </button>
                   <span className="text-[10px] text-slate-450 block">Or book free call above</span>
                 </div>
@@ -291,7 +291,7 @@ export default function PricingView({ setTab }: PricingViewProps) {
                   onClick={handleCta}
                   className="w-full font-bold text-xs py-4.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white shadow-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                 >
-                  <span>Build my customer pipeline free</span>
+                  <span>Get My Free Business Audit</span>
                   <ArrowRight className="h-4 w-4" />
                 </button>
                 <span className="block text-[10px] text-slate-500 mt-2.5">

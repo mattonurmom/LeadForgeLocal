@@ -95,8 +95,8 @@ export default function Footer({ setTab, setShowAdminHub }: FooterProps) {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2 border-t border-slate-900">
             <span>© {new Date().getFullYear()} LeadForge Local. All rights reserved.</span>
             <div className="flex gap-4">
-              <span className="cursor-pointer hover:text-slate-350">Service Terms</span>
-              <span className="cursor-pointer hover:text-slate-350">Privacy Protection</span>
+              <span className="cursor-pointer hover:text-slate-350" onClick={() => handleNav("terms")}>Service Terms</span>
+              <span className="cursor-pointer hover:text-slate-350" onClick={() => handleNav("privacy")}>Privacy Protection</span>
               <span className="cursor-pointer hover:text-slate-350" onClick={() => { setShowAdminHub(true); window.scrollTo({ top: 0, behavior: "smooth" }); }}>Owner Desk</span>
             </div>
           </div>

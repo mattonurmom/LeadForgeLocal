@@ -100,8 +100,8 @@ Priority Discoveries:
                   <CheckCircle2 className="h-6 w-6" />
                 </div>
                 <div>
-                  <span className="text-[10px] uppercase font-bold text-slate-400 block tracking-wider">Acquisition Received</span>
-                  <h3 className="font-display font-extrabold text-sky-400 text-lg">Diagnostics Queue Secured!</h3>
+                  <span className="text-[10px] uppercase font-bold text-slate-400 block tracking-wider">Audit Request</span>
+                  <h3 className="font-display font-extrabold text-sky-400 text-lg">Audit Request Received!</h3>
                 </div>
               </div>
 
@@ -229,7 +229,7 @@ Priority Discoveries:
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-300 mb-1.5">Business / Practice / Restaurant Name <span className="text-rose-500">*</span></label>
+                  <label className="block text-xs font-bold text-slate-300 mb-1.5">Your Business Name <span className="text-rose-500">*</span></label>
                   <input
                     type="text"
                     name="businessName"
@@ -244,7 +244,7 @@ Priority Discoveries:
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-bold text-slate-300 mb-1.5">Email Address <span className="text-rose-500">*</span></label>
+                  <label className="block text-xs font-bold text-slate-300 mb-1.5">Your Email Address <span className="text-rose-500">*</span></label>
                   <input
                     type="email"
                     name="email"
@@ -256,7 +256,7 @@ Priority Discoveries:
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-300 mb-1.5">Operating Mobile Phone <span className="text-rose-500">*</span></label>
+                  <label className="block text-xs font-bold text-slate-300 mb-1.5">Your Phone Number <span className="text-rose-500">*</span></label>
                   <input
                     type="tel"
                     name="phone"
@@ -305,11 +305,11 @@ Priority Discoveries:
                   {isSubmitting ? (
                     <>
                       <Sparkles className="h-4.5 w-4.5 animate-spin" />
-                      <span>PREPARING YOUR VISIBILITY HIGHLIGHTS...</span>
+                      <span>Preparing...</span>
                     </>
                   ) : (
                     <>
-                      <span>GET MY FREE SIMPLE AUDIT PLAN</span>
+                      <span>Get My Free Business Audit</span>
                       <ArrowRight className="h-4.5 w-4.5" />
                     </>
                   )}

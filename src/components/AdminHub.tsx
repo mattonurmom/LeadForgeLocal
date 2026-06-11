@@ -19,11 +19,15 @@ interface AdminHubProps {
 
 export default function AdminHub({ auditLeads, contactLeads, onClearLeads }: AdminHubProps) {
   // Security Locks states
-  const [isAdminUnlocked, setIsAdminUnlocked] = useState<boolean>(() => {
-    return localStorage.getItem("leadforge_admin_unlocked") === "true";
-  });
+  const [isAdminUnlocked, setIsAdminUnlocked] = useState<boolean>(false);
   const [passcode, setPasscode] = useState<string>("");
   const [passcodeError, setPasscodeError] = useState<string>("");
+
+  useEffect(() => {
+    // Reset unlock state and clear storage on mount to guarantee password prompt every time
+    setIsAdminUnlocked(false);
+    localStorage.removeItem("leadforge_admin_unlocked");
+  }, []);
 
   // AI Strategic Coordinator components
   const [aiPlaybook, setAiPlaybook] = useState<string>("");
@@ -82,7 +86,7 @@ export default function AdminHub({ auditLeads, contactLeads, onClearLeads }: Adm
 
   const handleVerifyPasscode = (e: React.FormEvent) => {
     e.preventDefault();
-    if (passcode === "7220" || passcode.toLowerCase() === "admin") {
+    if (passcode === "0722") {
       setIsAdminUnlocked(true);
       localStorage.setItem("leadforge_admin_unlocked", "true");
       setPasscodeError("");
@@ -263,10 +267,7 @@ export default function AdminHub({ auditLeads, contactLeads, onClearLeads }: Adm
             </button>
           </form>
 
-          <div className="pt-4 border-t border-slate-800/80">
-            <span className="text-[10px] text-slate-500 uppercase font-mono tracking-wider block">🔑 DEMO ACCESS PIN:</span>
-            <span className="text-xs text-slate-300 font-semibold font-mono block mt-1">"7220" or "admin"</span>
-          </div>
+          {/* Public demo PIN warning removed to secure credential privacy */}
         </div>
       </div>
     );

@@ -16,7 +16,7 @@ export default function Navbar({ currentTab, setTab, showAdminHub, setShowAdminH
     { id: "about", label: "About" },
     { id: "services", label: "Services" },
     { id: "pricing", label: "Pricing Packages" },
-    { id: "portfolio", label: "Case Studies" },
+    { id: "portfolio", label: "Sample Work" },
     { id: "audit", label: "Free Audit" },
     { id: "contact", label: "Contact" },
   ];
@@ -52,7 +52,7 @@ export default function Navbar({ currentTab, setTab, showAdminHub, setShowAdminH
               <span className="font-display text-xl font-bold tracking-tight text-white animate-fadeIn">LeadForge</span>
               <span className="rounded bg-blue-500/15 px-1.5 py-0.5 text-[10px] font-bold tracking-wide text-sky-400 uppercase">Local</span>
             </div>
-            <span className="block text-[9px] text-slate-400 tracking-wider">Local Visibility Support</span>
+            <span className="block text-[9px] text-slate-400 tracking-wider">Local Lead Growth Support</span>
           </div>
         </button>
 
@@ -82,14 +82,15 @@ export default function Navbar({ currentTab, setTab, showAdminHub, setShowAdminH
           <button
             onClick={toggleAdmin}
             id="nav-admin-toggle"
-            className={`flex items-center gap-2 rounded-lg px-3.5 py-2 text-xs font-semibold tracking-wide transition-all cursor-pointer ${
+            className={`flex items-center justify-center rounded-xl p-2.5 transition-all cursor-pointer ${
               showAdminHub 
                 ? "bg-slate-900 text-white hover:bg-slate-800 border border-slate-800" 
-                : "text-slate-300 bg-slate-900 border border-slate-800/80 hover:bg-slate-800"
+                : "text-slate-300 bg-slate-900 border border-slate-800/80 hover:bg-slate-850"
             }`}
+            title={showAdminHub ? "Return to Website" : "Admin Console Access"}
+            aria-label="Admin Console"
           >
-            <Lock className="h-3.5 w-3.5" />
-            {showAdminHub ? "Public Website" : "Launch Suite & Leads"}
+            <Lock className="h-4 w-4" />
           </button>
           
           <button
@@ -97,7 +98,7 @@ export default function Navbar({ currentTab, setTab, showAdminHub, setShowAdminH
             id="nav-cta"
             className="flex items-center gap-1.5 rounded-xl bg-blue-600 px-4.5 py-2.5 text-xs font-bold text-white shadow-lg shadow-blue-500/25 hover:bg-blue-700 hover:shadow-blue-600/30 active:scale-95 transition-all cursor-pointer"
           >
-            <span>Free Business Audit</span>
+            <span>Get My Free Business Audit</span>
             <ArrowRight className="h-3.5 w-3.5" />
           </button>
         </div>
@@ -107,10 +108,10 @@ export default function Navbar({ currentTab, setTab, showAdminHub, setShowAdminH
           <button
             onClick={toggleAdmin}
             id="nav-admin-toggle-mobile"
-            className={`flex items-center justify-center p-2 rounded-xl border border-slate-800 transition-colors ${
+            className={`flex items-center justify-center p-2.5 rounded-xl border border-slate-800 transition-colors ${
               showAdminHub ? "bg-slate-900 text-white" : "bg-slate-900 text-slate-300"
             }`}
-            title="Launch Suite & Leads"
+            title="Admin Desk"
           >
             <Lock className="h-4 w-4" />
           </button>
@@ -144,18 +145,10 @@ export default function Navbar({ currentTab, setTab, showAdminHub, setShowAdminH
             
             <div className="pt-4 flex flex-col gap-3">
               <button
-                onClick={toggleAdmin}
-                className="flex items-center justify-center gap-2.5 w-full rounded-xl bg-slate-900 text-white font-medium py-3 text-sm shadow-md border border-slate-800"
-              >
-                <Lock className="h-4 w-4" />
-                {showAdminHub ? "Return to Live Website" : "Launch Suite (100% Free Tools)"}
-              </button>
-
-              <button
                 onClick={() => handleNav("audit")}
                 className="flex items-center justify-center gap-2 w-full rounded-xl bg-blue-600 text-white font-bold py-3.5 text-sm shadow-lg shadow-blue-500/25"
               >
-                <span>Request Free Business Audit</span>
+                <span>Get My Free Business Audit</span>
                 <ArrowRight className="h-4 w-4" />
               </button>
             </div>

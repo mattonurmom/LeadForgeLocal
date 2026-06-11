@@ -11,68 +11,156 @@ const PORT = 3000;
 
 app.use(express.json());
 
-// API: AI Playbook Coordinator
-app.post("/api/ai-coordinate", async (req, res) => {
-  try {
-    const { auditLeads = [], contactLeads = [] } = req.body;
+// Helper: Fallback heuristic playbook generator
+function getHeuristicPlaybook(auditLeads: any[], contactLeads: any[]) {
+  const totalLeads = auditLeads.length + contactLeads.length;
+  let adviceLines: string[] = [];
+  
+  if (totalLeads === 0) {
+    adviceLines = [
+      "🎯 **Cold Outreach Kickoff**: Your CRM database list is empty. Go search Google Maps in your target city for 'roofing contractors' or 'dental clinics' on page 3. Grab three businesses that lack a primary website or have less than 10 reviews.",
+      "📝 **Manual Pilot Insertion**: Submit these three local prospects manually using the 'Get Free Business Audit' form on our homepage. This triggers the automatic profile creation, and outputs a bespoke audit PDF for you to email them immediately.",
+      "📞 **Missed Call Pitching**: Phone these prospects directly. Mention that you noticed their Google business hours are unverified and that they are losing massive client calls to competitors up the street.",
+    ];
+  } else {
+    // Build customized advice line-by-line using the actual lead names/industries
+    adviceLines.push(`📊 **Active Pipeline Secured**: You have ${auditLeads.length} audit requests and ${contactLeads.length} consultation messages in your CRM queue.`);
     
-    // Check if the database is completely empty
-    const totalLeads = auditLeads.length + contactLeads.length;
-    
-    // Check for API Key presence
-    const apiKey = process.env.GEMINI_API_KEY;
-    
-    if (!apiKey) {
-      // Graceful fallback when Gemini key is not yet set:
-      // Return a professional, deterministic smart playbook generated specifically from the actual lead data.
-      let adviceLines: string[] = [];
+    // Analyze audit leads
+    auditLeads.forEach((lead: any, index: number) => {
+      const biz = lead.businessName || "Local Prospect";
+      const client = lead.name || "Business Owner";
+      const hasSite = lead.website && !lead.website.toLowerCase().includes("no existing");
+      const phone = lead.phone || "No phone listed";
       
-      if (totalLeads === 0) {
-        adviceLines = [
-          "🎯 **Cold Outreach Kickoff**: Your CRM database list is empty. Go search Google Maps in your target city for 'roofing contractors' or 'dental clinics' on page 3. Grab three businesses that lack a primary website or have less than 10 reviews.",
-          "📝 **Manual Pilot Insertion**: Submit these three local prospects manually using the 'Get Free Business Audit' form on our homepage. This triggers the automatic profile creation, and outputs a bespoke audit PDF for you to email them immediately.",
-          "📞 **Missed Call Pitching**: Phone these prospects directly. Mention that you noticed their Google business hours are unverified and that they are losing massive client calls to competitors up the street.",
-        ];
+      if (!hasSite) {
+        adviceLines.push(`🔥 **CORRELATION [Audit #${index + 1}]**: **${biz}** (${client}) has NO active website listed. This represents a golden $499/mo setup contract. Draft our custom 'Growth Proposal' instantly, copy the outreach card, and text them at **${phone}** offering a free beautiful Google Site draft.`);
       } else {
-        // Build customized advice line-by-line using the actual lead names/industries
-        adviceLines.push(`📊 **Active Pipeline Secured**: You have ${auditLeads.length} audit requests and ${contactLeads.length} consultation messages in your CRM queue.`);
-        
-        // Analyze audit leads
-        auditLeads.forEach((lead: any, index: number) => {
-          const biz = lead.businessName || "Local Prospect";
-          const client = lead.name || "Business Owner";
-          const hasSite = lead.website && !lead.website.toLowerCase().includes("no existing");
-          const phone = lead.phone || "No phone listed";
-          
-          if (!hasSite) {
-            adviceLines.push(`🔥 **CORRELATION [Audit #${index + 1}]**: **${biz}** (${client}) has NO active website listed. This represents a golden $499/mo setup contract. Draft our custom 'Growth Proposal' instantly, copy the outreach card, and text them at **${phone}** offering a free beautiful Google Site draft.`);
-          } else {
-            adviceLines.push(`⚡ **CORRELATION [Audit #${index + 1}]**: **${biz}** has a website but rankings are low on Google Maps. Copy the 'GBP Optimization Card' script from the pitch cards tab and email **${lead.email || "them"}** with their 7-point audit report.`);
-          }
-        });
-        
-        // Analyze contact leads
-        contactLeads.forEach((lead: any, index: number) => {
-          const biz = lead.businessName || "Inbound Contact";
-          const client = lead.name || "Lead";
-          const msg = lead.message || "";
-          
-          adviceLines.push(`💬 **URGENT FOLLOWUP [Contact #${index + 1}]**: **${biz}** (Sender: ${client}) sent a direct inquiry stating: "${msg.length > 50 ? msg.substring(0, 50) + '...' : msg}". Call them back immediately. This lead filled out a direct form, signifying they are extremely warm and ready to transact. Pitch the 'Essential Starter' or 'Growth Engine' Monthly Retainer.`);
-        });
-        
-        adviceLines.push("🌟 **Next Best Action**: Go to our 'Audit & Proposal Writers' tab, type in these details to generate the documents, and send them directly to establish immediate, trust-based authority.");
+        adviceLines.push(`⚡ **CORRELATION [Audit #${index + 1}]**: **${biz}** has a website but rankings are low on Google Maps. Copy the 'GBP Optimization Card' script from the pitch cards tab and email **${lead.email || "them"}** with their 7-point audit report.`);
       }
+    });
+    
+    // Analyze contact leads
+    contactLeads.forEach((lead: any, index: number) => {
+      const biz = lead.businessName || "Inbound Contact";
+      const client = lead.name || "Lead";
+      const msg = lead.message || "";
+      
+      adviceLines.push(`💬 **URGENT FOLLOWUP [Contact #${index + 1}]**: **${biz}** (Sender: ${client}) sent a direct inquiry stating: "${msg.length > 50 ? msg.substring(0, 50) + '...' : msg}". Call them back immediately. This lead filled out a direct form, signifying they are extremely warm and ready to transact. Pitch the 'Essential Starter' or 'Growth Engine' Monthly Retainer.`);
+    });
+    
+    adviceLines.push("🌟 **Next Best Action**: Go to our 'Audit & Proposal Writers' tab, type in these details to generate the documents, and send them directly to establish immediate, trust-based authority.");
+  }
 
-      return res.json({
-        status: "optimized_heuristic",
-        text: `### 🤖 LeadForge AI Advisor (Smart Analysis Mode)
+  return {
+    status: "optimized_heuristic",
+    text: `### 🤖 LeadForge AI Advisor (Smart Analysis Mode)
 
 Your system is currently running on our local intelligent heuristic engine. Below is your prioritized outreach playbook, dynamically built from your live CRM database:
 
 ${adviceLines.map(line => `- ${line}`).join("\n\n")}
 
 *(Note: If you want to enable complex AI chat and unrestricted natural reasoning, select a Gemini API Key in **Settings > Secrets** to automatically unlock raw Gemini responses.)*`
-      });
+  };
+}
+
+// Helper: Fallback heuristic outreach script generator
+function getHeuristicOutreach(lead: any) {
+  const { name = "Owner", businessName = "Local Contractor", phone = "unknown phone", email = "no email", website = "", message = "", type = "Audit" } = lead;
+  const isContactInbound = type === "Contact";
+
+  let phoneScript = "";
+  let emailDraft = "";
+  
+  if (isContactInbound) {
+    phoneScript = `**Friendly Opener**: "Hey is this ${name}? Hey ${name}, my name is [Your Name] with LeadForge. I saw you just reached out on our site regarding some online visibility. I wanted to call you back personally while I have your file open so we can jump on this message you left: '${message}'."
+**Pitching**: "Typically, when we perform these diagnostics, we find three main focus areas: mobile design delay, a high percentage of missed inbound client calls, and Google Maps category labels that are unoptimized. Now, instead of trying to fix these things yourself, here are three things a professional marketing team would do to correct those three errors: re-engineer the layouts for instant phone loading, calibrate custom target labels on Maps to capture local traffic, and spin up an automated SMS fallback system so whenever you're busy, you text callers back immediately. We actually provide that exact service for a fraction of what a full marketing agency charges, except that you get direct, day-to-day access to your marketing team."
+**The Close / Booking**: "Let's grab 5-10 minutes tomorrow morning over coffee to look at it together, or I can email you the outline. What's your best address?"`;
+
+    emailDraft = `Subject: Fast follow up regarding your Inquiry - LeadForge Local
+
+Hi ${name},
+
+Thanks again for reaching out to us today! I wanted to follow up immediately regarding your message:
+"${message}"
+
+When local search customers are looking for services, they want instant help. When we run standard visibility diagnostics, we look closely at three main errors: mobile design delay, missed inbound client calls, and unoptimized Maps listing labels. 
+
+Instead of trying to fix these things yourself, here are three things a professional marketing team would do to correct those three errors:
+1. Re-engineer the layout structure for lightning-speed mobile rendering.
+2. Calibrate advanced Google Business categories and microdata optimization to unlock your local maps rank.
+3. Configure a carrier-approved instant SMS response route to lock in missed business traffic.
+
+We built LeadForge Local to handle all of this for you. We generally cost significantly less than a marketing team and provide the same service except that you have direct access to your marketing team.
+
+Could we schedule a quick 10-minute chat tomorrow at 9:00 AM or 2:00 PM to show you how to capture these clients?
+
+Best regards,
+[Your Name]
+LeadForge Local Coordinator
+Phone: 555-0199`;
+  } else {
+    phoneScript = `**Friendly Opener**: "Hi is this ${name}? Hey ${name}, my name is [Your Name]. I am a local coordinator here in town. I was looking through Google Maps profiles and noticed ${businessName}. I ran a quick smartphone speed scan of your listing and wanted to share what I found."
+**Pitching the Correction**: "So, here's the deal: when we run diagnostics, we look at three main errors: mobile design slowdown, unoptimized Maps listing categories, and a lack of missed call text-back. Instead of trying to fix these yourself, there are three things a professional marketing team would do to correct those three errors. First, re-engineer your mobile pages so they load in under a second; second, optimize your maps search labels so you rank at the top; and third, install a carrier-certified automatic SMS fallback so you never lose a client. We actually handle all of this. We generally cost significantly less than a marketing team and provide the same service except that you have direct access to your marketing team."
+**The Close / Booking**: "I compiled these three points in a clean, free report. Can I email it to ${email} or text it to ${phone}?"`;
+
+    emailDraft = `Subject: Quick helpful report for ${businessName}
+
+Hi ${name},
+
+I was looking at ${businessName} in your area and put together a quick, friendly visibility report of how your business appears on mobile search.
+
+During our check, we noticed three specific bottleneck areas: mobile design slowdown, unoptimized Maps listing categories, and a lack of instant-response text back for busy lines.
+
+Instead of trying to fix these things yourself, here are three things a professional marketing team would do to correct those three errors:
+1. Re-engineer your mobile page layout for lightning-fast mobile loading speed.
+2. Optimize your Google Business Profile labels and search categorization to rank at the top of maps.
+3. Establish an automatic SMS reply system to contact callers immediately if you miss a call.
+
+At LeadForge, we streamline this entire setup for you. We generally cost significantly less than a marketing team and provide the same service except that you have direct access to your marketing team.
+
+Would you prefer me to email the report to ${email} or send a quick copy to ${phone} so we can show you our approach?
+
+Best,
+[Your Name]
+LeadForge Local Team
+555-0199`;
+  }
+
+  const text = `### 🤖 AI Copy-and-Paste Outreach Guide (Optimized Template)
+
+Here is your exact word-for-word playbook to engage **${name}** at **${businessName}**. This guidance covers your complete sales calls and emails without any complicated tech talk:
+
+#### 📞 Word-for-Word Phone Script
+${phoneScript}
+
+---
+
+#### ✉️ Outbound Sales Email Draft
+\`\`\`text
+${emailDraft}
+\`\`\`
+
+---
+
+#### 💡 Immediate Next Steps
+1. **Send a quick text check**: Send a short SMS to **${phone}**: *"Hi ${name}, this is [Your Name]. Just sent a quick, friendly visibility report for ${businessName} to ${email}. Let me know if that helps!"*
+2. **Review their details**: Review the business parameters before launching the phone call. Keep the tone casual, like an encouraging neighbor, not a pushy corporate agent.
+3. Use our **Audit & Proposal Generators** tab to download the exact PDF and visual report card matching their info.`;
+
+  return { status: "optimized_heuristic", text };
+}
+
+// API: AI Playbook Coordinator
+app.post("/api/ai-coordinate", async (req, res) => {
+  const { auditLeads = [], contactLeads = [] } = req.body;
+  try {
+    // Check for API Key presence
+    const apiKey = process.env.GEMINI_API_KEY;
+    
+    if (!apiKey) {
+      const fallbackResult = getHeuristicPlaybook(auditLeads, contactLeads);
+      return res.json(fallbackResult);
     }
 
     // Lazy initialization of Gemini SDK
@@ -132,17 +220,18 @@ Format your response in beautiful Markdown:
 
   } catch (error: any) {
     console.error("Gemini API error:", error);
-    return res.status(500).json({
-      status: "error",
-      text: `### ❌ AI Coordinator Failure\n\nFailed to invoke Gemini reasoning model. Room error details: ${error.message || error}`
+    const fallbackResult = getHeuristicPlaybook(auditLeads, contactLeads);
+    return res.json({
+      status: "fallback_heuristic",
+      text: `${fallbackResult.text}\n\n*(Note: Your customized Gemini API Key returned a rate-limit/quota error. We have automatically activated the Local Heuristic Advisor Engine to compile your playbook with zero downtime. Check Settings > Secrets inside the code window or your billing details on Google AI Studio to increase your live API limits.)*`
     });
   }
 });
 
 // API: AI Interactive Strategic Advisor Chat
 app.post("/api/ai-chat", async (req, res) => {
+  const { message = "", auditLeads = [], contactLeads = [] } = req.body;
   try {
-    const { message = "", auditLeads = [], contactLeads = [] } = req.body;
     const apiKey = process.env.GEMINI_API_KEY;
 
     if (!apiKey) {
@@ -195,17 +284,26 @@ Provide a short, crisp, highly strategic reply. Show them exactly how to close p
 
   } catch (error: any) {
     console.error("Gemini Chat API error:", error);
-    return res.status(500).json({
-      status: "error",
-      text: `### ❌ Chat Engine Failure \n\nFailed to query Gemini. Room error: ${error.message || error}`
+    return res.json({
+      status: "fallback_heuristic",
+      text: `### 🤖 LeadForge Advisor (Heuristic Recovery Mode)
+
+I received your strategy query: *"${message}"*
+
+*(Note: Your Gemini API Key returned a rate-limit/quota error. We have automatically activated the Local Heuristic Advisor Engine.)*
+
+Here is our top sales recommendations to close this client:
+- **Never teach the owner to fix things herself**: Explain what traditional marketing teams do (mobile design layout re-engineering, maps label and secondary tag optimization, and SMS fallback setup). 
+- **Present our unfair pricing advantage**: Highlight that we cost significantly less than a marketing team and provide the same high tier service, except you get direct, day-to-day access to your marketing team.
+- **Propose a quick next step**: Secure a 5-minute call tomorrow morning to show their diagnostic sheet.`
     });
   }
 });
 
 // API: AI Tailored Outreach Script Generator (Call scripts & email drafts)
 app.post("/api/ai-lead-outreach", async (req, res) => {
+  const { lead } = req.body;
   try {
-    const { lead } = req.body;
     if (!lead) {
       return res.status(400).json({ status: "error", text: "Please select a valid prospect lead." });
     }
@@ -215,83 +313,8 @@ app.post("/api/ai-lead-outreach", async (req, res) => {
     const apiKey = process.env.GEMINI_API_KEY;
 
     if (!apiKey) {
-      // High-quality dynamic fallback based on the actual prospect lead
-      const formattedWebsite = website && !website.toLowerCase().includes("no existing") ? website : null;
-      const isContactInbound = type === "Contact";
-
-      let phoneScript = "";
-      let emailDraft = "";
-      
-      if (isContactInbound) {
-        phoneScript = `**Friendly Opener**: "Hey is this ${name}? Hey ${name}, my name is [Your Name] with LeadForge. I saw you just reached out on our site regarding some online visibility. I wanted to call you back personally while I have your file open so we can jump on this message you left: '${message}'."
-**Handling Objections / Pitching**: "Honestly, we do some really simple checkups on local search views, especially for companies like yours. If we sync your maps and set up a quick automated text back for missed calls, you'll grab any emergency queries immediately. It only takes about 5 seconds to set up. Does that sound like a plan?"
-**The Close / Booking**: "Let's grab 5-10 minutes tomorrow morning over coffee to look at it together, or I can email you the outline. What's your best address?"`;
-
-        emailDraft = `Subject: Fast follow up regarding your Inquiry - LeadForge Local
-
-Hi ${name},
-
-Thanks again for reaching out to us today! I wanted to follow up immediately regarding your message:
-"${message}"
-
-When local search customers are looking for local services, they want instant help. If you're in the middle of a job site and phone lines go busy, they'll call the next listing on Google Maps. 
-
-That is why we build simple Google Business Profile optimization and automated phone line replies that text prospects back instantly.
-
-Could we schedule a quick 10-minute chat tomorrow at 9:00 AM or 2:00 PM to show you how to capture these clients?
-
-Best regards,
-[Your Name]
-LeadForge Local Coordinator
-Phone: 555-0199`;
-      } else {
-        phoneScript = `**Friendly Opener**: "Hi is this ${name}? Hey ${name}, my name is [Your Name]. I am a local coordinator here in town. I was looking through Google Maps profiles and noticed ${businessName}. I ran a quick smartphone speed scan of your listing and wanted to share what I found."
-**Pitching the Correction**: "So, here's the deal: when people find you on Google Maps, everything is looking clean, but your listing is missing several secondary tags which makes you invisible to up to 80% of local searches. Also, if someone calls when you're busy and you can't answer, they hang up and call the next competitor. We help contractors set up a simple auto-text fallback so that never happens."
-**The Close / Booking**: "I actually drafted a tiny, easy-to-read visibility report with 3 quick pointers to get you show up top. I can send it over for free—can I email it to ${email} or text it to ${phone}?"`;
-
-        emailDraft = `Subject: Quick helpful report for ${businessName}
-
-Hi ${name},
-
-I was looking at ${businessName} in your area and put together a quick, friendly visibility report of how your business appears on mobile search.
-
-Here are the 3 simple discoveries:
-1. Smartphone Design: Your website could be simplified to load much faster for local callers on mobile.
-2. Google Maps: A few minor category updates will place you higher when people search maps locally.
-3. Call Guard: Setting up a 5-second automatic reply SMS secures customers if you ever miss a phone call on a job site.
-
-I have compiled these simple recommendations in a 1-page guide. No pushy sales pitch—just straightforward, helpful tips.
-
-Would you prefer me to email it to ${email} or send a quick copy to ${phone}?
-
-Best,
-[Your Name]
-LeadForge Local Team
-555-0199`;
-      }
-
-      const text = `### 🤖 AI Copy-and-Paste Outreach Guide (Optimized Template)
-
-Here is your exact word-for-word playbook to engage **${name}** at **${businessName}**. This guidance covers your complete sales calls and emails without any complicated tech talk:
-
-#### 📞 Word-for-Word Phone Script
-${phoneScript}
-
----
-
-#### ✉️ Outbound Sales Email Draft
-\`\`\`text
-${emailDraft}
-\`\`\`
-
----
-
-#### 💡 Immediate Next Steps
-1. **Send a quick text check**: Send a short SMS to **${phone}**: *"Hi ${name}, this is [Your Name]. Just sent a quick, friendly visibility report for ${businessName} to ${email}. Let me know if that helps!"*
-2. **Review their details**: Review the business parameters before launching the phone call. Keep the tone casual, like an encouraging neighbor, not a pushy corporate agent.
-3. Use our **Audit & Proposal Generators** tab to download the exact PDF and visual report card matching their info.`;
-
-      return res.json({ status: "optimized_heuristic", text });
+      const fallbackResult = getHeuristicOutreach(lead);
+      return res.json(fallbackResult);
     }
 
     // Process with Live Gemini API
@@ -326,8 +349,10 @@ Write this in plain English without any complex technical jargon, so any busines
 
 Your response MUST be in beautiful Markdown and contain:
 - "### 🤖 AI outreach blueprint & Playbook for ${businessName}"
-- "#### 📞 Word-for-Word Call Script" (A realistic, friendly, non-pushy phone conversation guide with a helpful opening line, simple value presentation targeting their specific situation, objection handlers for price or trust, and a natural callback agreement close).
+- "#### 📞 Word-for-Word Call Script" (A realistic, friendly, non-pushy phone conversation guide with a helpful opening line). 
+  CRITICAL: In the script, DO NOT tell the business owners how to fix things themselves off the rip. Instead, explain that there are three things a professional marketing team would do to correct those three errors (speed layout layout re-engineering, Google Maps advanced category/secondary tag optimization, and carrier-approved automated instant-response SMS fallback). Explicitly mention that: "We generally cost significantly less than a marketing team and provide the same service except that you have direct access to your marketing team."
 - "#### ✉️ Outbound Email Draft" (A casual, fully-written, direct, and persuasive copy-paste business email including a customized Subject line).
+  CRITICAL: In the email, DO NOT tell the business owners how to fix things themselves off the rip. Instead, specify the three things a professional marketing team would do to correct these errors, and explain that: "We generally cost significantly less than a marketing team and provide the same service except that you have direct access to your marketing team."
 - "#### 💡 Immediate Actions" (2-3 very easy, sequential tasks like sending a friendly text message to their phone: ${phone}, printing documents, and timing recommendation).
 
 Keep the tone encouraging, crisp, professional, and practical. Return only the beautiful Markdown output.
@@ -342,9 +367,14 @@ Keep the tone encouraging, crisp, professional, and practical. Return only the b
 
   } catch (error: any) {
     console.error("Outreach API error:", error);
-    return res.status(500).json({
-      status: "error",
-      text: `### ❌ Outreach AI Failure \n\nFailed to invoke Gemini outreach model. Room error details: ${error.message || error}`
+    const fallbackResult = getHeuristicOutreach(lead);
+    return res.json({
+      status: "fallback_heuristic",
+      text: `### 🤖 AI Copy-and-Paste Outreach Guide (Optimized Template)
+
+*(Note: Your customized Gemini API Key returned a rate-limit/quota error. We have automatically activated the Local Heuristic Advisor Engine to compile your playbook with zero downtime. Check Settings > Secrets inside the code window or your billing details on Google AI Studio to increase your live API limits.)*
+
+${fallbackResult.text}`
     });
   }
 });

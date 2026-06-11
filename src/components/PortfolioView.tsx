@@ -168,7 +168,7 @@ export default function PortfolioView({ setTab }: PortfolioViewProps) {
                       onClick={handleAuditCta}
                       className="text-xs font-bold text-sky-450 hover:text-sky-305 flex items-center gap-1 cursor-pointer self-start sm:self-auto"
                     >
-                      <span>Draft similar plan for my business</span>
+                      <span>Get My Free Business Audit</span>
                       <ArrowRight className="h-3.5 w-3.5" />
                     </button>
                   </div>
@@ -195,7 +195,7 @@ export default function PortfolioView({ setTab }: PortfolioViewProps) {
             onClick={handleAuditCta}
             className="font-extrabold text-xs py-3.5 px-6 rounded-xl bg-blue-600 hover:bg-blue-700 text-white shadow-md cursor-pointer transition-all uppercase tracking-wider inline-flex items-center gap-1"
           >
-            <span>Claim My Free Business Diagnostic Plan</span>
+            <span>Get My Free Business Audit</span>
             <ArrowRight className="h-4 w-4" />
           </button>
         </div>

@@ -26,7 +26,7 @@ export const SERVICES: ServiceItem[] = [
     benefits: [
       "Supports local search performance within your target city",
       "Highlights key services in the map pack",
-      "Designed to help businesses attract more opportunities",
+      "Designed to turn nearby local searches into high-intent inbound calls",
       "Increases customer trust with polished profile assets"
     ],
     iconName: "MapPin"
@@ -36,7 +36,7 @@ export const SERVICES: ServiceItem[] = [
     title: "Google Business Profile Monthly Management",
     category: "Google GBP",
     description: "Keep your profile active with consistent strategic updates, photo uploads, and customer Q&As.",
-    detailedDescription: "Search listings require constant updates. We handle postings of weekly offers, publish high-impact photos, answer client Q&As, and manage review triggers. Helps businesses attract more opportunities with no manual effort.",
+    detailedDescription: "Search listings require constant updates. We handle postings of weekly offers, publish high-impact photos, answer client Q&As, and manage review triggers. Ensures your local brand remains active, engaging, and favored by search algorithms automatically.",
     priceTag: "Starting at $99/month",
     benefits: [
       "Weekly localized search-friendly visual updates",
@@ -96,7 +96,7 @@ export const SERVICES: ServiceItem[] = [
     title: "Website Redesign",
     category: "Websites",
     description: "Transform outdated, slow-loading, or broken web pages into polished mobile booking engines.",
-    detailedDescription: "We restructure slow corporate sites. We enhance navigation layout, update old colors and branding, secure contact fields, and display reviews clearly. Helps businesses attract more opportunities.",
+    detailedDescription: "We restructure slow corporate sites. We enhance navigation layout, update old colors and branding, secure contact fields, and display reviews clearly. Improves mobile engagement and turns disengaged design visitors into active service appointments.",
     priceTag: "Starting at $500",
     benefits: [
       "Upgrades old pages with beautiful responsive visual hierarchy",
@@ -231,7 +231,7 @@ export const SERVICES: ServiceItem[] = [
     title: "Business Growth Audit",
     category: "Automation",
     description: "A friendly, easy-to-read audit scan of your search ranking errors, mobile speed, and lead leaks.",
-    detailedDescription: "We run quick scans of your zip code's maps pack. We point out Name-Address-Phone issues and layout leaks, giving you an easy checklist to help attract more work.",
+    detailedDescription: "We run quick scans of your zip code's maps pack. We point out Name-Address-Phone issues and layout leaks, giving you an easy checklist to help book more local jobs.",
     priceTag: "Free / Included",
     benefits: [
       "Pinpoints Name-Address-Phone citation issues in under 24 hours",
@@ -250,7 +250,7 @@ export const SERVICES: ServiceItem[] = [
     priceTag: "$250",
     benefits: [
       "Tailors inquiry options to match your trade diagnostics",
-      "Helps businesses attract more opportunities automatically",
+      "Encourages higher website-to-booking conversions seamlessly",
       "Includes professional conversion-focused request headings",
       "Organizes contacts cleanly in local history databases"
     ],
@@ -326,7 +326,7 @@ export const SERVICES: ServiceItem[] = [
     benefits: [
       "Provides rapid, informative replies to basic client emails",
       "Reduces active support time spent on duplicate queries",
-      "Helps businesses attract more opportunities with quick turnarounds",
+      "Drastically reduces customer response times and increases conversion trust",
       "Easily adjusts guidelines to fit your unique trade tone"
     ],
     iconName: "Bot"
@@ -366,7 +366,7 @@ export const SERVICES: ServiceItem[] = [
     title: "Monthly Marketing Management",
     category: "Automation",
     description: "A complete digital partnership managing your GBP, reviews, social updates, and chat loops.",
-    detailedDescription: "Our premium remote marketing team handles maps ranking activity, schedules Facebook updates, responds to Google feedback, and manages mobile text alerts. Helps businesses attract more opportunities with absolute freedom.",
+    detailedDescription: "Our premium remote marketing team handles maps ranking activity, schedules Facebook updates, responds to Google feedback, and manages mobile text alerts. Ensures continuous, premium digital coverage and local growth handling without the massive agency retainer.",
     priceTag: "Starting at $300/month",
     benefits: [
       "Includes both Google GBP and Facebook monthly updates",
