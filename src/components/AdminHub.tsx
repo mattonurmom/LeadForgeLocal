@@ -84,14 +84,32 @@ export default function AdminHub({ auditLeads, contactLeads, onClearLeads }: Adm
   const [faqSearch, setFaqSearch] = useState<string>("");
   const [faqFilter, setFaqFilter] = useState<string>("All");
 
-  const handleVerifyPasscode = (e: React.FormEvent) => {
+  const [isVerifying, setIsVerifying] = useState<boolean>(false);
+
+  const handleVerifyPasscode = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (passcode === "0722") {
-      setIsAdminUnlocked(true);
-      localStorage.setItem("leadforge_admin_unlocked", "true");
-      setPasscodeError("");
-    } else {
-      setPasscodeError("Invalid security credential. Check owner configurations.");
+    if (isVerifying) return;
+    setIsVerifying(true);
+    setPasscodeError("");
+    try {
+      const res = await fetch("/api/verify-pin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ pin: passcode }),
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setIsAdminUnlocked(true);
+        localStorage.setItem("leadforge_admin_unlocked", "true");
+        setPasscodeError("");
+      } else {
+        setPasscodeError(data.message || "Invalid security credential. Check owner configurations.");
+      }
+    } catch (err) {
+      console.error(err);
+      setPasscodeError("Connection error while validating security passcode. Please try again.");
+    } finally {
+      setIsVerifying(false);
     }
   };
 
@@ -263,9 +281,10 @@ export default function AdminHub({ auditLeads, contactLeads, onClearLeads }: Adm
 
             <button
               type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-5 rounded-xl cursor-pointer transition-colors text-sm shadow shadow-blue-500/20"
+              disabled={isVerifying}
+              className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-bold py-3 px-5 rounded-xl cursor-pointer transition-colors text-sm shadow shadow-blue-500/20 flex items-center justify-center gap-2"
             >
-              Verify & Unlock Console
+              {isVerifying ? "Verifying..." : "Verify & Unlock Console"}
             </button>
           </form>
 

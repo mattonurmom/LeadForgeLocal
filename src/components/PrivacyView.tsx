@@ -78,7 +78,7 @@ export default function PrivacyView({ setTab }: PrivacyViewProps) {
             <div className="space-y-2">
               <h2 className="text-white font-bold text-lg font-display">5. Opt-Out and Deletion Controls</h2>
               <p className="leading-relaxed">
-                Should you wish to close your administrative account, clean historic lead databases from active instances, or deactivate missed-call SMS loops, please communicate direct requests to Heather or Matthew Eisan.
+                Should you wish to close your administrative account, clean historic lead databases from active instances, or deactivate missed-call SMS loops, please communicate direct requests to Heather or Matthew Tucker.
               </p>
             </div>
           </div>

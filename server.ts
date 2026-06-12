@@ -11,6 +11,29 @@ const PORT = 3000;
 
 app.use(express.json());
 
+// Secure HTTP Headers Middleware
+app.use((req, res, next) => {
+  res.setHeader("X-Frame-Options", "DENY");
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+  res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
+  res.setHeader("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
+  res.setHeader("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload");
+
+  // Content-Security-Policy (allows self, Tailwind inline styles, Google Fonts, Google Analytics, and local images)
+  res.setHeader(
+    "Content-Security-Policy",
+    "default-src 'self'; " +
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com; " +
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; " +
+    "font-src 'self' https://fonts.gstatic.com; " +
+    "img-src 'self' data: https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://images.unsplash.com https://picsum.photos; " +
+    "connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com;"
+  );
+
+  next();
+});
+
 // Helper: Fallback heuristic playbook generator
 function getHeuristicPlaybook(auditLeads: any[], contactLeads: any[]) {
   const totalLeads = auditLeads.length + contactLeads.length;
@@ -150,6 +173,17 @@ ${emailDraft}
 
   return { status: "optimized_heuristic", text };
 }
+
+// API: Secure Admin passcode verification
+app.post("/api/verify-pin", (req, res) => {
+  const { pin } = req.body;
+  const adminPin = process.env.ADMIN_PIN || "0722";
+  if (pin === adminPin) {
+    return res.json({ success: true });
+  } else {
+    return res.status(401).json({ success: false, message: "Invalid security credential. Check owner configurations." });
+  }
+});
 
 // API: AI Playbook Coordinator
 app.post("/api/ai-coordinate", async (req, res) => {
@@ -306,77 +340,155 @@ function generateHeuristicAudit(businessName: string, category: string, website:
   const nameLow = (businessName || "").toLowerCase();
   
   let grade = "Needs Attention";
-  let summary = `A review of ${businessName}'s digital visibility highlights a few quick-win opportunities to capture more local customers. In the competitive ${category || "local services"} landscape, simple structural optimizations can dramatically increase calls.`;
+  let summary = `A detailed visibility scan of ${businessName}'s digital foundation highlights key growth vectors across your online footprint. In the competitive ${category || "local services"} market, many local companies invest heavily in advertising while overlooking foundational issues that limit results. Solving these challenges first will establish a reliable, high-converting customer pipeline.`;
   
   let recommendations = [];
   
-  if (cat.includes("plumb") || cat.includes("leak") || cat.includes("pipe") || nameLow.includes("plumb")) {
+  if (cat.includes("plumb") || cat.includes("leak") || cat.includes("pipe") || nameLow.includes("plumb") || cat.includes("roof") || cat.includes("hvac") || cat.includes("air") || cat.includes("heat") || cat.includes("contract") || cat.includes("repair")) {
+    const isPlumbing = cat.includes("plumb") || nameLow.includes("plumb");
+    const serviceName = isPlumbing ? "plumbing" : "home services";
+    const emergencyKeyword1 = isPlumbing ? "burst pipe repair" : "emergency roof leak repair";
+    const emergencyKeyword2 = isPlumbing ? "clogged drain repair" : "clogged ac drain line repair";
+    const emergencyKeyword3 = isPlumbing ? "water heater replacement" : "same-day repair service";
+
     grade = "Critical Gaps";
-    summary = `Preliminary visibility audit for ${businessName} (Plumbing Services). We detected significant gaps in local search placement, high-intent service keywords, and instant response channels that are costing you active plumbing calls.`;
+    summary = `Preliminary premium visibility analysis for ${businessName} (${category || "Home Services"}). We detected critical structural layout and high-intent local search gaps in your Dallas-area visibility profile. Correcting these items will help you capture immediate inbound phone calls and prevent local homeowners from choosing competitors who appear more established and easier to trust online.`;
     recommendations = [
       {
-        title: "Service Area Optimization & Sub-Pages",
-        desc: "Build dedicated landing sub-pages for each local neighborhood you service (e.g., 'Emergency Plumber in [Suburban Neighborhood]'). Google's search algorithms prioritize hyper-local relevance. This matches searchers' exact physical queries."
+        title: "Service Area Optimization & Location Landing Pages",
+        issueFound: "Your business website does not have dedicated localized service pages for each specific town, suburb, or neighborhood you cover. Currently, it only lists a single general physical office or service area.",
+        whyThisMatters: "When local searchers need a helper quickly, they type phrases like '" + (isPlumbing ? "toilet repair near me" : "hvac repair near me") + "' or '" + (isPlumbing ? "emergency plumber in Richardson" : "contractor in Plano") + "'. Without separate pages optimized for each surrounding suburb, search engines will exclude your website from those physical search results, resulting in lost leads, fewer phone calls, and lost revenue.",
+        competitiveImpact: "Other area companies that have built distinct local neighborhood pages will rank higher in nearby suburbs, capturing active, high-intent emergency service calls first and leaving you at a disadvantage.",
+        recommendedSolution: "Create separate, highly readable, and uncluttered landing pages on your website for every major target neighborhood in your service territory. Provide helpful, custom-written information detailing your services in those specific areas.",
+        estimatedDifficulty: "Advanced",
+        implementationComplexity: "Setting up search-optimized location landing pages requires professional web development, careful keyword allocation, and local schema coding to ensure Google indexes and ranks each page correctly.",
+        potentialBusinessImpact: "Critical"
       },
       {
-        title: "High-Intent Emergency Keywords Calibration",
-        desc: "Incorporate urgent-buy action words like 'burst pipe repair', 'clogged drain hot line', and 'water heater replacement' directly into your title tags and main headings. This will help you rank when homeowners have active water leaks and need an immediate helper."
+        title: "High-Intent Emergency Keywords Optimization",
+        issueFound: "Your website text relies almost entirely on passive, generic phrases and lacks explicit, prominent keywords focusing on urgent emergency searches like '" + emergencyKeyword1 + "', '" + emergencyKeyword2 + "', and '" + emergencyKeyword3 + "'.",
+        whyThisMatters: "When an active leak, broken AC, or structural emergency arises, homeowners are stressed and seek immediate, specific fixes. They do not click on generic 'about us' pages; they seek quick assistance. Lacking terms of urgency, your website fails to rank on Google in these moments, leading to lower search visibility and missed high-ticket service jobs.",
+        competitiveImpact: "Competitors with clear, reassurance-focused headlines and explicit service names immediately win the trust of frantic searchers, booking the job before the customer ever continues browsing.",
+        recommendedSolution: "Re-engineer your main website headings and title tags to prominently display urgent-buy terms and clear phone numbers, reassuring nearby customers that you offer rapid solutions to their immediate problems.",
+        estimatedDifficulty: "Intermediate",
+        implementationComplexity: "Selecting the precise combination of high-traffic terms and writing compelling, natural headings without sound technical or confusing requires an elite copywriter.",
+        potentialBusinessImpact: "High"
       },
       {
-        title: "Reputation Velocity & SMS Reviews Link",
-        desc: "Unlocking Google Maps requires persistent review generation. Implement an automated Review campaign to instantly check-in with completed accounts via SMS, providing a single-click direct link to your GBP reviews window."
+        title: "Missed-Call Auto-SMS Fallback Integration",
+        issueFound: "Your business does not have an automated response system to instantly reply to unanswered phone calls or website forms with a friendly text message.",
+        whyThisMatters: "Over sixty percent of phone calls to local service businesses go unanswered. When a customer calls a contractor and gets sent to voicemail, they immediately hang up and call a competitor. Moving too slow leads to a direct loss of customer trust and missed opportunities.",
+        competitiveImpact: "Competitors using instant, automated text reply platforms start active conversation threads immediately, locking in the homeowner before the customer can search elsewhere.",
+        recommendedSolution: "Establish a carrier-approved instant web response route that automatically sends a friendly, conversational text message ('Hi, sorry we missed your call—how can we help you today?') within thirty seconds of any missed ring.",
+        estimatedDifficulty: "Expert-Level",
+        implementationComplexity: "Many business owners choose professional help here because setting up carrier-certified SMS routing, CRM synchronization, and automated replies requires technical coordination to prevent messages from being marked as spam.",
+        potentialBusinessImpact: "Critical"
       }
     ];
-  } else if (cat.includes("dent") || cat.includes("teeth") || cat.includes("ortho") || cat.includes("dental") || nameLow.includes("dent")) {
+  } else if (cat.includes("dent") || cat.includes("teeth") || cat.includes("ortho") || cat.includes("dental") || nameLow.includes("dent") || cat.includes("health") || cat.includes("med") || cat.includes("care")) {
     grade = "Needs Attention";
-    summary = `Preliminary visibility audit for ${businessName} (Dental Services). Your branding looks trustworthy, but optimization gaps in insurance keywords, local maps citations, and client conversion cues limit your monthly patient intake.`;
+    summary = `Comprehensive digital visibility audit for ${businessName} (Healthcare & Dental Services). While your practice presents a trustworthy and friendly initial impression, key optimization bottlenecks in localized maps listing details, insurance discovery pages, and conversion pathways severely limit your organic new-patient acquisition.`;
     recommendations = [
       {
-        title: "Insurance Pages & Copay Transparency",
-        desc: "Nearly 70% of dental patients search for terms like 'dentist who accepts [Insurance Provider]'. Create a dedicated insurances-accepted matrix page with schema metadata. This ranks for insurance-specific local search terms and removes patient booking friction."
+        title: "Google Maps Citation and NAP Detail Alignment",
+        issueFound: "Your practice's exact business credentials—including your Name, Physical Address, and Phone Number—contain slight differences across major online health platforms and your Google Maps page.",
+        whyThisMatters: "Search engines continuously compare directories to verify that your medical practice is legitimate and securely located. Tiny variations (such as 'Ste A' vs 'Suite A', or different phone numbers) weaken search engine trust, which reduces your visibility and ranking inside the Google Maps section.",
+        competitiveImpact: "Practices with perfectly synchronized citations across portals like Yelp, Healthgrades, and Google Maps rank higher, capturing local patients seeking nearby care first.",
+        recommendedSolution: "Perform a thorough cleanup of your business coordinates across all major local databases, locking in a perfectly identical format matching your Google Business Profile.",
+        estimatedDifficulty: "Intermediate",
+        implementationComplexity: "Tracking down, verifying, and claiming dozens of distinct directory profiles is extremely time-consuming and requires specialized database tools to ensure updates stick permanently.",
+        potentialBusinessImpact: "High"
       },
       {
-        title: "Google Maps Citation Alignment & Patient Review Signals",
-        desc: "Audit and align your Name, Address, and Phone (NAP) citations across health portals like WebMD, Healthgrades, and Yelp, matching your Google Business Profile exactly. Ask patients for review keywords like 'pain-free cleaning' or 'great orthodontist' to tell Google what search terms your dental clinic is relevant for."
+        title: "Insurance Information Portals & Patient Search Pages",
+        issueFound: "Your current website lacks clear, prominent pages explicitly explaining which major insurance carriers and copay networks you accept.",
+        whyThisMatters: "The single biggest question new patients have is: 'Do they take my insurance?'. If a customer searches for 'dentist who accepts Delta Dental' and does not find an unambiguous answer on your site, they will leave immediately. This increases your website bounce rate and wastes precious traffic.",
+        competitiveImpact: "Competing practices with dedicated, clear insurance matriculation tables rank prominently on Google and quickly convert visitors into real booked visits.",
+        recommendedSolution: "Create a dedicated 'Insurances Accepted' page complete with high-resolution carrier logos and answers to common billing questions to put prospective clients at ease.",
+        estimatedDifficulty: "Basic",
+        implementationComplexity: "Setting up a clean, high-contrast grid of accepted providers that looks clean on mobile devices while applying structured local data requires professional design.",
+        potentialBusinessImpact: "High"
       },
       {
-        title: "Virtual Appointment Setup & Direct Video Intakes",
-        desc: "Add a prominent mobile action drawer for 'Book Live Consultation' or 'Verify Insurance Online'. By reducing friction to a single clear mobile touchpoint, you convert casual searchers into scheduled dental cleaning appointments."
+        title: "Seamless 24/7 Mobile Patient Scheduling",
+        issueFound: "Your website requires patients to manually dial your front desk during limited office hours to request or book an appointment, with no digital scheduling options.",
+        whyThisMatters: "A significant percentage of family healthcare decisions are made in the evenings after normal business hours. If a busy parent visits your website on their smartphone and cannot easily request an appointment slot, they will click away to a competitor who makes scheduling simple.",
+        competitiveImpact: "Practices offering clean, interactive online request calendars secure new patient files round-the-clock, outperforming static informational websites.",
+        recommendedSolution: "Introduce a prominent, mobile-optimized scheduling button or patient intake form in your website main header to minimize the steps needed to book.",
+        estimatedDifficulty: "Intermediate",
+        implementationComplexity: "Integrating automated calendar sync that updates in real-time with your practice management software without double-booking requires professional tech integration.",
+        potentialBusinessImpact: "High"
       }
     ];
-  } else if (cat.includes("law") || cat.includes("attorney") || cat.includes("legal") || cat.includes("court") || nameLow.includes("attorney") || nameLow.includes("law")) {
+  } else if (cat.includes("law") || cat.includes("attorney") || cat.includes("legal") || cat.includes("court") || nameLow.includes("attorney") || nameLow.includes("law") || cat.includes("consult")) {
     grade = "Critical Gaps";
-    summary = `Preliminary visibility audit for ${businessName} (Legal Practice). In the high-competition legal market, displaying prominent trust coordinates, specialized practice pages, and credentials is essential to secure retainers.`;
+    summary = `Premium local SEO and authority assessment for ${businessName} (Legal Practice). In the highly competitive legal marketplace, simple listings are no longer enough. Your audit reveals substantial gaps in case-specific structure and digital trust signals that restrict your search exposure and prevent you from securing high-value client retainers.`;
     recommendations = [
       {
-        title: "Practice & Sub-Practice Area Specific Silos",
-        desc: "Instead of a generic services list, create distinct, authoritative content pages for each specific case type (e.g., 'Dedicated Family Divorce Law', 'Commercial Trucking Accidents'). Detailed context establishes local relevance and ranks for direct client needs."
+        title: "Case-Specific Practice Area Silo Pages",
+        issueFound: "Your legal website groups multiple complex practice areas together on a single generic Page, rather than dedicating separate pages to each specific legal service you provide.",
+        whyThisMatters: "Individual clients search for highly specific solutions, such as 'child custody attorney in Dallas' or 'commercial truck accident lawyer'. If your website lacks detailed, separate pages for each service, search engines will evaluate your site as too generic, resulting in poor rankings and fewer qualified legal leads.",
+        competitiveImpact: "Elite law firms with focused, comprehensive pages for every practice area dominate search results and capture individual clients facing urgent legal battles first.",
+        recommendedSolution: "Expand your website layout to feature individual, deeply informative sub-pages for every legal practice area and case type you represent.",
+        estimatedDifficulty: "Advanced",
+        implementationComplexity: "Writing high-quality, legally compliant copy that is friendly yet authoritative, while laying out proper backlink pathways, requires expert content and SEO writing.",
+        potentialBusinessImpact: "Critical"
       },
       {
-        title: "EEAT Authority Signals & Scholar Profile Links",
-        desc: "Google ranks legal advice under strict 'Your Money Your Life' (YMYL) updates. Build out authoritative author profile bios demonstrating your state bar memberships, certifications, and litigation history to establish high Experience, Expertise, Authoritativeness, and Trustworthiness (EEAT)."
+        title: "Establishing Strict Legal Authority and EEAT Signals",
+        issueFound: "Your platform does not highlight critical trust marks, state bar credentials, legal memberships, award logos, and successful case histories on the homepage.",
+        whyThisMatters: "Google evaluates legal websites under extremely strict 'Your Money Your Life' standards. Without clear, unmistakable proof of experience, authority, and safety, search engines will choose not to display your website in local searches.",
+        competitiveImpact: "Competitors who professionally highlight credentials and badges on their mobile headers instantly win client trust and secure the initial consult.",
+        recommendedSolution: "Inject highly visible proof elements—such as official state bar seals, prestigious membership badges, and client case study reviews—directly into your primary website pages.",
+        estimatedDifficulty: "Intermediate",
+        implementationComplexity: "Sourcing, formatting, and placing official legal trust markers elegantly without complicating your layout requires dedicated frontend web designers.",
+        potentialBusinessImpact: "High"
       },
       {
-        title: "Attorney Schema Markup (JSON Structured Data)",
-        desc: "Inject specialized 'Attorney' or 'LegalService' structured data into your website code. Schema directly feeds search engines your jurisdiction, practice regions, lawyer profile credentials, and office hours, boosting your rich snippet map rankings."
+        title: "Attorney and LegalService Schema Code Markup",
+        issueFound: "Your business website lacks specialized search engine background code—known as structured legal metadata—that explicitly details your practice status to search engines.",
+        whyThisMatters: "Without structured business information embedded in your background code, search engine spiders struggle to parse your physical jurisdiction, office locations, and exact bar affiliations, limiting your Google Maps visibility.",
+        competitiveImpact: "Law offices utilizing advanced legal schema tags rank higher and present richer, more professional results on Google search screens.",
+        recommendedSolution: "Integrate a custom-written 'Attorney' or 'LegalService' JSON-LD code layer into the background of your website's main files.",
+        estimatedDifficulty: "Advanced",
+        implementationComplexity: "Injecting custom JSON-LD schema into database layouts requires coding expertise, as errors can render your website design broken or invisible to search engine crawlers.",
+        potentialBusinessImpact: "Moderate"
       }
     ];
   } else {
     // Default / General
     grade = "Needs Attention";
-    summary = `Preliminary visibility check for ${businessName}. While you have established a solid baseline, simple improvements in mobile performance, direct contact points, and local Google maps rank will keep your inbound phone pipeline active.`;
+    summary = `Strategic localized visibility check for ${businessName}. While your business possesses a solid baseline, several key optimizations in web display speeds, automated lead capture, and Google Maps categorization are required to prevent lost leads and maintain a steady stream of incoming phone calls.`;
     recommendations = [
       {
-        title: "Mobile Speed & Layout Streamlining",
-        desc: "Your mobile page performance shows minor lags. Compressing large image files, removing slow code scripts, and placing a massive tap-to-call dialer button at the top of the mobile header ensures searchers can contact you instantly."
+        title: "Mobile Speed, Performance, and Screen Layout Optimization",
+        issueFound: "Your website experiences minor speed delays when loading on standard mobile data connections and lack a clean, responsive layout for modern phones.",
+        whyThisMatters: "More than sixty percent of local customers find services on their smartphones. If your page layout takes more than three seconds to load, visitors will leave immediately. A slow loading speed reduces customer trust and limits your primary lead capture capabilities.",
+        competitiveImpact: "Nearby competitors who have optimized and modernized their mobile load times capture these busy mobile searchers first.",
+        recommendedSolution: "Compress heavy image files, remove outdated script files, and ensure your website is engineered to display instantly on any mobile viewport.",
+        estimatedDifficulty: "Intermediate",
+        implementationComplexity: "Re-engineering a website's speed requires careful edits to file systems, CSS styling, and server parameters, which can disrupt site formatting if not configured by a professional developer.",
+        potentialBusinessImpact: "High"
       },
       {
-        title: "Integrated Lead Capture & Automated Response Loop",
-        desc: "Capturing leads on your web page shouldn't rely on slow email. Implement a lightweight instant contact form. When a prospect submits their request, trigger an instantaneous custom congratulations SMS message or automated phone route to show immediate response."
+        title: "Google Maps Category Verification and Secondary Attribute Tuning",
+        issueFound: "Your primary Google Business Profile category might not align precisely with high-volume search phrases, or you are missing key secondary keyword attributes.",
+        whyThisMatters: "Google Maps uses your primary business category to determine when to show your business to local searchers. Setting an incorrect or generic category means your listing will never appear for high-value search phrases, resulting in fewer phone calls and lost revenue.",
+        competitiveImpact: "Local competitors with accurate and complete category tuning rank higher in Maps, capturing nearby commercial traffic first.",
+        recommendedSolution: "Verify and align your primary Google Maps category to match your specific industry perfectly, and integrate all applicable secondary service tags.",
+        estimatedDifficulty: "Basic",
+        implementationComplexity: "Adjusting your category is simple, but analyzing local search volumes and selecting the exact mix of secondary tags that will maximize visibility without risk of profile suspension requires seasoned consultant expertise.",
+        potentialBusinessImpact: "Critical"
       },
       {
-        title: "Maps Listing Category Verification & Local Reviews Boost",
-        desc: "Validate that your primary GBP category matches your highest-intent trade precisely, and add relevant secondary service tags. Pair this with a dedicated review generation campaign to quickly expand your local Google profile prominence."
+        title: "Lead Capture response and Missed-Call Auto-SMS Fallback",
+        issueFound: "Your business does not have an automatic missed-call system or instant text autoresponder linked to your primary phone number.",
+        whyThisMatters: "If a nearby customer calls your business and receives a voicemail, they will not wait—they will immediately hang up and call the next service provider on their screen. Overlooking this leads directly to lost revenue and wasted marketing efforts.",
+        competitiveImpact: "Competitors who employ active, instant text automation lock in new opportunities immediately by sending a friendly text text-back within seconds, ending the customer's search.",
+        recommendedSolution: "Implement a polite, secure missed-call auto-response setup of LeadForge Local to instantly reply to unanswered calls or web submissions via SMS.",
+        estimatedDifficulty: "Advanced",
+        implementationComplexity: "Setting up carrier-approved, reliable SMS autoresponders with proper call routing and CRM logs requires technical configuration to meet telco legal compliance.",
+        potentialBusinessImpact: "Critical"
       }
     ];
   }
@@ -428,7 +540,7 @@ app.post("/api/generate-audit", async (req, res) => {
     });
 
     const promptText = `
-    You are a professional local marketing auditor for LeadForge Local, an elite agency helping local firms dominate search ranks.
+    You are an elite conversion copywriter, local SEO consultant, and B2B marketing strategist for LeadForge Local.
     Perform an industry-specific, highly custom, actionable, and professional 3-point digital visibility audit for:
     - Business Owner: "${name}"
     - Business Name: "${businessName}"
@@ -436,20 +548,43 @@ app.post("/api/generate-audit", async (req, res) => {
     - Website: "${website || "None listed"}"
     - Google Business Profile: "${gbpLink || "None provided"}"
 
-    Your analysis should focus specifically on their industry ("${category || "Local Service"}"). You MUST offer actionable, high-value, and specialized improvements corresponding to their trade:
-    - If it is a PLUMBER (or plumbing related), focus on: Service area sub-pages optimization, urgent emergency keyword optimization ('burst pipe repair', 'clogged drain hot line'), and reputation velocity/review generation.
-    - If it is a DENTIST (or dental related), focus on: Insurance carrier page listings, Google Maps citation NAP (Name, Address, Phone) consistency, and patient review signals.
-    - If it is a LAWYER (or attorney/legal related), focus on: Sub-practice area silo pages (e.g. child custody subpages under divorce), local EEAT (Experience, Expertise, Authoritativeness, Trustworthiness) profiles, and Attorney or LegalService structured JSON-LD schema markup.
-    - If it is any other industry (such as roofer, restaurant, HVAC, salon, etc.), tailor your 3 recommendations specifically to their operational bottlenecks with identical strategic depth.
+    Your writing style MUST be:
+    - Easy for non-technical business owners to understand.
+    - Written at approximately a 6th–8th grade reading level.
+    - Free of abbreviations, acronyms, and technical jargon unless immediately explained in plain English.
+    - Highly detailed, comprehensive, valuable, and authoritative.
+    - Focused on business impact, lost revenue, lost customers, and competitive disadvantage.
+    - Written in a way that clearly shows why expert implementation is valuable.
+    - Avoid fear tactics, false claims, exaggerated results/guarantees, or false claims of Google penalty (explain Google algorithms factually where relevant).
+
+    Avoid technical terms alone:
+    - Instead of "Implement GBP optimization.", write "Create and fully optimize your Google Business Profile so customers can find your business on Google Maps, view reviews, and contact you directly."
+    - Instead of "Deploy JSON-LD schema.", write "Add structured business information to your website so search engines clearly understand your services, service areas, and business details."
+    - Instead of "Improve local SEO.", write "Increase your visibility when nearby customers search for businesses like yours."
+
+    For every recommendation, you MUST provide these exact 7 fields in the JSON object:
+    1. issueFound - Explain what is wrong in plain English.
+    2. whyThisMatters - Explain how this directly affects customer trust, phone calls, leads, and revenue.
+    3. competitiveImpact - Explain how competitors with stronger digital foundations may capture customers first.
+    4. recommendedSolution - Explain what should be done to fix the issue.
+    5. estimatedDifficulty - Rate select strictly from: "Basic", "Intermediate", "Advanced", "Expert-Level".
+    6. implementationComplexity - Briefly explain why many business owners choose professional help for setup, optimization, and ongoing maintenance.
+    7. potentialBusinessImpact - Rate select strictly from: "Low", "Moderate", "High", "Critical".
 
     You MUST output a valid JSON object matching this exact structure:
     {
       "grade": "Needs Attention" | "Critical Gaps",
-      "summary": "A concise, high-level professional assessment (2-3 sentences) of their current digital standing and local search positioning based on their business constraints...",
+      "summary": "A comprehensive executive summary (3-4 sentences in plain English) that highlights lost opportunity and emphasizes how digital systems must work together (website, search visibility, reviews, conversion systems, technical setup, ongoing monitoring)...",
       "recommendations": [
         {
           "title": "Clear Actionable Recommendation Title",
-          "desc": "A paragraph explaining the specific problem, why it matters for client conversion in their specific trade, and what a professional team would do to correct it."
+          "issueFound": "plain English explanation of what is wrong...",
+          "whyThisMatters": "how this affects customer trust, phone calls, and revenue...",
+          "competitiveImpact": "how competitors capture customers first...",
+          "recommendedSolution": "what should be done to fix it...",
+          "estimatedDifficulty": "Basic" | "Intermediate" | "Advanced" | "Expert-Level",
+          "implementationComplexity": "why many business owners choose professional help for setup...",
+          "potentialBusinessImpact": "Low" | "Moderate" | "High" | "Critical"
         },
         ... (exactly 3 objects in the recommendations array)
       ]
@@ -591,14 +726,223 @@ ${fallbackResult.text}`
   }
 });
 
+// API: SEO Robots.txt route
+app.get("/robots.txt", (req, res) => {
+  const domain = process.env.APP_URL || "https://leadforgelocal.onrender.com";
+  const cleanDomain = domain.replace(/\/$/, "");
+  res.type("text/plain");
+  res.send(`User-agent: *
+Allow: /
+
+Sitemap: ${cleanDomain}/sitemap.xml`);
+});
+
+// API: SEO Sitemap.xml route
+app.get("/sitemap.xml", (req, res) => {
+  const domain = process.env.APP_URL || "https://leadforgelocal.onrender.com";
+  const cleanDomain = domain.replace(/\/$/, "");
+  
+  res.type("application/xml");
+  res.send(`<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>${cleanDomain}/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>${cleanDomain}/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>${cleanDomain}/services</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>${cleanDomain}/pricing</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>${cleanDomain}/portfolio</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>${cleanDomain}/free-audit</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>${cleanDomain}/contact</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>${cleanDomain}/privacy</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>${cleanDomain}/terms</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+</urlset>`);
+});
+
+import fs from "fs";
+
+interface RouteMeta {
+  title: string;
+  description: string;
+  image: string;
+}
+
+const routesMeta: Record<string, RouteMeta> = {
+  "/": {
+    title: "LeadForge Local | Conversion-Focused Local SEO & Web Design",
+    description: "LeadForge Local helps plumbers, roofers, and local tradesmen get 2x more maps calls. Instant missed-call text back and profile ranking.",
+    image: "/src/assets/images/frustrated_laptop_1781286600083.jpg"
+  },
+  "/about": {
+    title: "About Us | LeadForge Local",
+    description: "Meet Heather & Matthew Tucker, founders of LeadForge Local. We build lightning-fast contractor websites & maps SEO systems that grow your trades business.",
+    image: "/src/assets/images/frustrated_laptop_1781286600083.jpg"
+  },
+  "/services": {
+    title: "Our Local SEO & Tech Services | LeadForge Local",
+    description: "Google Maps SEO, GBP 3-Pack optimization, missed call text back automation, and beautiful websites for local service companies.",
+    image: "/src/assets/images/tradesman_worker_1781286632167.jpg"
+  },
+  "/pricing": {
+    title: "Simple Pricing Plans | LeadForge Local",
+    description: "Affordable flat-rate contractor local SEO, automated reviews setup, and custom landing pages. No hidden contracts.",
+    image: "/src/assets/images/restaurant_owner_1781286617140.jpg"
+  },
+  "/portfolio": {
+    title: "Our Work & Client Stories | LeadForge Local",
+    description: "See how local trade companies, roofers, dentists, and restaurants scaled their map rankings and calls with LeadForge Local.",
+    image: "/src/assets/images/restaurant_owner_1781286617140.jpg"
+  },
+  "/free-audit": {
+    title: "Get a Free Google Business Scan | LeadForge Local",
+    description: "Run our free automated 3-Point audit on your Google Maps listing. Identify slow mobile pages and text-back leaks instantly.",
+    image: "/src/assets/images/frustrated_laptop_1781286600083.jpg"
+  },
+  "/contact": {
+    title: "Contact LeadForge Local | Dallas, Texas",
+    description: "Ready to dominate your city's local search packs? Reach out to Heather & Matthew Tucker today for custom lead growth services.",
+    image: "/src/assets/images/tradesman_worker_1781286632167.jpg"
+  },
+  "/privacy": {
+    title: "Privacy Policy | LeadForge Local",
+    description: "Learn about how securely we sandboxed your lead information and respect your absolute user data privacy.",
+    image: "/src/assets/images/frustrated_laptop_1781286600083.jpg"
+  },
+  "/terms": {
+    title: "Terms of Service | LeadForge Local",
+    description: "Our plain English terms. How we optimize Google profiles, landing pages, and lead automations for local businesses.",
+    image: "/src/assets/images/frustrated_laptop_1781286600083.jpg"
+  },
+  "/admin": {
+    title: "Command Center Login | LeadForge Admin",
+    description: "Secure entry console for the LeadForge Local CRM and AI Playbook adviser cockpit. PIN-protected credentials lock.",
+    image: "/src/assets/images/frustrated_laptop_1781286600083.jpg"
+  }
+};
+
 // Vite Middleware for Dev/Prod static files
 async function startServer() {
+  let viteDevServer: any = null;
+
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa",
     });
-    app.use(vite.middlewares);
+    viteDevServer = vite;
+  }
+
+  // Intercept specific navigation routes and server-render core meta tags 
+  const routesList = ["/", "/about", "/services", "/pricing", "/portfolio", "/free-audit", "/contact", "/privacy", "/terms", "/admin"];
+
+  app.get(routesList, async (req, res, next) => {
+    const reqPath = req.path;
+    const meta = routesMeta[reqPath] || routesMeta["/"];
+    const domain = process.env.APP_URL || "https://leadforgelocal.onrender.com";
+    const cleanDomain = domain.replace(/\/$/, "");
+    const currentUrl = cleanDomain + reqPath;
+    const origin = cleanDomain;
+    const imageAbsUrl = meta.image.startsWith("http") ? meta.image : (origin + meta.image);
+
+    let htmlPath = "";
+    if (process.env.NODE_ENV !== "production") {
+      htmlPath = path.join(process.cwd(), "index.html");
+    } else {
+      htmlPath = path.join(process.cwd(), "dist", "index.html");
+    }
+
+    try {
+      let html = fs.readFileSync(htmlPath, "utf-8");
+
+      // Replace Title
+      const titleRegex = /<title>[^<]*<\/title>/;
+      if (titleRegex.test(html)) {
+        html = html.replace(titleRegex, `<title>${meta.title}</title>`);
+      } else {
+        html = html.replace("<head>", `<head>\n    <title>${meta.title}</title>`);
+      }
+
+      // Replace Description
+      const descRegex = /<meta\s+name="description"\s+content="[^"]*"\s*\/?>/;
+      const newDescTag = `<meta name="description" content="${meta.description}" />`;
+      if (descRegex.test(html)) {
+        html = html.replace(descRegex, newDescTag);
+      } else {
+        html = html.replace("<head>", `<head>\n    ${newDescTag}`);
+      }
+
+      // Replace Canonical
+      const canonRegex = /<link\s+rel="canonical"\s+href="[^"]*"\s*\/?>/;
+      const newCanonTag = `<link rel="canonical" href="${currentUrl}" />`;
+      if (canonRegex.test(html)) {
+        html = html.replace(canonRegex, newCanonTag);
+      } else {
+        html = html.replace("<head>", `<head>\n    ${newCanonTag}`);
+      }
+
+      // Open Graph & Twitter Card tags
+      const socialTags = `
+    <!-- Server-Rendered Social Meta Tags -->
+    <meta property="og:title" content="${meta.title}" />
+    <meta property="og:description" content="${meta.description}" />
+    <meta property="og:url" content="${currentUrl}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="${imageAbsUrl}" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="${meta.title}" />
+    <meta name="twitter:description" content="${meta.description}" />
+    <meta name="twitter:image" content="${imageAbsUrl}" />
+    `;
+
+      html = html.replace("</head>", `${socialTags}\n  </head>`);
+
+      if (process.env.NODE_ENV !== "production" && viteDevServer) {
+        html = await viteDevServer.transformIndexHtml(req.originalUrl || reqPath, html);
+      }
+
+      return res.status(200).set({ "Content-Type": "text/html" }).end(html);
+    } catch (err) {
+      console.error("HTML server-render error:", err);
+      next(err);
+    }
+  });
+
+  if (process.env.NODE_ENV !== "production") {
+    app.use(viteDevServer.middlewares);
   } else {
     const distPath = path.join(process.cwd(), "dist");
     app.use(express.static(distPath));

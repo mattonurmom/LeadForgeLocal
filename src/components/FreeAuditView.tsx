@@ -35,7 +35,7 @@ export default function FreeAuditView({ onAddAuditLead }: FreeAuditViewProps) {
   const [auditResult, setAuditResult] = useState<{
     grade: string;
     summary: string;
-    recommendations: { title: string; desc: string }[];
+    recommendations: any[];
     isAiPowered: boolean;
   } | null>(null);
 
@@ -150,6 +150,20 @@ export default function FreeAuditView({ onAddAuditLead }: FreeAuditViewProps) {
     }
   };
 
+  // Helper: Adapt raw recommendation data safely to prevent undefined accesses
+  const adaptRecommendation = (rec: any) => {
+    return {
+      title: rec.title || "Core Local Visibility Upgrade",
+      issueFound: rec.issueFound || rec.desc || "A fundamental optimization is missing from your active search footprint.",
+      whyThisMatters: rec.whyThisMatters || "This directly limits your online discoverability, making it harder for nearby, high-intent customers to reach you.",
+      competitiveImpact: rec.competitiveImpact || "Local competitors with full-funnel digital optimizations will capture client search demand first.",
+      recommendedSolution: rec.recommendedSolution || "Establish clear website structures, complete map citations, and instant-response loops.",
+      estimatedDifficulty: rec.estimatedDifficulty || "Intermediate",
+      implementationComplexity: rec.implementationComplexity || "Configuring correct keyword matrices and automation protocols requires expert experience.",
+      potentialBusinessImpact: rec.potentialBusinessImpact || "High"
+    };
+  };
+
   const handleCopyReport = () => {
     if (!auditResult) return;
     
@@ -165,7 +179,17 @@ OVERALL SITE SUMMARY:
 ${auditResult.summary}
 
 RECOMMENDED CORE OPTIMIZATIONS:
-${auditResult.recommendations.map((rec, i) => `${i + 1}. [${rec.title}] \n   ${rec.desc}`).join("\n\n")}
+${auditResult.recommendations.map((rec, i) => {
+  const adapted = adaptRecommendation(rec);
+  return `${i + 1}. [${adapted.title}]
+   - Issue Found: ${adapted.issueFound}
+   - Why This Matters: ${adapted.whyThisMatters}
+   - Competitive Impact: ${adapted.competitiveImpact}
+   - Recommended Solution: ${adapted.recommendedSolution}
+   - Difficulty Level: ${adapted.estimatedDifficulty}
+   - Complexity: ${adapted.implementationComplexity}
+   - Potential Impact: ${adapted.potentialBusinessImpact}`;
+}).join("\n\n")}
 
 Thank you for choosing LeadForge Local. Actionable visibility solutions.
 Direct Partner Support Hotline: (469) 751-7153.`;
@@ -179,76 +203,157 @@ Direct Partner Support Hotline: (469) 751-7153.`;
   // Safe client-side local analyzer
   const getClientHeuristicAudit = (businessName: string, category: string) => {
     const cat = (category || "").toLowerCase();
+    const nameLow = (businessName || "").toLowerCase();
+    
     let grade = "Needs Attention";
-    let summary = `A review of ${businessName}'s local digital visibility shows simple improvement vectors. In the competitive ${category} sector, quick adjustments pay dividends.`;
+    let summary = `A detailed visibility scan of ${businessName}'s digital foundation highlights key growth vectors across your online footprint. In the competitive ${category || "local services"} market, many local companies invest heavily in advertising while overlooking foundational issues that limit results. Solving these challenges first will establish a reliable, high-converting customer pipeline.`;
+    
     let recommendations = [];
+    
+    if (cat.includes("plumb") || cat.includes("leak") || cat.includes("pipe") || nameLow.includes("plumb") || cat.includes("roof") || cat.includes("hvac") || cat.includes("air") || cat.includes("heat") || cat.includes("contract") || cat.includes("repair")) {
+      const isPlumbing = cat.includes("plumb") || nameLow.includes("plumb");
+      const emergencyKeyword1 = isPlumbing ? "burst pipe repair" : "emergency roof leak repair";
+      const emergencyKeyword2 = isPlumbing ? "clogged drain repair" : "clogged ac drain line repair";
+      const emergencyKeyword3 = isPlumbing ? "water heater replacement" : "same-day repair service";
 
-    if (cat.includes("plumb") || cat.includes("leak") || cat.includes("pipe")) {
       grade = "Critical Gaps";
-      summary = `Preliminary visibility audit for ${businessName} (Plumbing Services). We detected high-intent keywords gaps and instant response opportunities costing you active plumbing calls.`;
+      summary = `Preliminary premium visibility analysis for ${businessName} (${category || "Home Services"}). We detected critical structural layout and high-intent local search gaps in your Dallas-area visibility profile. Correcting these items will help you capture immediate inbound phone calls and prevent local homeowners from choosing competitors who appear more established and easier to trust online.`;
       recommendations = [
         {
-          title: "Service Area Optimization & Sub-Pages",
-          desc: "Create dedicated localized pages for each surrounding neighborhood (e.g., 'Emergency Plumber in [Suburban Neighborhood]'). Google rank algorithms prioritize hyper-local proximity queries."
+          title: "Service Area Optimization & Location Landing Pages",
+          issueFound: "Your business website does not have dedicated localized service pages for each specific town, suburb, or neighborhood you cover. Currently, it only lists a single general physical office or service area.",
+          whyThisMatters: "When local searchers need a helper quickly, they type phrases like '" + (isPlumbing ? "toilet repair near me" : "hvac repair near me") + "' or '" + (isPlumbing ? "emergency plumber in Richardson" : "contractor in Plano") + "'. Without separate pages optimized for each surrounding suburb, search engines will exclude your website from those physical search results, resulting in lost leads, fewer phone calls, and lost revenue.",
+          competitiveImpact: "Other area companies that have built distinct local neighborhood pages will rank higher in nearby suburbs, capturing active, high-intent emergency service calls first and leaving you at a disadvantage.",
+          recommendedSolution: "Create separate, highly readable, and uncluttered landing pages on your website for every major target neighborhood in your service territory. Provide helpful, custom-written information detailing your services in those specific areas.",
+          estimatedDifficulty: "Advanced",
+          implementationComplexity: "Setting up search-optimized location landing pages requires professional web development, careful keyword allocation, and local schema coding to ensure Google indexes and ranks each page correctly.",
+          potentialBusinessImpact: "Critical"
         },
         {
-          title: "High-Intent Emergency Keywords",
-          desc: "Incorporate action search terms like 'burst pipe repair', 'clogged drain repair', and 'emergency water heater fix' directly into your title headers. This secures high-intent searchers having active water leaks."
+          title: "High-Intent Emergency Keywords Optimization",
+          issueFound: "Your website text relies almost entirely on passive, generic phrases and lacks explicit, prominent keywords focusing on urgent emergency searches like '" + emergencyKeyword1 + "', '" + emergencyKeyword2 + "', and '" + emergencyKeyword3 + "'.",
+          whyThisMatters: "When an active leak, broken AC, or structural emergency arises, homeowners are stressed and seek immediate, specific fixes. They do not click on generic 'about us' pages; they seek quick assistance. Lacking terms of urgency, your website fails to rank on Google in these moments, leading to lower search visibility and missed high-ticket service jobs.",
+          competitiveImpact: "Competitors with clear, reassurance-focused headlines and explicit service names immediately win the trust of frantic searchers, booking the job before the customer ever continues browsing.",
+          recommendedSolution: "Re-engineer your main website headings and title tags to prominently display urgent-buy terms and clear phone numbers, reassuring nearby customers that you offer rapid solutions to their immediate problems.",
+          estimatedDifficulty: "Intermediate",
+          implementationComplexity: "Selecting the precise combination of high-traffic terms and writing compelling, natural headings without sound technical or confusing requires an elite copywriter.",
+          potentialBusinessImpact: "High"
         },
         {
-          title: "Reputation Velocity via Instant SMS Reviews Link",
-          desc: "Set up automatic text check-ins with completed customer files. Homeowners are 4x more likely to leave positive reviews on Google Maps when sent a quick direct link instantly via SMS."
+          title: "Missed-Call Auto-SMS Fallback Integration",
+          issueFound: "Your business does not have an automated response system to instantly reply to unanswered phone calls or website forms with a friendly text text-back.",
+          whyThisMatters: "Over sixty percent of phone calls to local service businesses go unanswered. When a customer calls a contractor and gets sent to voicemail, they immediately hang up and call a competitor. Moving too slow leads to a direct loss of customer trust and missed opportunities.",
+          competitiveImpact: "Competitors using instant, automated text reply platforms start active conversation threads immediately, locking in the homeowner before the customer can search elsewhere.",
+          recommendedSolution: "Establish a carrier-approved instant web response route that automatically sends a friendly, conversational text message ('Hi, sorry we missed your call—how can we help you today?') within thirty seconds of any missed ring.",
+          estimatedDifficulty: "Expert-Level",
+          implementationComplexity: "Many business owners choose professional help here because setting up carrier-certified SMS routing, CRM synchronization, and automated replies requires technical coordination to prevent messages from being marked as spam.",
+          potentialBusinessImpact: "Critical"
         }
       ];
-    } else if (cat.includes("dent") || cat.includes("teeth") || cat.includes("ortho") || cat.includes("dental")) {
+    } else if (cat.includes("dent") || cat.includes("teeth") || cat.includes("ortho") || cat.includes("dental") || nameLow.includes("dent") || cat.includes("health") || cat.includes("med") || cat.includes("care")) {
       grade = "Needs Attention";
-      summary = `Preliminary visibility audit for ${businessName} (Dental Services). Your branding looks trustworthy, but optimization gaps in insurance keywords and local review citations cap patient intake.`;
+      summary = `Comprehensive digital visibility audit for ${businessName} (Healthcare & Dental Services). While your practice presents a trustworthy and friendly initial impression, key optimization bottlenecks in localized maps listing details, insurance discovery pages, and conversion pathways severely limit your organic new-patient acquisition.`;
       recommendations = [
         {
-          title: "Insurance Pages & Copay Transparency",
-          desc: "Most dental searches check accepted insurance carriers. Publish dedicated pages mentioning common providers (Delta Dental, Humana, etc.) with local schema to attract organic patient searchers."
+          title: "Google Maps Citation and NAP Detail Alignment",
+          issueFound: "Your practice's exact business credentials—including your Name, Physical Address, and Phone Number—contain slight differences across major online health platforms and your Google Maps page.",
+          whyThisMatters: "Search engines continuously compare directories to verify that your medical practice is legitimate and securely located. Tiny variations (such as 'Ste A' vs 'Suite A', or different phone numbers) weaken search engine trust, which reduces your visibility and ranking inside the Google Maps section.",
+          competitiveImpact: "Practices with perfectly synchronized citations across portals like Yelp, Healthgrades, and Google Maps rank higher, capturing local patients seeking nearby care first.",
+          recommendedSolution: "Perform a thorough cleanup of your business coordinates across all major local databases, locking in a perfectly identical format matching your Google Business Profile.",
+          estimatedDifficulty: "Intermediate",
+          implementationComplexity: "Tracking down, verifying, and claiming dozens of distinct directory profiles is extremely time-consuming and requires specialized database tools to ensure updates stick permanently.",
+          potentialBusinessImpact: "High"
         },
         {
-          title: "Google Maps Citation Alignments",
-          desc: "Ensure your Name, Address, and Phone (NAP) details are exactly aligned across dental platforms like Healthgrades, Wellness.com, and Google Maps. Search engines favor matching coordinates."
+          title: "Insurance Information Portals & Patient Search Pages",
+          issueFound: "Your current website lacks clear, prominent pages explicitly explaining which major insurance carriers and copay networks you accept.",
+          whyThisMatters: "The single biggest question new patients have is: 'Do they take my insurance?'. If a customer searches for 'dentist who accepts Delta Dental' and does not find an unambiguous answer on your site, they will leave immediately. This increases your website bounce rate and wastes precious traffic.",
+          competitiveImpact: "Competing practices with dedicated, clear insurance matriculation tables rank prominently on Google and quickly convert visitors into real booked visits.",
+          recommendedSolution: "Create a dedicated 'Insurances Accepted' page complete with high-resolution carrier logos and answers to common billing questions to put prospective clients at ease.",
+          estimatedDifficulty: "Basic",
+          implementationComplexity: "Setting up a clean, high-contrast grid of accepted providers that looks clean on mobile devices while applying structured local data requires professional design.",
+          potentialBusinessImpact: "High"
         },
         {
-          title: "Virtual Booking Intakes",
-          desc: "Introduce an intuitive mobile calendar link ('Schedule Appointment') in your header. Reducing booking steps increases call-to-visit conversion rates of online dental searchers."
+          title: "Seamless 24/7 Mobile Patient Scheduling",
+          issueFound: "Your website requires patients to manually dial your front desk during limited office hours to request or book an appointment, with no digital scheduling options.",
+          whyThisMatters: "A significant percentage of family healthcare decisions are made in the evenings after normal business hours. If a busy parent visits your website on their smartphone and cannot easily request an appointment slot, they will click away to a competitor who makes scheduling simple.",
+          competitiveImpact: "Practices offering clean, interactive online request calendars secure new patient files round-the-clock, outperforming static informational websites.",
+          recommendedSolution: "Introduce a prominent, mobile-optimized scheduling button or patient intake form in your website main header to minimize the steps needed to book.",
+          estimatedDifficulty: "Intermediate",
+          implementationComplexity: "Integrating automated calendar sync that updates in real-time with your practice management software without double-booking requires professional tech integration.",
+          potentialBusinessImpact: "High"
         }
       ];
-    } else if (cat.includes("law") || cat.includes("attorney") || cat.includes("legal") || cat.includes("court")) {
+    } else if (cat.includes("law") || cat.includes("attorney") || cat.includes("legal") || cat.includes("court") || nameLow.includes("attorney") || nameLow.includes("law") || cat.includes("consult")) {
       grade = "Critical Gaps";
-      summary = `Preliminary visibility audit for ${businessName} (Legal Practice). In the competitive legal field, displaying clear expertise silos, EEAT author elements, and structured markup is vital to capture qualified clients.`;
+      summary = `Premium local SEO and authority assessment for ${businessName} (Legal Practice). In the highly competitive legal marketplace, simple listings are no longer enough. Your audit reveals substantial gaps in case-specific structure and digital trust signals that restrict your search exposure and prevent you from securing high-value client retainers.`;
       recommendations = [
         {
-          title: "Practice & Case Specific Silos",
-          desc: "Craft dedicated practice pages for specific case lines (e.g. 'Family Divorce Support' or 'Commercial Truck Accidents') instead of one broad service list. Broad listings lose search traction against focused law platforms."
+          title: "Case-Specific Practice Area Silo Pages",
+          issueFound: "Your legal website groups multiple complex practice areas together on a single generic Page, rather than dedicating separate pages to each specific legal service you provide.",
+          whyThisMatters: "Individual clients search for highly specific solutions, such as 'child custody attorney in Dallas' or 'commercial truck accident lawyer'. If your website lacks detailed, separate pages for each service, search engines will evaluate your site as too generic, resulting in poor rankings and fewer qualified legal leads.",
+          competitiveImpact: "Elite law firms with focused, comprehensive pages for every practice area dominate search results and capture individual clients facing urgent legal battles first.",
+          recommendedSolution: "Expand your website layout to feature individual, deeply informative sub-pages for every legal practice area and case type you represent.",
+          estimatedDifficulty: "Advanced",
+          implementationComplexity: "Writing high-quality, legally compliant copy that is friendly yet authoritative, while laying out proper backlink pathways, requires expert content and SEO writing.",
+          potentialBusinessImpact: "Critical"
         },
         {
-          title: "EEAT Authority Schema & State Bar Links",
-          desc: "Google validates legal advice under strict Your Money Your Life (YMYL) standards. Embed detailed profiles indicating certifications, bar status, and academic publications to maximize ranking credibility."
+          title: "Establishing Strict Legal Authority and EEAT Signals",
+          issueFound: "Your platform does not highlight critical trust marks, state bar credentials, legal memberships, award logos, and successful case histories on the homepage.",
+          whyThisMatters: "Google evaluates legal websites under extremely strict 'Your Money Your Life' standards. Without clear, unmistakable proof of experience, authority, and safety, search engines will choose not to display your website in local searches.",
+          competitiveImpact: "Competitors who professionally highlight credentials and badges on their mobile headers instantly win client trust and secure the initial consult.",
+          recommendedSolution: "Inject highly visible proof elements—such as official state bar seals, prestigious membership badges, and client case study reviews—directly into your primary website pages.",
+          estimatedDifficulty: "Intermediate",
+          implementationComplexity: "Sourcing, formatting, and placing official legal trust markers elegantly without complicating your layout requires dedicated frontend web designers.",
+          potentialBusinessImpact: "High"
         },
         {
-          title: "Attorney Structured Data Schema",
-          desc: "Inject custom 'Attorney' structured JSON-LD metadata. This informs crawlers of your jurisdictional limits, courthouse coordinates, and bar standings, unlocking special organic display cards."
+          title: "Attorney and LegalService Schema Code Markup",
+          issueFound: "Your business website lacks specialized search engine background code—known as structured legal metadata—that explicitly details your practice status to search engines.",
+          whyThisMatters: "Without structured business information embedded in your background code, search engine spiders struggle to parse your physical jurisdiction, office locations, and exact bar affiliations, limiting your Google Maps visibility.",
+          competitiveImpact: "Law offices utilizing advanced legal schema tags rank higher and present richer, more professional results on Google search screens.",
+          recommendedSolution: "Integrate a custom-written 'Attorney' or 'LegalService' JSON-LD code layer into the background of your website's main files.",
+          estimatedDifficulty: "Advanced",
+          implementationComplexity: "Injecting custom JSON-LD schema into database layouts requires coding expertise, as errors can render your website design broken or invisible to search engine crawlers.",
+          potentialBusinessImpact: "Moderate"
         }
       ];
     } else {
+      // Default / General
       grade = "Needs Attention";
-      summary = `Preliminary analysis for ${businessName}. Your business has a healthy base, but optimizations to mobile speed, instant lead capturing, and Google Maps category tuning will maximize your local search capture.`;
+      summary = `Strategic localized visibility check for ${businessName}. While your business possesses a solid baseline, several key optimizations in web display speeds, automated lead capture, and Google Maps categorization are required to prevent lost leads and maintain a steady stream of incoming phone calls.`;
       recommendations = [
         {
-          title: "Mobile Speed & Click-to-Call Header",
-          desc: "Enhance mobile loads by compressing bulky images. Add a prominent tap-to-call phone linkage so mobile searchers on Google can contact your office directly in one touch."
+          title: "Mobile Speed, Performance, and Screen Layout Optimization",
+          issueFound: "Your website experiences minor speed delays when loading on standard mobile data connections and lack a clean, responsive layout for modern phones.",
+          whyThisMatters: "More than sixty percent of local customers find services on their smartphones. If your page layout takes more than three seconds to load, visitors will leave immediately. A slow loading speed reduces customer trust and limits your primary lead capture capabilities.",
+          competitiveImpact: "Nearby competitors who have optimized and modernized their mobile load times capture these busy mobile searchers first.",
+          recommendedSolution: "Compress heavy image files, remove outdated script files, and ensure your website is engineered to display instantly on any mobile viewport.",
+          estimatedDifficulty: "Intermediate",
+          implementationComplexity: "Re-engineering a website's speed requires careful edits to file systems, CSS styling, and server parameters, which can disrupt site formatting if not configured by a professional developer.",
+          potentialBusinessImpact: "High"
         },
         {
-          title: "Instant SMS Lead-Capture Autoresponder",
-          desc: "Never let leads go cold. Integrate a short contact frame that automatically signals your smartphone and schedules a welcoming text-back acknowledgment to prospects within 60 seconds."
+          title: "Google Maps Category Verification and Secondary Attribute Tuning",
+          issueFound: "Your primary Google Business Profile category might not align precisely with high-volume search phrases, or you are missing key secondary keyword attributes.",
+          whyThisMatters: "Google Maps uses your primary business category to determine when to show your business to local searchers. Setting an incorrect or generic category means your listing will never appear for high-value search phrases, resulting in fewer phone calls and lost revenue.",
+          competitiveImpact: "Local competitors with accurate and complete category tuning rank higher in Maps, capturing nearby commercial traffic first.",
+          recommendedSolution: "Verify and align your primary Google Maps category to match your specific industry perfectly, and integrate all applicable secondary service tags.",
+          estimatedDifficulty: "Basic",
+          implementationComplexity: "Adjusting your category is simple, but analyzing local search volumes and selecting the exact mix of secondary tags that will maximize visibility without risk of profile suspension requires seasoned consultant expertise.",
+          potentialBusinessImpact: "Critical"
         },
         {
-          title: "Maps Listing Category & Secondary Tags Verification",
-          desc: "Ensure your primary Google Maps category aligns precisely with high-intent keywords. Supplement this with secondary service attributes to widen your visibility in relevant local directories."
+          title: "Lead Capture response and Missed-Call Auto-SMS Fallback",
+          issueFound: "Your business does not have an automatic missed-call system or instant text autoresponder linked to your primary phone number.",
+          whyThisMatters: "If a nearby customer calls your business and receives a voicemail, they will not wait—they will immediately hang up and call the next service provider on their screen. Overlooking this leads directly to lost revenue and wasted marketing efforts.",
+          competitiveImpact: "Competitors who employ active, instant text automation lock in new opportunities immediately by sending a friendly text text-back within seconds, ending the customer's search.",
+          recommendedSolution: "Implement a polite, secure missed-call auto-response setup of LeadForge Local to instantly reply to unanswered calls or web submissions via SMS.",
+          estimatedDifficulty: "Advanced",
+          implementationComplexity: "Setting up carrier-approved, reliable SMS autoresponders with proper call routing and CRM logs requires technical configuration to meet telco legal compliance.",
+          potentialBusinessImpact: "Critical"
         }
       ];
     }
@@ -361,33 +466,112 @@ Direct Partner Support Hotline: (469) 751-7153.`;
               </div>
 
               {/* Detected Gaps database dashboard */}
-              <div className="bg-slate-900 border border-slate-800 rounded-xl p-4.5 space-y-4">
-                <h5 className="font-display font-medium text-xs text-white uppercase tracking-wider flex items-center gap-1.5 border-b border-slate-800 pb-2">
-                  <AlertTriangle className="h-4 w-4 text-blue-400" />
-                  Three Priority Recommendations Found For Your Trade
-                </h5>
+              <div className="space-y-6">
+                <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 space-y-5">
+                  <h5 className="font-display font-semibold text-sm text-white uppercase tracking-wider flex items-center gap-1.5 border-b border-slate-800 pb-3">
+                    <AlertTriangle className="h-4.5 w-4.5 text-blue-400" />
+                    Three Priority Gaps Identified For Your Trade
+                  </h5>
 
-                <div className="space-y-4 text-xs text-slate-300">
-                  {auditResult.recommendations.map((rec, rIdx) => (
-                    <div key={rIdx} className={`flex items-start gap-3 pb-3 ${rIdx !== auditResult.recommendations.length - 1 ? "border-b border-slate-850" : ""}`}>
-                      <div className="h-6 w-6 rounded-full bg-blue-600/20 text-sky-400 flex items-center justify-center font-bold font-mono text-[10px] flex-shrink-0 mt-0.5 border border-blue-500/10">
-                        {rIdx + 1}
-                      </div>
-                      <div>
-                        <strong className="text-white block font-display font-extrabold text-sm text-sky-400">{rec.title}</strong>
-                        <span className="text-slate-300 block text-[12px] leading-relaxed mt-1 font-sans">{rec.desc}</span>
-                      </div>
-                    </div>
-                  ))}
+                  <div className="space-y-6 text-xs text-slate-300">
+                    {auditResult.recommendations.map((rec, rIdx) => {
+                      const adapted = adaptRecommendation(rec);
+                      
+                      const diffColor = (diff: string) => {
+                        const d = diff.toLowerCase();
+                        if (d.includes("basic")) return "text-emerald-400 bg-emerald-950/30 border-emerald-500/20";
+                        if (d.includes("intermediate")) return "text-sky-450 bg-sky-950/30 border-sky-500/20";
+                        if (d.includes("advanced")) return "text-amber-400 bg-amber-950/30 border-amber-500/20";
+                        return "text-purple-400 bg-purple-950/30 border-purple-500/20"; // Expert-Level
+                      };
+
+                      const impColor = (imp: string) => {
+                        const i = imp.toLowerCase();
+                        if (i.includes("low")) return "text-slate-400 bg-slate-900 border-slate-800";
+                        if (i.includes("moderate")) return "text-yellow-450 bg-yellow-950/25 border-yellow-500/20";
+                        if (i.includes("high")) return "text-orange-400 bg-orange-950/25 border-orange-500/20";
+                        return "text-rose-400 bg-rose-950/30 border-rose-500/30 animate-pulse"; // Critical
+                      };
+
+                      return (
+                        <div 
+                          key={rIdx} 
+                          className={`space-y-4 pb-6 ${rIdx !== auditResult.recommendations.length - 1 ? "border-b border-slate-850" : ""}`}
+                        >
+                          {/* Heading Line */}
+                          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                            <div className="flex items-center gap-2.5">
+                              <div className="h-6.5 w-6.5 rounded-full bg-blue-600/25 text-sky-400 flex items-center justify-center font-bold font-mono text-[11px] flex-shrink-0 border border-blue-500/20">
+                                {rIdx + 1}
+                              </div>
+                              <h4 className="text-white font-display font-extrabold text-sm sm:text-base text-sky-400">
+                                {adapted.title}
+                              </h4>
+                            </div>
+
+                            {/* Badges */}
+                            <div className="flex items-center gap-2 pl-9 sm:pl-0">
+                              <span className={`text-[9px] font-mono font-bold px-2 py-0.5 rounded border ${diffColor(adapted.estimatedDifficulty)}`}>
+                                Difficulty: {adapted.estimatedDifficulty}
+                              </span>
+                              <span className={`text-[9px] font-mono font-bold px-2 py-0.5 rounded border ${impColor(adapted.potentialBusinessImpact)}`}>
+                                Impact: {adapted.potentialBusinessImpact}
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* 7-Part Audit Section Details Grid */}
+                          <div className="pl-9 space-y-3 font-sans">
+                            {/* Issue Found */}
+                            <div className="text-slate-350 text-[12.5px] leading-relaxed">
+                              <span className="text-amber-400/90 font-bold font-mono text-[10px] uppercase tracking-wider block mb-0.5">⚠️ Issue Found</span>
+                              <p>{adapted.issueFound}</p>
+                            </div>
+
+                            {/* Why This Matters */}
+                            <div className="text-slate-350 text-[12.5px] leading-relaxed">
+                              <span className="text-sky-400/90 font-bold font-mono text-[10px] uppercase tracking-wider block mb-0.5">💡 Why This Matters</span>
+                              <p>{adapted.whyThisMatters}</p>
+                            </div>
+
+                            {/* Competitive Impact */}
+                            <div className="text-slate-350 text-[12.5px] leading-relaxed">
+                              <span className="text-rose-400/90 font-bold font-mono text-[10px] uppercase tracking-wider block mb-0.5">⚔️ Competitive Impact</span>
+                              <p>{adapted.competitiveImpact}</p>
+                            </div>
+
+                            {/* Recommended Solution */}
+                            <div className="text-slate-100 text-[12.5px] leading-relaxed bg-slate-950 p-4 rounded-xl border border-slate-800/65">
+                              <span className="text-emerald-400 font-extrabold font-mono text-[10px] uppercase tracking-wider block mb-1">✅ Recommended Solution</span>
+                              <p>{adapted.recommendedSolution}</p>
+                            </div>
+
+                            {/* Implementation Complexity */}
+                            <div className="text-slate-400 text-[11.5px] leading-relaxed italic bg-slate-950/20 p-3 rounded-lg border border-slate-850">
+                              <span className="text-slate-400 font-extrabold font-mono text-[9px] uppercase tracking-wider block not-italic mb-0.5">🔧 Implementation Complexity Overview</span>
+                              <p>{adapted.implementationComplexity}</p>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
 
-              {/* Next steps advice */}
-              <div className="text-xs text-slate-400 space-y-1.5 leading-relaxed font-sans">
-                <span className="text-white font-bold block uppercase text-[10px]">Next Action Step:</span>
-                <p className="font-sans text-slate-305">
-                  We are preparing a clean, easy-to-read, print-ready PDF version of these precise fixes. A human support specialist will reach out within 24 business hours to share these straightforward items. Zero pressure—just actionable items!
-                </p>
+                {/* Next action step & Consultation Scheduler */}
+                <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-5">
+                  <div className="space-y-2">
+                    <span className="text-emerald-450 font-extrabold block uppercase tracking-wider text-[11px] font-mono">📅 Expert Roadmap Action Plan</span>
+                    <p className="font-sans text-slate-200 text-sm leading-relaxed">
+                      Your audit identified several opportunities that could improve online visibility, customer trust, and lead generation. If you would like expert assistance implementing these recommendations, schedule a strategy session with LeadForge Local to receive a customized growth plan tailored to your business.
+                    </p>
+                  </div>
+                  
+                  {/* Embedded Interactive Consultation Scheduler System */}
+                  <div className="pt-2">
+                    <InteractiveScheduler formData={formData} />
+                  </div>
+                </div>
               </div>
 
             </div>
@@ -571,5 +755,186 @@ Direct Partner Support Hotline: (469) 751-7153.`;
 
       </div>
     </div>
+  );
+}
+
+// Embedded Interactive Consultation Scheduler Component
+interface InteractiveSchedulerProps {
+  formData: {
+    name: string;
+    phone: string;
+    email: string;
+    businessName: string;
+  };
+}
+
+function InteractiveScheduler({ formData }: InteractiveSchedulerProps) {
+  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedTime, setSelectedTime] = useState("");
+  const [bookingName, setBookingName] = useState(formData.name || "");
+  const [bookingPhone, setBookingPhone] = useState(formData.phone || "");
+  const [isBooked, setIsBooked] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Generate next 5 weekdays
+  const dates: string[] = [];
+  const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  
+  let current = new Date();
+  let count = 0;
+  while (count < 5) {
+    current.setDate(current.getDate() + 1);
+    const day = current.getDay();
+    if (day !== 0 && day !== 6) { // Weekdays only
+      const dateStr = `${daysOfWeek[day]}, ${months[current.getMonth()]} ${current.getDate()}`;
+      dates.push(dateStr);
+      count++;
+    }
+  }
+
+  const timeSlots = [
+    "9:00 AM CST",
+    "10:30 AM CST",
+    "1:00 PM CST",
+    "2:30 PM CST",
+    "4:00 PM CST"
+  ];
+
+  const handleBookSession = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedDate || !selectedTime) return;
+    
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      setIsBooked(true);
+      // Track Analytics
+      if (typeof window !== "undefined" && (window as any).gtag) {
+        (window as any).gtag("event", "consultation_booked", {
+          business_name: formData.businessName,
+          date: selectedDate,
+          time: selectedTime
+        });
+      }
+    }, 1200);
+  };
+
+  if (isBooked) {
+    return (
+      <div className="bg-emerald-950/20 border border-emerald-500/30 p-5 rounded-xl text-center space-y-3 animate-fadeIn">
+        <div className="h-10 w-10 bg-emerald-500/10 text-emerald-400 flex items-center justify-center rounded-full mx-auto border border-emerald-500/20">
+          <Check className="h-5 w-5" />
+        </div>
+        <div>
+          <h5 className="font-display font-extrabold text-sm text-white">Your Strategy Session is Reserved!</h5>
+          <p className="text-slate-300 text-[12px] leading-relaxed mt-1.5 font-sans">
+            We have locked in your Dallas strategy time slot for <strong>{selectedDate}</strong> at <strong>{selectedTime}</strong>. 
+            Heather or Matthew Tucker will personally call you at <strong>{bookingPhone}</strong> to conduct your strategic roadmap scan.
+          </p>
+        </div>
+        <div className="text-[10px] font-mono text-emerald-400 font-semibold bg-emerald-950/40 py-1.5 px-3 rounded inline-block">
+          CALENDAR INVITE SENT TO: {formData.email}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleBookSession} className="bg-slate-950 border border-slate-850 p-4 sm:p-5 rounded-xl space-y-4 animate-fadeIn">
+      <div className="space-y-1 text-left">
+        <h5 className="font-display font-bold text-white text-[13px] tracking-tight">Schedule Your 15-Minute Roadmap Consult</h5>
+        <p className="text-slate-405 text-[11px] leading-normal font-sans">
+          Select a convenient day and time to receive a fully customized, professional checklist growth plan. No sales pressure, just actionable Dallas-area marketing advice.
+        </p>
+      </div>
+
+      <div className="space-y-3 text-left">
+        {/* Date choice */}
+        <div>
+          <span className="text-[10px] font-bold text-slate-400 block mb-1 uppercase tracking-wide">1. Select Target Date</span>
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-1.5">
+            {dates.map((d) => (
+              <button
+                key={d}
+                type="button"
+                onClick={() => setSelectedDate(d)}
+                className={`py-1.5 px-2 rounded-lg text-[10.5px] font-medium border text-center transition-all cursor-pointer ${
+                  selectedDate === d
+                    ? "bg-sky-500 border-sky-400 text-white shadow-md font-bold"
+                    : "bg-slate-900 border-slate-800 text-slate-300 hover:bg-slate-850"
+                }`}
+              >
+                {d}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Time choice */}
+        <div>
+          <span className="text-[10px] font-bold text-slate-400 block mb-1 uppercase tracking-wide">2. Select Time Slot</span>
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-1.5">
+            {timeSlots.map((t) => (
+              <button
+                key={t}
+                type="button"
+                onClick={() => setSelectedTime(t)}
+                className={`py-1.5 px-2 rounded-lg text-[10.5px] font-medium border text-center transition-all cursor-pointer ${
+                  selectedTime === t
+                    ? "bg-sky-500 border-sky-400 text-white shadow-md font-bold"
+                    : "bg-slate-900 border-slate-800 text-slate-300 hover:bg-slate-850"
+                }`}
+              >
+                {t}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Confirm Contacts */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs pt-1">
+          <div>
+            <label className="text-[10px] font-bold text-slate-500 block mb-1 uppercase tracking-wide">Your Name</label>
+            <input
+              type="text"
+              required
+              value={bookingName}
+              onChange={(e) => setBookingName(e.target.value)}
+              className="w-full bg-slate-900 border border-slate-800 text-xs px-3 py-2 text-white rounded-lg focus:outline-none focus:border-sky-500 font-sans"
+            />
+          </div>
+          <div>
+            <label className="text-[10px] font-bold text-slate-500 block mb-1 uppercase tracking-wide">Phone Number for Voice Consult</label>
+            <input
+              type="tel"
+              required
+              value={bookingPhone}
+              onChange={(e) => setBookingPhone(e.target.value)}
+              className="w-full bg-slate-900 border border-slate-800 text-xs px-3 py-2 text-white rounded-lg focus:outline-none focus:border-sky-500 font-sans"
+            />
+          </div>
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        disabled={isLoading || !selectedDate || !selectedTime}
+        className={`w-full py-2.5 rounded-lg text-white font-extrabold text-xs uppercase tracking-wider shadow-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+          !selectedDate || !selectedTime
+            ? "bg-slate-800 text-slate-500 cursor-not-allowed border border-slate-750"
+            : "bg-sky-500 hover:bg-sky-600 border border-sky-400"
+        }`}
+      >
+        {isLoading ? (
+          <>
+            <span className="animate-spin h-3.5 w-3.5 border-2 border-white border-t-transparent rounded-full" />
+            <span>Locking in appointment...</span>
+          </>
+        ) : (
+          <span>Book My Strategy Consultation Session</span>
+        )}
+      </button>
+    </form>
   );
 }

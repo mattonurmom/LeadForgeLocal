@@ -50,7 +50,7 @@ export default function TermsView({ setTab }: TermsViewProps) {
             <div className="space-y-2">
               <h2 className="text-white font-bold text-lg font-display">1. Purpose and Scope of Services</h2>
               <p className="leading-relaxed">
-                LeadForge Local, operated by Heather Eisan & Matthew Eisan, provides specialized online optimization, including local landing pages, map citation enhancements, and missed-call text fallback automation setups. All services are aimed at bolstering small brand local prominence.
+                LeadForge Local, operated by Heather Tucker & Matthew Tucker, provides specialized online optimization, including local landing pages, map citation enhancements, and missed-call text fallback automation setups. All services are aimed at bolstering small brand local prominence.
               </p>
             </div>
 

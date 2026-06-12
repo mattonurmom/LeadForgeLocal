@@ -9,8 +9,18 @@ declare global {
 }
 
 // Initialize GA4 datalayer safety
-export const initGA4 = (measurementId: string = "G-MOCKTRACK8") => {
+export const initGA4 = () => {
   if (typeof window === "undefined") return;
+
+  const measurementId = (import.meta as any).env.VITE_GA_ID;
+
+  if (!measurementId || measurementId === "G-MOCKTRACK8" || measurementId.trim() === "") {
+    console.warn(
+      `[Google Analytics 4] Tracking is disabled because VITE_GA_ID is not configured in environment variables.\n` +
+      `To activate real GA4 coverage, register VITE_GA_ID in your configuration (e.g., VITE_GA_ID=G-XXXXXXXXXX).`
+    );
+    return;
+  }
 
   // Insert standard script tag
   if (!document.getElementById("google-tag-manager")) {
@@ -31,7 +41,7 @@ export const initGA4 = (measurementId: string = "G-MOCKTRACK8") => {
       cookie_flags: "SameSite=None;Secure",
     });
 
-    console.log(`[Google Analytics 4] Initialized tracking with measurement ID: ${measurementId}`);
+    console.log(`[Google Analytics 4] Initialized live tracking with G-ID: ${measurementId}`);
   }
 };
 

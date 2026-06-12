@@ -18,15 +18,145 @@ export default function App() {
   const [currentTab, setTab] = useState<string>("home");
   const [showAdminHub, setShowAdminHubState] = useState<boolean>(false);
 
+  const pathToTab: Record<string, string> = {
+    "/": "home",
+    "/about": "about",
+    "/services": "services",
+    "/pricing": "pricing",
+    "/portfolio": "portfolio",
+    "/free-audit": "audit",
+    "/contact": "contact",
+    "/privacy": "privacy",
+    "/terms": "terms",
+  };
+
+  const tabToPath: Record<string, string> = {
+    "home": "/",
+    "about": "/about",
+    "services": "/services",
+    "pricing": "/pricing",
+    "portfolio": "/portfolio",
+    "audit": "/free-audit",
+    "contact": "/contact",
+    "privacy": "/privacy",
+    "terms": "/terms",
+  };
+
+  const routeMetaData: Record<string, { title: string; desc: string; image: string }> = {
+    "home": {
+      title: "LeadForge Local | Conversion-Focused Local SEO & Web Design",
+      desc: "LeadForge Local helps plumbers, roofers, and local tradesmen get 2x more maps calls. Instant missed-call text back and profile ranking.",
+      image: "/src/assets/images/frustrated_laptop_1781286600083.jpg"
+    },
+    "about": {
+      title: "About Us | LeadForge Local",
+      desc: "Meet Heather & Matthew Tucker, founders of LeadForge Local. We build lightning-fast contractor websites & maps SEO systems that grow your trades business.",
+      image: "/src/assets/images/frustrated_laptop_1781286600083.jpg"
+    },
+    "services": {
+      title: "Our Local SEO & Tech Services | LeadForge Local",
+      desc: "Google Maps SEO, GBP 3-Pack optimization, missed call text back automation, and beautiful websites for local service companies.",
+      image: "/src/assets/images/tradesman_worker_1781286632167.jpg"
+    },
+    "pricing": {
+      title: "Simple Pricing Plans | LeadForge Local",
+      desc: "Affordable flat-rate contractor local SEO, automated reviews setup, and custom landing pages. No hidden contracts.",
+      image: "/src/assets/images/restaurant_owner_1781286617140.jpg"
+    },
+    "portfolio": {
+      title: "Our Work & Client Stories | LeadForge Local",
+      desc: "See how local trade companies, roofers, dentists, and restaurants scaled their map rankings and calls with LeadForge Local.",
+      image: "/src/assets/images/restaurant_owner_1781286617140.jpg"
+    },
+    "audit": {
+      title: "Get a Free Google Business Scan | LeadForge Local",
+      desc: "Run our free automated 3-Point audit on your Google Maps listing. Identify slow mobile pages and text-back leaks instantly.",
+      image: "/src/assets/images/frustrated_laptop_1781286600083.jpg"
+    },
+    "contact": {
+      title: "Contact LeadForge Local | Dallas, Texas",
+      desc: "Ready to dominate your city's local search packs? Reach out to Heather & Matthew Tucker today for custom lead growth services.",
+      image: "/src/assets/images/tradesman_worker_1781286632167.jpg"
+    },
+    "privacy": {
+      title: "Privacy Policy | LeadForge Local",
+      desc: "Learn about how securely we sandboxed your lead information and respect your absolute user data privacy.",
+      image: "/src/assets/images/frustrated_laptop_1781286600083.jpg"
+    },
+    "terms": {
+      title: "Terms of Service | LeadForge Local",
+      desc: "Our plain English terms. How we optimize Google profiles, landing pages, and lead automations for local businesses.",
+      image: "/src/assets/images/frustrated_laptop_1781286600083.jpg"
+    },
+    "admin": {
+      title: "Command Center Login | LeadForge Admin",
+      desc: "Secure entry console for the LeadForge Local CRM and AI Playbook adviser cockpit. PIN-protected credentials lock.",
+      image: "/src/assets/images/frustrated_laptop_1781286600083.jpg"
+    }
+  };
+
   useEffect(() => {
     // 1. Initialize GA4 tracking safely
-    initGA4("G-MOCKTRACK8");
+    initGA4();
+  }, []);
 
-    // 2. Overwrite hardcoded canonical tags dynamically based on the exact mounted domain
+  // Update URL history whenever tab / admin console state changes
+  useEffect(() => {
+    const path = window.location.pathname;
+    if (showAdminHub) {
+      if (path !== "/admin") {
+        window.history.pushState(null, "", "/admin");
+      }
+    } else {
+      const activePath = tabToPath[currentTab] || "/";
+      if (path !== activePath) {
+        window.history.pushState(null, "", activePath);
+      }
+    }
+  }, [currentTab, showAdminHub]);
+
+  // Handle popstate navigation changes (Forward/Backward browser buttons)
+  useEffect(() => {
+    const handleLocationChange = () => {
+      const path = window.location.pathname;
+      if (path === "/admin") {
+        setShowAdminHubState(true);
+      } else {
+        setShowAdminHubState(false);
+        const mappedTab = pathToTab[path] || "home";
+        setTab(mappedTab);
+      }
+    };
+
+    handleLocationChange();
+    window.addEventListener("popstate", handleLocationChange);
+    return () => window.removeEventListener("popstate", handleLocationChange);
+  }, []);
+
+  // Set page titles, meta tags, and rich JSON-LD schema dynamically
+  useEffect(() => {
     const origin = window.location.origin;
     const path = window.location.pathname;
     const currentUrl = origin + path;
 
+    const activeKey = showAdminHub ? "admin" : currentTab;
+    const meta = routeMetaData[activeKey] || routeMetaData["home"];
+
+    // Update Title
+    document.title = meta.title;
+
+    // Update Description
+    let descNode = document.querySelector("meta[name='description']");
+    if (descNode) {
+      descNode.setAttribute("content", meta.desc);
+    } else {
+      descNode = document.createElement("meta");
+      descNode.setAttribute("name", "description");
+      descNode.setAttribute("content", meta.desc);
+      document.head.appendChild(descNode);
+    }
+
+    // Update Canonical
     let canonicalLinkNode = document.querySelector("link[rel='canonical']");
     if (canonicalLinkNode) {
       canonicalLinkNode.setAttribute("href", currentUrl);
@@ -37,17 +167,17 @@ export default function App() {
       document.head.appendChild(canonicalLinkNode);
     }
 
-    // 3. Update Open Graph and Twitter metadata dynamically (Task 9)
+    // Update Social Medias og/twitter
     const socialMeta = {
-      "og:title": "AI-Powered Local Marketing That Generates Leads",
-      "og:description": "Websites, SEO, AI Chatbots, and Lead Generation for Local Businesses.",
+      "og:title": meta.title,
+      "og:description": meta.desc,
       "og:url": currentUrl,
       "og:type": "website",
-      "og:image": origin + "/src/assets/images/frustrated_laptop_1780974909506.png",
+      "og:image": origin + meta.image,
       "twitter:card": "summary_large_image",
-      "twitter:title": "AI-Powered Local Marketing That Generates Leads",
-      "twitter:description": "Websites, SEO, AI Chatbots, and Lead Generation for Local Businesses.",
-      "twitter:image": origin + "/src/assets/images/frustrated_laptop_1780974909506.png"
+      "twitter:title": meta.title,
+      "twitter:description": meta.desc,
+      "twitter:image": origin + meta.image
     };
 
     Object.entries(socialMeta).forEach(([property, value]) => {
@@ -64,8 +194,8 @@ export default function App() {
       }
     });
 
-    // 4. Inject validated rich Google-compliant JSON-LD schemas (Task 10)
-    const jsonLdSchemas = [
+    // Load structured JSON-LD schemas
+    const schemas: any[] = [
       {
         "@context": "https://schema.org",
         "@type": "Organization",
@@ -89,12 +219,15 @@ export default function App() {
             "name": "Matthew Tucker"
           }
         ]
-      },
-      {
+      }
+    ];
+
+    if (activeKey === "home") {
+      schemas.push({
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "name": "LeadForge Local",
-        "image": origin + "/src/assets/images/tradesman_worker_1780974939055.png",
+        "image": origin + "/src/assets/images/tradesman_worker_1781286632167.jpg",
         "telephone": "+1-469-751-7153",
         "email": "support@leadforgelocal.com",
         "address": {
@@ -105,8 +238,8 @@ export default function App() {
         },
         "priceRange": "$$",
         "areaServed": "US"
-      },
-      {
+      });
+      schemas.push({
         "@context": "https://schema.org",
         "@type": "FAQPage",
         "mainEntity": [
@@ -127,8 +260,11 @@ export default function App() {
             }
           }
         ]
-      },
-      {
+      });
+    }
+
+    if (activeKey === "services") {
+      schemas.push({
         "@context": "https://schema.org",
         "@type": "Service",
         "name": "Conversion-Focused Local SEO Services",
@@ -137,13 +273,13 @@ export default function App() {
           "name": "LeadForge Local"
         },
         "serviceType": "Digital Visibility Support, Maps SEO, Review Automation, and Web Design for Trade Contractors"
-      }
-    ];
+      });
+    }
 
-    // Remove any stale schemas before injects
+    // Remove any stale injected schemas
     document.querySelectorAll(".leadforge-injected-schema").forEach(e => e.remove());
 
-    jsonLdSchemas.forEach(schema => {
+    schemas.forEach(schema => {
       const script = document.createElement("script");
       script.type = "application/ld+json";
       script.className = "leadforge-injected-schema";
@@ -151,31 +287,10 @@ export default function App() {
       document.head.appendChild(script);
     });
 
-  }, []);
-
-  useEffect(() => {
-    const handleLocationChange = () => {
-      const path = window.location.pathname;
-      if (path === "/admin") {
-        setShowAdminHubState(true);
-      } else {
-        setShowAdminHubState(false);
-      }
-    };
-
-    handleLocationChange();
-    window.addEventListener("popstate", handleLocationChange);
-    return () => window.removeEventListener("popstate", handleLocationChange);
-  }, []);
+  }, [currentTab, showAdminHub]);
 
   const handleSetShowAdminHub = (show: boolean) => {
-    if (show) {
-      window.history.pushState(null, "", "/admin");
-      setShowAdminHubState(true);
-    } else {
-      window.history.pushState(null, "", "/");
-      setShowAdminHubState(false);
-    }
+    setShowAdminHubState(show);
   };
 
   // Load and save audit leads with local storage

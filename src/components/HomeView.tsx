@@ -241,7 +241,7 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
               
               <div className="relative rounded-2xl overflow-hidden border border-slate-800 bg-slate-950/60 shadow-2xl max-w-lg aspect-video group">
                 <img 
-                  src="/src/assets/images/frustrated_laptop_1780974909506.png" 
+                  src="/src/assets/images/frustrated_laptop_1781286600083.jpg" 
                   alt="Frustrated small business owner looking at computer screen" 
                   className="w-full h-full object-cover opacity-90 group-hover:scale-102 transition-transform duration-500"
                   referrerPolicy="no-referrer"
@@ -541,7 +541,7 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
             <div className="relative group overflow-hidden rounded-2xl border border-slate-800 bg-slate-950/65 p-6 flex flex-col md:flex-row gap-6 items-center">
               <div className="w-32 h-32 md:w-36 md:h-36 rounded-xl overflow-hidden flex-shrink-0 border border-slate-800 shadow-md">
                 <img 
-                  src="/src/assets/images/restaurant_owner_1780974923718.png" 
+                  src="/src/assets/images/restaurant_owner_1781286617140.jpg" 
                   alt="Cozy bistro restaurant owner" 
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   referrerPolicy="no-referrer"
@@ -563,7 +563,7 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
             <div className="relative group overflow-hidden rounded-2xl border border-slate-850 bg-slate-950/65 p-6 flex flex-col md:flex-row gap-6 items-center">
               <div className="w-32 h-32 md:w-36 md:h-36 rounded-xl overflow-hidden flex-shrink-0 border border-slate-800 shadow-md">
                 <img 
-                  src="/src/assets/images/tradesman_worker_1780974939055.png" 
+                  src="/src/assets/images/tradesman_worker_1781286632167.jpg" 
                   alt="Tradesman plumber contractor crew" 
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   referrerPolicy="no-referrer"
