@@ -382,7 +382,7 @@ export const PACKAGES: PackageItem[] = [
   {
     id: "pkg-starter",
     name: "Starter Local Package",
-    price: "$299",
+    price: "$299 One-Time Setup",
     tagline: "Essential local footprint designed to improve search visibility and built-in trust.",
     badge: "Startup Friendly",
     services: [
@@ -406,7 +406,7 @@ export const PACKAGES: PackageItem[] = [
   {
     id: "pkg-growth",
     name: "Premium Growth Package",
-    price: "$499 / mo",
+    price: "$499/month",
     tagline: "Our most requested system to organically improve local search presence and convert leads.",
     badge: "Best Value",
     isPopular: true,
@@ -432,7 +432,7 @@ export const PACKAGES: PackageItem[] = [
   {
     id: "pkg-premium",
     name: "Premium Marketing Package",
-    price: "$999 / mo",
+    price: "$999/month",
     tagline: "Complete marketing management designed to bolster your online presence and client trust.",
     badge: "Complete Growth",
     services: [
@@ -796,20 +796,20 @@ export const OUTREACH_TEMPLATES: OutreachTemplate[] = [
     name: "Cold Facebook Message Template",
     type: "Facebook Message",
     tips: "Find local painters, landscapers, or cleaning companies on Facebook who are inactive and message them.",
-    content: "Hi [Business Owner Name]! 👋\n\nI was looking for local [Service Type, e.g., plumbers] in [City Name] today and noticed your Facebook page, but struggled to find your Google listing on the Map Pack. \n\nI did a quick audit of your online profiles and discovered 3 minor errors that are likely blocking customers from finding your phone number on Google. \n\nI created a quick, free 1-page Business Performance Audit detailing how to fix these errors yourself to get more calls in [City Name]. Can I drop the PDF link over to you right here? No pitch, just some helpful local tips!\n\nBest,\n[Your Name]\nLeadForge Local Business Growth Service"
+    content: "Hi [Business Owner Name]! 👋\n\nI was looking for local [Service Type, e.g., plumbers] in [City Name] today and noticed your Facebook page, but struggled to find your Google listing on the Map Pack. \n\nI did a quick audit of your online profiles and discovered 3 minor errors that are likely blocking customers from finding your phone number on Google. \n\nI created a quick, free 1-page Business Performance Audit detailing three things a professional marketing team would do to correct those three errors. We generally cost significantly less than a marketing team and provide the same service except that you have direct access to your marketing team. Can I drop the PDF link over to you right here? No pitch, just some helpful local tips!\n\nBest,\n[Your Name]\nLeadForge Local Business Growth Service"
   },
   {
     name: "Cold Outreach Text Message (SMS)",
     type: "Text Message",
     tips: "Excellent for contractors since they read 99% of text messages during high-activity field jobs.",
-    content: "Hi [Owner Name], this is [Your Name] from LeadForge Local. I noticed your [Business Name] listing is currently missing from the Google Map 3-Pack for search queries in [City]. Many local contractors lose 30%+ of their jobs because of minor profile errors and delayed response times on missed calls. I drafted a free 1-page business report showing how to fix this yourself to get more calls. Would it be alright if I texted you the PDF link here? Let me know!"
+    content: "Hi [Owner Name], this is [Your Name] from LeadForge Local. I noticed your [Business Name] listing is currently missing from the Google Map 3-Pack for search queries in [City]. Many local contractors lose 30%+ of their jobs because of minor profile errors and delayed response times on missed calls. I drafted a free 1-page business report detailing three things a professional marketing team would do to correct those three errors. We generally cost significantly less than a marketing team and provide the same service except that you have direct access to your marketing team. Would it be alright if I texted you the PDF link here? Let me know!"
   },
   {
     name: "Cold Email Prospecting Script",
     type: "Email",
     subject: "Improvement Plan for [Business Name] - More calls in [City Name]",
     tips: "Keep your email brief, casual, and focused strictly on the free audit value.",
-    content: "Hi [Owner Name],\n\nI was researching [Service Trade, e.g., HVAC companies] in [City Name] and came across your website ([Website Link]). \n\nYou have a great business, but I noticed a couple of structural gaps that are causing you to lose high-value calls to other competitors in the neighborhood:\n\n1. Your website loads slowly on mobile devices, which causes up to 40% of page visitors to back out before they call.\n2. Your Google Business Profile is showing incomplete search categories, causing you to rank on map page 2 where clients rarely click.\n\nWe specialize in setting up fast, high-converting service websites and Google listings that generate steady customer calling streams. \n\nI've generated a free, custom 1-page Business performance audit for [Business Name] with tailored, straight-to-the-point instructions on how to patch these leaks. You can apply them yourself, or have us do it for you.\n\nWould you be open to reviewing the free report and a brief 5-minute call to discuss how to capture 10-15 more jobs per month?\n\nIf so, please let me know or book directly here: [Your Booking Link]\n\nWarm regards,\n\n[Your Name]\nLeadForge Local\n[Your Phone Number]"
+    content: "Hi [Owner Name],\n\nI was researching [Service Trade, e.g., HVAC companies] in [City Name] and came across your website ([Website Link]). \n\nYou have a great business, but I noticed a couple of structural gaps that are causing you to lose high-value calls to other competitors in the neighborhood:\n\n1. Your website loads slowly on mobile devices, which causes up to 40% of page visitors to back out before they call.\n2. Your Google Business Profile is showing incomplete search categories, causing you to rank on map page 2 where clients rarely click.\n3. There is no automated text-back setup on your phone line, meaning missed calls instantly become lost revenue.\n\nI've generated a free, custom 1-page Business performance audit for [Business Name] detailing the exact three things a professional marketing team would do to correct those three errors. We generally cost significantly less than a marketing team and provide the same service except that you have direct access to your marketing team.\n\nWould you be open to reviewing the free report and a brief 5-minute call to discuss how to capture 10-15 more jobs per month?\n\nIf so, please let me know or book directly here: [Your Booking Link]\n\nWarm regards,\n\n[Your Name]\nLeadForge Local\n[Your Phone Number]"
   },
   {
     name: "Quick Lead Follow-Up Sequence",

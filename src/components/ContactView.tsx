@@ -4,6 +4,7 @@ import {
   Mail, Phone, MapPin, CheckCircle2, ArrowRight, ShieldCheck, 
   HelpCircle, MessageSquare, Clock, Building 
 } from "lucide-react";
+import { trackContactFormSubmission } from "../utils/analytics";
 
 interface ContactViewProps {
   onAddContactLead: (lead: Omit<ContactLead, "id" | "submittedAt">) => void;
@@ -33,24 +34,37 @@ export default function ContactView({ onAddContactLead }: ContactViewProps) {
     e.preventDefault();
     setErrorMessage("");
     if (!formData.name || !formData.email || !formData.phone) {
-      setErrorMessage("Name, Email, and Phone are required.");
+      const errorMsg = "Name, Email, and Phone are required.";
+      setErrorMessage(errorMsg);
+      console.warn("[LeadForge Contact Form] Form validation failure:", errorMsg);
       return;
     }
 
     setIsSubmitting(true);
     
-    setTimeout(() => {
-      onAddContactLead({
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        businessName: formData.businessName,
-        message: formData.message
-      });
+    try {
+      // Simulate database submission and dispatch tracking events
+      setTimeout(() => {
+        onAddContactLead({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          businessName: formData.businessName,
+          message: formData.message
+        });
+
+        // Dispatch GA4 event
+        trackContactFormSubmission(formData.businessName);
+
+        setIsSubmitting(false);
+        setIsCompleted(true);
+        window.scrollTo({ top: 120, behavior: "smooth" });
+      }, 1200);
+    } catch (err: any) {
+      console.error("[LeadForge Contact Form] Submission error details:", err);
+      setErrorMessage("A system timeout occurred. Please call details to support directly at (469) 751-7153.");
       setIsSubmitting(false);
-      setIsCompleted(true);
-      window.scrollTo({ top: 120, behavior: "smooth" });
-    }, 1200);
+    }
   };
 
   return (

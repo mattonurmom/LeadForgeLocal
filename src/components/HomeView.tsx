@@ -1,7 +1,7 @@
 import React from "react";
 import { 
   ArrowRight, ShieldCheck, MapPin, PhoneCall, AlertTriangle, 
-  Users, CheckCircle2, TrendingUp, MessageSquare, Star, Settings 
+  Users, CheckCircle2, TrendingUp, MessageSquare, Star, Settings, DollarSign 
 } from "lucide-react";
 
 const TICKER_ITEMS = [
@@ -429,27 +429,35 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             <div className="lg:col-span-6 space-y-6">
-              <span className="text-xs font-bold text-sky-450 uppercase tracking-widest block">The LeadForge Edge</span>
+              <span className="text-xs font-bold text-sky-450 uppercase tracking-widest block">Direct Accountability</span>
               <h2 className="font-display text-3xl font-extrabold tracking-tight text-white sm:text-4xl leading-tight">
-                Why Local Business Owners Choose LeadForge Local
+                Why Business Owners Trust LeadForge Local
               </h2>
               <p className="text-sm text-slate-300 leading-relaxed">
-                We are local business specialists ourselves. We are not interested in fluffy corporate jargon, generic social media likes, or vanity metrics. We measure our successes purely by:
+                We are local business specialists ourselves. We are not interested in fluffy corporate jargon, generic social media likes, or vanity metrics. We focus 100% on delivering more leads, calls, and customers to local firms.
               </p>
 
               <div className="space-y-4 pt-2">
                 {[
                   {
-                    title: "No Confusing Corporate Fluff",
-                    desc: "We talk in high-intent calls, property estimate volumes, and real dollars—never click-through impressions or abstract web telemetry."
-                  },
-                  {
-                    title: "Extreme Operational Value",
-                    desc: "Our division operations are optimized so we can sell premium custom trades websites starting under $500, with no high agency markups."
-                  },
-                  {
                     title: "No Long-Term Contracts",
-                    desc: "You are never locked into long annual legal bindings. We earn our retainer every month based on performance and phone traffic."
+                    desc: "You are never locked into long annual legal bindings. We earn your business month-to-month based on real local performance and phone traffic."
+                  },
+                  {
+                    title: "Affordable Pricing",
+                    desc: "Our services are clean, upfront, and budget-friendly. Choose simple packages designed specifically for small business owners."
+                  },
+                  {
+                    title: "Real People",
+                    desc: "No automated support tickets or overseas bots. You deal directly with our founders, Heather and Matthew Tucker, who care about your growth."
+                  },
+                  {
+                    title: "Personalized Support",
+                    desc: "We understand your local area, your services, and your unique goals. You get individual attention and hand-crafted optimizations."
+                  },
+                  {
+                    title: "Local Business Focus",
+                    desc: "We don't work with giant conglomerates. Our entire system is engineered for local physical shops, hometown services, and independent contractors."
                   }
                 ].map((edge, idx) => (
                   <div key={idx} className="flex gap-4">
@@ -489,6 +497,27 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
               </div>
             </div>
 
+          </div>
+
+          {/* Trust Badges Grid */}
+          <div className="mt-16 pt-10 border-t border-slate-800/85 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            {[
+              { label: "Secure Forms", icon: ShieldCheck, desc: "Encrypted & Spam-Protected" },
+              { label: "No Long-Term Contracts", icon: CheckCircle2, desc: "Flexible Month-To-Month" },
+              { label: "Small Business Focused", icon: Users, desc: "100% Dedicated to Local Firms" },
+              { label: "Transparent Pricing", icon: DollarSign, desc: "No Hidden Costs or Surcharges" }
+            ].map((badge, idx) => {
+              const Icon = badge.icon;
+              return (
+                <div key={idx} className="bg-slate-900/50 border border-slate-800/60 rounded-2xl p-5 hover:border-slate-700/70 transition-all flex flex-col items-center">
+                  <div className="h-10 w-10 bg-blue-600/10 rounded-xl flex items-center justify-center text-sky-400 mb-3 border border-blue-500/15">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <h4 className="font-display font-extrabold text-white text-sm mb-1">{badge.label}</h4>
+                  <p className="text-[10px] text-slate-400 font-medium">{badge.desc}</p>
+                </div>
+              );
+            })}
           </div>
 
         </div>

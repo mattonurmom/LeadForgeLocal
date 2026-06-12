@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { PACKAGES } from "../data";
 import { 
   Check, ArrowRight, Calculator, Star, BadgeAlert, 
   HelpCircle, DollarSign, RefreshCw, Sparkles, Sliders 
 } from "lucide-react";
+import { trackRoiCalculatorUsage } from "../utils/analytics";
 
 interface PricingViewProps {
   setTab: (tab: string) => void;
@@ -39,6 +40,15 @@ export default function PricingView({ setTab }: PricingViewProps) {
     setSelectedTrade(tradeKey);
     setTicketSize(tradeDefaults[tradeKey].ticket);
   };
+
+  // Debounced tracking for slider usage
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      const estimatedRevenue = ticketSize * additionalJobs;
+      trackRoiCalculatorUsage(selectedTrade, ticketSize, additionalJobs, estimatedRevenue);
+    }, 1000);
+    return () => clearTimeout(timeoutId);
+  }, [selectedTrade, ticketSize, additionalJobs]);
 
   // ROI math
   const estimatedRevenue = ticketSize * additionalJobs;

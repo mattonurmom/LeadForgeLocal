@@ -300,6 +300,218 @@ Here is our top sales recommendations to close this client:
   }
 });
 
+// Helper: Heuristic local audit generator
+function generateHeuristicAudit(businessName: string, category: string, website: string, gbpLink: string) {
+  const cat = (category || "").toLowerCase();
+  const nameLow = (businessName || "").toLowerCase();
+  
+  let grade = "Needs Attention";
+  let summary = `A review of ${businessName}'s digital visibility highlights a few quick-win opportunities to capture more local customers. In the competitive ${category || "local services"} landscape, simple structural optimizations can dramatically increase calls.`;
+  
+  let recommendations = [];
+  
+  if (cat.includes("plumb") || cat.includes("leak") || cat.includes("pipe") || nameLow.includes("plumb")) {
+    grade = "Critical Gaps";
+    summary = `Preliminary visibility audit for ${businessName} (Plumbing Services). We detected significant gaps in local search placement, high-intent service keywords, and instant response channels that are costing you active plumbing calls.`;
+    recommendations = [
+      {
+        title: "Service Area Optimization & Sub-Pages",
+        desc: "Build dedicated landing sub-pages for each local neighborhood you service (e.g., 'Emergency Plumber in [Suburban Neighborhood]'). Google's search algorithms prioritize hyper-local relevance. This matches searchers' exact physical queries."
+      },
+      {
+        title: "High-Intent Emergency Keywords Calibration",
+        desc: "Incorporate urgent-buy action words like 'burst pipe repair', 'clogged drain hot line', and 'water heater replacement' directly into your title tags and main headings. This will help you rank when homeowners have active water leaks and need an immediate helper."
+      },
+      {
+        title: "Reputation Velocity & SMS Reviews Link",
+        desc: "Unlocking Google Maps requires persistent review generation. Implement an automated Review campaign to instantly check-in with completed accounts via SMS, providing a single-click direct link to your GBP reviews window."
+      }
+    ];
+  } else if (cat.includes("dent") || cat.includes("teeth") || cat.includes("ortho") || cat.includes("dental") || nameLow.includes("dent")) {
+    grade = "Needs Attention";
+    summary = `Preliminary visibility audit for ${businessName} (Dental Services). Your branding looks trustworthy, but optimization gaps in insurance keywords, local maps citations, and client conversion cues limit your monthly patient intake.`;
+    recommendations = [
+      {
+        title: "Insurance Pages & Copay Transparency",
+        desc: "Nearly 70% of dental patients search for terms like 'dentist who accepts [Insurance Provider]'. Create a dedicated insurances-accepted matrix page with schema metadata. This ranks for insurance-specific local search terms and removes patient booking friction."
+      },
+      {
+        title: "Google Maps Citation Alignment & Patient Review Signals",
+        desc: "Audit and align your Name, Address, and Phone (NAP) citations across health portals like WebMD, Healthgrades, and Yelp, matching your Google Business Profile exactly. Ask patients for review keywords like 'pain-free cleaning' or 'great orthodontist' to tell Google what search terms your dental clinic is relevant for."
+      },
+      {
+        title: "Virtual Appointment Setup & Direct Video Intakes",
+        desc: "Add a prominent mobile action drawer for 'Book Live Consultation' or 'Verify Insurance Online'. By reducing friction to a single clear mobile touchpoint, you convert casual searchers into scheduled dental cleaning appointments."
+      }
+    ];
+  } else if (cat.includes("law") || cat.includes("attorney") || cat.includes("legal") || cat.includes("court") || nameLow.includes("attorney") || nameLow.includes("law")) {
+    grade = "Critical Gaps";
+    summary = `Preliminary visibility audit for ${businessName} (Legal Practice). In the high-competition legal market, displaying prominent trust coordinates, specialized practice pages, and credentials is essential to secure retainers.`;
+    recommendations = [
+      {
+        title: "Practice & Sub-Practice Area Specific Silos",
+        desc: "Instead of a generic services list, create distinct, authoritative content pages for each specific case type (e.g., 'Dedicated Family Divorce Law', 'Commercial Trucking Accidents'). Detailed context establishes local relevance and ranks for direct client needs."
+      },
+      {
+        title: "EEAT Authority Signals & Scholar Profile Links",
+        desc: "Google ranks legal advice under strict 'Your Money Your Life' (YMYL) updates. Build out authoritative author profile bios demonstrating your state bar memberships, certifications, and litigation history to establish high Experience, Expertise, Authoritativeness, and Trustworthiness (EEAT)."
+      },
+      {
+        title: "Attorney Schema Markup (JSON Structured Data)",
+        desc: "Inject specialized 'Attorney' or 'LegalService' structured data into your website code. Schema directly feeds search engines your jurisdiction, practice regions, lawyer profile credentials, and office hours, boosting your rich snippet map rankings."
+      }
+    ];
+  } else {
+    // Default / General
+    grade = "Needs Attention";
+    summary = `Preliminary visibility check for ${businessName}. While you have established a solid baseline, simple improvements in mobile performance, direct contact points, and local Google maps rank will keep your inbound phone pipeline active.`;
+    recommendations = [
+      {
+        title: "Mobile Speed & Layout Streamlining",
+        desc: "Your mobile page performance shows minor lags. Compressing large image files, removing slow code scripts, and placing a massive tap-to-call dialer button at the top of the mobile header ensures searchers can contact you instantly."
+      },
+      {
+        title: "Integrated Lead Capture & Automated Response Loop",
+        desc: "Capturing leads on your web page shouldn't rely on slow email. Implement a lightweight instant contact form. When a prospect submits their request, trigger an instantaneous custom congratulations SMS message or automated phone route to show immediate response."
+      },
+      {
+        title: "Maps Listing Category Verification & Local Reviews Boost",
+        desc: "Validate that your primary GBP category matches your highest-intent trade precisely, and add relevant secondary service tags. Pair this with a dedicated review generation campaign to quickly expand your local Google profile prominence."
+      }
+    ];
+  }
+
+  return {
+    grade,
+    summary,
+    recommendations,
+    isAiPowered: false
+  };
+}
+
+// API: Generate Live Business Audit with Heuristic Safe Recovery
+app.post("/api/generate-audit", async (req, res) => {
+  const { name, businessName, email, phone, website = "", gbpLink = "", category = "" } = req.body;
+  
+  console.log(`[LeadForge Server] Received Audit Generation Request for: "${businessName}" (${category})`);
+
+  // Validate basic parameters
+  if (!name || !businessName || !email || !phone) {
+    return res.status(400).json({ 
+      status: "error", 
+      message: "Please complete all required fields: Name, Business Name, Email, and Phone Number." 
+    });
+  }
+
+  try {
+    const apiKey = process.env.GEMINI_API_KEY;
+
+    // Check if we should use Live Gemini API or Fallback Heuristics
+    if (!apiKey) {
+      console.log("[LeadForge Server] No GEMINI_API_KEY detected. Utilizing local adaptive heuristic audit engine.");
+      const heuristicResult = generateHeuristicAudit(businessName, category, website, gbpLink);
+      return res.json({
+        success: true,
+        ...heuristicResult,
+        isAiPowered: false
+      });
+    }
+
+    console.log("[LeadForge Server] GEMINI_API_KEY found. Orchestrating dynamic Gemini-powered visibility check.");
+    const ai = new GoogleGenAI({
+      apiKey: apiKey,
+      httpOptions: {
+        headers: {
+          'User-Agent': 'aistudio-build',
+        }
+      }
+    });
+
+    const promptText = `
+    You are a professional local marketing auditor for LeadForge Local, an elite agency helping local firms dominate search ranks.
+    Perform an industry-specific, highly custom, actionable, and professional 3-point digital visibility audit for:
+    - Business Owner: "${name}"
+    - Business Name: "${businessName}"
+    - Primary Category/Industry: "${category || "Local Service"}"
+    - Website: "${website || "None listed"}"
+    - Google Business Profile: "${gbpLink || "None provided"}"
+
+    Your analysis should focus specifically on their industry ("${category || "Local Service"}"). You MUST offer actionable, high-value, and specialized improvements corresponding to their trade:
+    - If it is a PLUMBER (or plumbing related), focus on: Service area sub-pages optimization, urgent emergency keyword optimization ('burst pipe repair', 'clogged drain hot line'), and reputation velocity/review generation.
+    - If it is a DENTIST (or dental related), focus on: Insurance carrier page listings, Google Maps citation NAP (Name, Address, Phone) consistency, and patient review signals.
+    - If it is a LAWYER (or attorney/legal related), focus on: Sub-practice area silo pages (e.g. child custody subpages under divorce), local EEAT (Experience, Expertise, Authoritativeness, Trustworthiness) profiles, and Attorney or LegalService structured JSON-LD schema markup.
+    - If it is any other industry (such as roofer, restaurant, HVAC, salon, etc.), tailor your 3 recommendations specifically to their operational bottlenecks with identical strategic depth.
+
+    You MUST output a valid JSON object matching this exact structure:
+    {
+      "grade": "Needs Attention" | "Critical Gaps",
+      "summary": "A concise, high-level professional assessment (2-3 sentences) of their current digital standing and local search positioning based on their business constraints...",
+      "recommendations": [
+        {
+          "title": "Clear Actionable Recommendation Title",
+          "desc": "A paragraph explaining the specific problem, why it matters for client conversion in their specific trade, and what a professional team would do to correct it."
+        },
+        ... (exactly 3 objects in the recommendations array)
+      ]
+    }
+    IMPORTANT: Output ONLY a valid JSON string. Do not wrap it in markdown block fences like \`\`\`json or add other preambles. Output only the pure raw parseable JSON string.
+    `;
+
+    const response = await ai.models.generateContent({
+      model: "gemini-3.5-flash",
+      contents: promptText,
+    });
+
+    const responseText = response.text || "";
+    let cleanJsonStr = responseText.trim();
+    
+    // Safety check: strip markdown block fences if the model wraps them anyway
+    if (cleanJsonStr.startsWith("```json")) {
+      cleanJsonStr = cleanJsonStr.substring(7);
+    } else if (cleanJsonStr.startsWith("```")) {
+      cleanJsonStr = cleanJsonStr.substring(3);
+    }
+    if (cleanJsonStr.endsWith("```")) {
+      cleanJsonStr = cleanJsonStr.substring(0, cleanJsonStr.length - 3);
+    }
+    cleanJsonStr = cleanJsonStr.trim();
+
+    try {
+      const parsedAudit = JSON.parse(cleanJsonStr);
+      if (parsedAudit && parsedAudit.grade && Array.isArray(parsedAudit.recommendations)) {
+        console.log(`[LeadForge Server] Successfully generated and parsed dynamic Gemini audit for: "${businessName}"`);
+        return res.json({
+          success: true,
+          ...parsedAudit,
+          isAiPowered: true
+        });
+      } else {
+        throw new Error("Parsed JSON did not match expected database schema.");
+      }
+    } catch (parseErr: any) {
+      console.warn("[LeadForge Server] Malformed/invalid JSON returned from Gemini API. Falling back to local heuristic matrix:", parseErr);
+      const heuristicResult = generateHeuristicAudit(businessName, category, website, gbpLink);
+      return res.json({
+        success: true,
+        ...heuristicResult,
+        isAiPowered: false,
+        warning: "Gemini JSON parsing issue"
+      });
+    }
+
+  } catch (apiError: any) {
+    console.error("[LeadForge Server] Gemini API error/timeout during audit orchestration:", apiError);
+    // Silent recovery: serve heuristic recommendations so form always submits successfully!
+    const heuristicResult = generateHeuristicAudit(businessName, category, website, gbpLink);
+    return res.json({
+      success: true,
+      ...heuristicResult,
+      isAiPowered: false,
+      errorLog: apiError.message || apiError
+    });
+  }
+});
+
 // API: AI Tailored Outreach Script Generator (Call scripts & email drafts)
 app.post("/api/ai-lead-outreach", async (req, res) => {
   const { lead } = req.body;

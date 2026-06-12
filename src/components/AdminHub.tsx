@@ -100,6 +100,8 @@ export default function AdminHub({ auditLeads, contactLeads, onClearLeads }: Adm
     localStorage.removeItem("leadforge_admin_unlocked");
     setPasscode("");
     setPasscodeError("");
+    window.history.pushState(null, "", "/");
+    window.dispatchEvent(new Event("popstate"));
   };
 
   const handleFetchAiPlaybook = async () => {

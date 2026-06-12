@@ -169,25 +169,33 @@ export default function AboutView({ setTab }: AboutViewProps) {
           <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
             <span className="text-xs font-bold text-sky-400 uppercase tracking-widest block">Direct Accountability</span>
             <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-              Meet Our Founders & Leadership
+              Meet Our Founders
             </h2>
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              We don't hide behind automated email response portals or outsourced customer centers. You get direct access to our agency principals whenever you need coordination.
+              We don't hide behind automated email response portals or outsourced customer centers. You get direct access to our founders, Matthew and Heather, focused on helping local businesses generate more leads, calls, and customers.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             
-            {/* Heather Eisan Card */}
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 relative overflow-hidden group">
-              <div className="absolute top-0 right-0 h-1.5 bg-blue-605 w-full" />
-              <div className="space-y-4">
+            {/* Heather Tucker Card */}
+            <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 relative overflow-hidden group flex flex-col sm:flex-row gap-6 items-start">
+              <div className="absolute top-0 left-0 h-1 bg-blue-600 w-full" />
+              <div className="h-20 w-20 rounded-2xl bg-slate-800 border border-slate-700 overflow-hidden flex items-center justify-center shrink-0">
+                <img 
+                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200&h=200" 
+                  alt="Heather Tucker" 
+                  referrerPolicy="no-referrer" 
+                  className="h-full w-full object-cover" 
+                />
+              </div>
+              <div className="space-y-4 flex-grow">
                 <div>
-                  <h3 className="font-display font-extrabold text-white text-lg">Heather Eisan</h3>
-                  <span className="text-xs text-sky-400 font-bold block uppercase tracking-wider mt-0.5">Co-Founder & Client Success Director</span>
+                  <h3 className="font-display font-extrabold text-white text-lg">Heather Tucker</h3>
+                  <span className="text-xs text-sky-400 font-bold block uppercase tracking-wider mt-0.5">Co-Founder</span>
                 </div>
-                <p className="text-xs text-slate-300 leading-relaxed font-sans font-normal text-slate-300">
-                  Heather manages our local onboarding schedules, citation reviews loops, and client partnership retention. She ensures your brand receives elite representation and persistent localized placement.
+                <p className="text-xs text-slate-350 leading-relaxed font-sans font-normal">
+                  Heather leads our lead management optimization, local review expansion, and customer success flows. She is focused entirely on helping small businesses turn online searches into paying customers and ensuring that every partner receives personalized support they can rely on.
                 </p>
                 <div className="pt-3 border-t border-slate-800 space-y-2 text-xs font-medium">
                   <a href="tel:4697517153" className="flex items-center gap-2.5 text-slate-300 hover:text-sky-400 transition-colors">
@@ -202,23 +210,31 @@ export default function AboutView({ setTab }: AboutViewProps) {
               </div>
             </div>
 
-            {/* Matthew Eisan Card */}
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 relative overflow-hidden group">
-              <div className="absolute top-0 right-0 h-1.5 bg-blue-605 w-full" />
-              <div className="space-y-4">
+            {/* Matthew Tucker Card */}
+            <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 relative overflow-hidden group flex flex-col sm:flex-row gap-6 items-start">
+              <div className="absolute top-0 left-0 h-1 bg-blue-600 w-full" />
+              <div className="h-20 w-20 rounded-2xl bg-slate-800 border border-slate-700 overflow-hidden flex items-center justify-center shrink-0">
+                <img 
+                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=200&h=200" 
+                  alt="Matthew Tucker" 
+                  referrerPolicy="no-referrer" 
+                  className="h-full w-full object-cover" 
+                />
+              </div>
+              <div className="space-y-4 flex-grow">
                 <div>
-                  <h3 className="font-display font-extrabold text-white text-lg">Matthew Eisan</h3>
-                  <span className="text-xs text-sky-400 font-bold block uppercase tracking-wider mt-0.5">Co-Founder & Technical Operations Director</span>
+                  <h3 className="font-display font-extrabold text-white text-lg">Matthew Tucker</h3>
+                  <span className="text-xs text-sky-400 font-bold block uppercase tracking-wider mt-0.5">Co-Founder</span>
                 </div>
-                <p className="text-xs text-slate-300 leading-relaxed font-sans font-normal text-slate-305">
-                  Matthew leads our custom container infrastructure, digital optimization systems, Google API synchronizations, and automated call SMS responders. He keeps your inbound funnel secure and loading at 99.9% speeds.
+                <p className="text-xs text-slate-355 leading-relaxed font-sans font-normal">
+                  Matthew leads our custom local search systems, Google Profile integrations, and automated call SMS responders. He engineered our Missed Call Text Back engine to capture lost revenue pipelines, ensuring small business owners never miss a high-paying customer call.
                 </p>
                 <div className="pt-3 border-t border-slate-800 space-y-2 text-xs font-medium">
-                  <a href="tel:4693402871" className="flex items-center gap-2.5 text-slate-305 hover:text-sky-400 transition-colors">
+                  <a href="tel:4693402871" className="flex items-center gap-2.5 text-slate-300 hover:text-sky-400 transition-colors">
                     <Phone className="h-4 w-4 text-sky-400" />
                     <span>(469) 340-2871</span>
                   </a>
-                  <a href="mailto:support@leadforgelocal.com" className="flex items-center gap-2.5 text-slate-305 hover:text-sky-400 transition-colors">
+                  <a href="mailto:support@leadforgelocal.com" className="flex items-center gap-2.5 text-slate-300 hover:text-sky-400 transition-colors">
                     <Mail className="h-4 w-4 text-sky-400" />
                     <span>support@leadforgelocal.com</span>
                   </a>
@@ -231,10 +247,10 @@ export default function AboutView({ setTab }: AboutViewProps) {
           <div className="mt-12 bg-slate-901 rounded-2xl p-6 border border-slate-800 text-center max-w-2xl mx-auto bg-slate-900/50">
             <span className="text-[10px] text-sky-450 font-bold uppercase tracking-widest block mb-1">Our Location & Availability</span>
             <p className="text-xs font-semibold text-white">
-              Executive Office: Dallas, Texas
+              Location: Dallas, Texas
             </p>
             <p className="text-[11px] text-slate-300 mt-1 leading-relaxed">
-              We support contractors nationwide, with centralized strategic hubs operating out of Texas and Colorado. Schedule a direct callback session with Matthew or Heather today.
+              We support local business owners nationwide, with centralized strategic hubs operating out of Texas. Schedule a direct callback session with Matthew or Heather today.
             </p>
           </div>
 

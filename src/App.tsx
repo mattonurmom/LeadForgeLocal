@@ -12,10 +12,171 @@ import Footer from "./components/Footer";
 import TermsView from "./components/TermsView";
 import PrivacyView from "./components/PrivacyView";
 import { AuditLead, ContactLead } from "./types";
+import { initGA4 } from "./utils/analytics";
 
 export default function App() {
   const [currentTab, setTab] = useState<string>("home");
-  const [showAdminHub, setShowAdminHub] = useState<boolean>(false);
+  const [showAdminHub, setShowAdminHubState] = useState<boolean>(false);
+
+  useEffect(() => {
+    // 1. Initialize GA4 tracking safely
+    initGA4("G-MOCKTRACK8");
+
+    // 2. Overwrite hardcoded canonical tags dynamically based on the exact mounted domain
+    const origin = window.location.origin;
+    const path = window.location.pathname;
+    const currentUrl = origin + path;
+
+    let canonicalLinkNode = document.querySelector("link[rel='canonical']");
+    if (canonicalLinkNode) {
+      canonicalLinkNode.setAttribute("href", currentUrl);
+    } else {
+      canonicalLinkNode = document.createElement("link");
+      canonicalLinkNode.setAttribute("rel", "canonical");
+      canonicalLinkNode.setAttribute("href", currentUrl);
+      document.head.appendChild(canonicalLinkNode);
+    }
+
+    // 3. Update Open Graph and Twitter metadata dynamically (Task 9)
+    const socialMeta = {
+      "og:title": "AI-Powered Local Marketing That Generates Leads",
+      "og:description": "Websites, SEO, AI Chatbots, and Lead Generation for Local Businesses.",
+      "og:url": currentUrl,
+      "og:type": "website",
+      "og:image": origin + "/src/assets/images/frustrated_laptop_1780974909506.png",
+      "twitter:card": "summary_large_image",
+      "twitter:title": "AI-Powered Local Marketing That Generates Leads",
+      "twitter:description": "Websites, SEO, AI Chatbots, and Lead Generation for Local Businesses.",
+      "twitter:image": origin + "/src/assets/images/frustrated_laptop_1780974909506.png"
+    };
+
+    Object.entries(socialMeta).forEach(([property, value]) => {
+      const isOg = property.startsWith("og:");
+      const attrName = isOg ? "property" : "name";
+      let metaNode = document.querySelector(`meta[${attrName}='${property}']`);
+      if (metaNode) {
+        metaNode.setAttribute("content", value);
+      } else {
+        metaNode = document.createElement("meta");
+        metaNode.setAttribute(attrName, property);
+        metaNode.setAttribute("content", value);
+        document.head.appendChild(metaNode);
+      }
+    });
+
+    // 4. Inject validated rich Google-compliant JSON-LD schemas (Task 10)
+    const jsonLdSchemas = [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "LeadForge Local",
+        "url": origin,
+        "logo": origin + "/logo.png",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+1-469-751-7153",
+          "contactType": "customer care",
+          "areaServed": "US",
+          "availableLanguage": "en"
+        },
+        "founder": [
+          {
+            "@type": "Person",
+            "name": "Heather Tucker"
+          },
+          {
+            "@type": "Person",
+            "name": "Matthew Tucker"
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "LeadForge Local",
+        "image": origin + "/src/assets/images/tradesman_worker_1780974939055.png",
+        "telephone": "+1-469-751-7153",
+        "email": "support@leadforgelocal.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Dallas",
+          "addressRegion": "TX",
+          "addressCountry": "US"
+        },
+        "priceRange": "$$",
+        "areaServed": "US"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is Automated Missed Call Text-back?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "When you miss an incoming ringer call, our automated service instantly texts the customer back, booking their trade appointment and converting them before they try competitor companies."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can you optimize my Google Business Profile?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, we target localized keywords, citations, categories, and review generation flow vectors to improve your visibility inside the local Google Maps 3-Pack."
+            }
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "Conversion-Focused Local SEO Services",
+        "provider": {
+          "@type": "Organization",
+          "name": "LeadForge Local"
+        },
+        "serviceType": "Digital Visibility Support, Maps SEO, Review Automation, and Web Design for Trade Contractors"
+      }
+    ];
+
+    // Remove any stale schemas before injects
+    document.querySelectorAll(".leadforge-injected-schema").forEach(e => e.remove());
+
+    jsonLdSchemas.forEach(schema => {
+      const script = document.createElement("script");
+      script.type = "application/ld+json";
+      script.className = "leadforge-injected-schema";
+      script.text = JSON.stringify(schema);
+      document.head.appendChild(script);
+    });
+
+  }, []);
+
+  useEffect(() => {
+    const handleLocationChange = () => {
+      const path = window.location.pathname;
+      if (path === "/admin") {
+        setShowAdminHubState(true);
+      } else {
+        setShowAdminHubState(false);
+      }
+    };
+
+    handleLocationChange();
+    window.addEventListener("popstate", handleLocationChange);
+    return () => window.removeEventListener("popstate", handleLocationChange);
+  }, []);
+
+  const handleSetShowAdminHub = (show: boolean) => {
+    if (show) {
+      window.history.pushState(null, "", "/admin");
+      setShowAdminHubState(true);
+    } else {
+      window.history.pushState(null, "", "/");
+      setShowAdminHubState(false);
+    }
+  };
 
   // Load and save audit leads with local storage
   const [auditLeads, setAuditLeads] = useState<AuditLead[]>(() => {
@@ -169,7 +330,7 @@ export default function App() {
 
     switch (currentTab) {
       case "home":
-        return <HomeView setTab={setTab} setShowAdminHub={setShowAdminHub} />;
+        return <HomeView setTab={setTab} setShowAdminHub={handleSetShowAdminHub} />;
       case "about":
         return <AboutView setTab={setTab} />;
       case "services":
@@ -187,7 +348,7 @@ export default function App() {
       case "privacy":
         return <PrivacyView setTab={setTab} />;
       default:
-        return <HomeView setTab={setTab} setShowAdminHub={setShowAdminHub} />;
+        return <HomeView setTab={setTab} setShowAdminHub={handleSetShowAdminHub} />;
     }
   };
 
@@ -199,7 +360,7 @@ export default function App() {
         currentTab={currentTab} 
         setTab={setTab} 
         showAdminHub={showAdminHub} 
-        setShowAdminHub={setShowAdminHub} 
+        setShowAdminHub={handleSetShowAdminHub} 
       />
 
       {/* Main active view container block */}
@@ -210,7 +371,7 @@ export default function App() {
       {/* Corporate Footers */}
       <Footer 
         setTab={setTab} 
-        setShowAdminHub={setShowAdminHub} 
+        setShowAdminHub={handleSetShowAdminHub} 
       />
 
     </div>

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { Ship, Menu, X, ArrowRight, ShieldCheck, Lock, Activity } from "lucide-react";
+import { Ship, Menu, X, ArrowRight, ShieldCheck, Lock, Activity, Phone } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
+import { trackPhoneClick, trackCtaClick } from "../utils/analytics";
 
 interface NavbarProps {
   currentTab: string;
@@ -21,17 +23,16 @@ export default function Navbar({ currentTab, setTab, showAdminHub, setShowAdminH
     { id: "contact", label: "Contact" },
   ];
 
-  const handleNav = (tabId: string) => {
+  const handleNav = (tabId: string, label: string) => {
+    trackCtaClick(`nav_${tabId}`, label);
     setTab(tabId);
     setShowAdminHub(false);
     setMobileOpen(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const toggleAdmin = () => {
-    setShowAdminHub(!showAdminHub);
-    setMobileOpen(false);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  const handlePhoneDial = (location: string) => {
+    trackPhoneClick("(469) 751-7153", location);
   };
 
   return (
@@ -40,7 +41,7 @@ export default function Navbar({ currentTab, setTab, showAdminHub, setShowAdminH
         
         {/* Logo and Brand */}
         <button 
-          onClick={() => handleNav("home")}
+          onClick={() => handleNav("home", "Home Logo")}
           className="flex items-center gap-3 group text-left cursor-pointer"
           id="nav-logo"
         >
@@ -62,8 +63,8 @@ export default function Navbar({ currentTab, setTab, showAdminHub, setShowAdminH
             <button
               key={item.id}
               id={`nav-${item.id}`}
-              onClick={() => handleNav(item.id)}
-              className={`text-sm font-medium transition-colors hover:text-sky-450 relative py-1 cursor-pointer ${
+              onClick={() => handleNav(item.id, item.label)}
+              className={`text-sm font-medium transition-all hover:text-sky-400 relative py-1 cursor-pointer ${
                 currentTab === item.id && !showAdminHub
                   ? "text-sky-400 font-semibold"
                   : "text-slate-300"
@@ -77,24 +78,19 @@ export default function Navbar({ currentTab, setTab, showAdminHub, setShowAdminH
           ))}
         </nav>
 
-        {/* Action Buttons */}
-        <div className="hidden lg:flex items-center gap-4">
-          <button
-            onClick={toggleAdmin}
-            id="nav-admin-toggle"
-            className={`flex items-center justify-center rounded-xl p-2.5 transition-all cursor-pointer ${
-              showAdminHub 
-                ? "bg-slate-900 text-white hover:bg-slate-800 border border-slate-800" 
-                : "text-slate-300 bg-slate-900 border border-slate-800/80 hover:bg-slate-850"
-            }`}
-            title={showAdminHub ? "Return to Website" : "Admin Console Access"}
-            aria-label="Admin Console"
+        {/* Action Buttons & Desktop Click-To-Call */}
+        <div className="hidden lg:flex items-center gap-6">
+          <a
+            href="tel:4697517153"
+            onClick={() => handlePhoneDial("desktop_header")}
+            className="flex items-center gap-2 text-xs font-semibold text-slate-300 hover:text-sky-400 transition-colors py-2"
           >
-            <Lock className="h-4 w-4" />
-          </button>
-          
+            <Phone className="h-4 w-4 text-sky-400 animate-pulse" />
+            <span className="font-mono">Heather: (469) 751-7153</span>
+          </a>
+
           <button
-            onClick={() => handleNav("audit")}
+            onClick={() => handleNav("audit", "Get My Free Business Audit CTA")}
             id="nav-cta"
             className="flex items-center gap-1.5 rounded-xl bg-blue-600 px-4.5 py-2.5 text-xs font-bold text-white shadow-lg shadow-blue-500/25 hover:bg-blue-700 hover:shadow-blue-600/30 active:scale-95 transition-all cursor-pointer"
           >
@@ -103,23 +99,22 @@ export default function Navbar({ currentTab, setTab, showAdminHub, setShowAdminH
           </button>
         </div>
 
-        {/* Mobile menu trigger */}
-        <div className="flex lg:hidden items-center gap-2">
-          <button
-            onClick={toggleAdmin}
-            id="nav-admin-toggle-mobile"
-            className={`flex items-center justify-center p-2.5 rounded-xl border border-slate-800 transition-colors ${
-              showAdminHub ? "bg-slate-900 text-white" : "bg-slate-900 text-slate-300"
-            }`}
-            title="Admin Desk"
+        {/* Mobile menu trigger & Mobile Click-To-Call */}
+        <div className="flex lg:hidden items-center gap-3">
+          <a
+            href="tel:4697517153"
+            onClick={() => handlePhoneDial("mobile_header_icon")}
+            className="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-800 text-sky-400 bg-slate-900/50 hover:bg-slate-900 hover:text-sky-305 transition-colors active:scale-95 touch-manipulation"
+            title="Call Support Team"
           >
-            <Lock className="h-4 w-4" />
-          </button>
-          
+            <Phone className="h-5 w-5" />
+          </a>
+
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="rounded-xl border border-slate-800 p-2.5 text-slate-300 hover:bg-slate-900 cursor-pointer"
+            className="rounded-xl border border-slate-800 p-2.5 text-slate-300 hover:bg-slate-900 cursor-pointer active:scale-95 touch-manipulation"
             id="mobile-menu-btn"
+            aria-label="Toggle Navigation Menu"
           >
             {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
@@ -127,38 +122,57 @@ export default function Navbar({ currentTab, setTab, showAdminHub, setShowAdminH
 
       </div>
 
-      {/* Mobile Menu Panel */}
-      {mobileOpen && (
-        <div className="lg:hidden border-t border-slate-900 bg-slate-950 px-4 py-6 shadow-xl transition-all">
-          <div className="flex flex-col gap-4">
-            {menuItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => handleNav(item.id)}
-                className={`flex items-center py-2.5 text-base font-semibold border-b border-slate-900 text-left ${
-                  currentTab === item.id && !showAdminHub ? "text-sky-400 pl-2 border-l-2 border-sky-400" : "text-slate-200"
-                }`}
-              >
-                {item.label}
-              </button>
-            ))}
-            
-            <div className="pt-4 flex flex-col gap-3">
-              <button
-                onClick={() => handleNav("audit")}
-                className="flex items-center justify-center gap-2 w-full rounded-xl bg-blue-600 text-white font-bold py-3.5 text-sm shadow-lg shadow-blue-500/25"
-              >
-                <span>Get My Free Business Audit</span>
-                <ArrowRight className="h-4 w-4" />
-              </button>
+      {/* Mobile Menu Panel with Framer Motion wrapper */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
+            className="lg:hidden overflow-hidden border-t border-slate-900 bg-slate-950 px-4 py-6 shadow-xl"
+            id="mobile-navigation-dropdown"
+          >
+            <div className="flex flex-col gap-4">
+              {menuItems.map((item) => (
+                <button
+                  key={item.id}
+                  id={`mobile-nav-link-${item.id}`}
+                  onClick={() => handleNav(item.id, `mobile_${item.label}`)}
+                  className={`flex items-center py-3.5 text-base font-semibold border-b border-slate-900 text-left touch-manipulation cursor-pointer ${
+                    currentTab === item.id && !showAdminHub ? "text-sky-400 pl-3 border-l-2 border-sky-400" : "text-slate-205"
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
+              
+              <div className="pt-4 flex flex-col gap-4">
+                <a
+                  href="tel:4697517153"
+                  onClick={() => handlePhoneDial("mobile_dropdown_cta")}
+                  className="flex items-center justify-center gap-2.5 w-full rounded-xl border border-slate-800 bg-slate-900/40 text-sky-400 font-bold py-3.5 text-sm active:scale-95 touch-manipulation"
+                >
+                  <Phone className="h-4.5 w-4.5" />
+                  <span>Call Direct: (469) 751-7153</span>
+                </a>
+
+                <button
+                  onClick={() => handleNav("audit", "mobile_dropdown_audit_cta")}
+                  className="flex items-center justify-center gap-2 w-full rounded-xl bg-blue-600 text-white font-bold py-3.5 text-sm shadow-lg shadow-blue-500/25 active:scale-95 touch-manipulation"
+                >
+                  <span>Get My Free Business Audit</span>
+                  <ArrowRight className="h-4 w-4" />
+                </button>
+              </div>
+              
+              <div className="pt-4 text-center border-t border-slate-900">
+                <span className="text-[11px] text-slate-400 font-medium">Local Visibility & Lead Capture</span>
+              </div>
             </div>
-            
-            <div className="pt-4 text-center border-t border-slate-900">
-              <span className="text-[11px] text-slate-400 font-medium">Local Visibility & Lead Capture</span>
-            </div>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
