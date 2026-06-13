@@ -123,8 +123,8 @@ export default function ContactView({ onAddContactLead }: ContactViewProps) {
                   </div>
                   <div>
                     <span className="block text-[10px] text-slate-500 font-bold uppercase">Location</span>
-                    <strong className="text-white block">Dallas, Texas & Regional Hubs</strong>
-                    <span className="text-[10px] text-slate-400 block mt-0.5">Matthew & Heather Tucker, Owners</span>
+                    <strong className="text-white block">North Fort Worth/Alliance Area (Serving DFW)</strong>
+                    <span className="text-[10px] text-slate-400 block mt-0.5">Matthew & Heather Eisan, Owners</span>
                   </div>
                 </div>
 

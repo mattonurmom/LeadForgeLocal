@@ -41,7 +41,7 @@ export default function AdminHub({ auditLeads, contactLeads, onClearLeads }: Adm
   
   // Custom templates editing states
   const [clientBusinessName, setClientBusinessName] = useState<string>("Alpha Contractors");
-  const [clientCity, setClientCity] = useState<string>("Dallas");
+  const [clientCity, setClientCity] = useState<string>("Fort Worth");
   const [clientServiceType, setClientServiceType] = useState<string>("Roofing");
 
   // AI Outreach Copilot states

@@ -16,101 +16,84 @@ export default function AboutView({ setTab }: AboutViewProps) {
       {/* Editorial Header */}
       <section className="bg-slate-900 py-16 sm:py-20 border-b border-slate-800" id="about-hero">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center space-y-4">
-          <span className="text-xs font-bold text-sky-400 uppercase tracking-widest block">Our Mission & Identity</span>
+          <span className="text-xs font-bold text-sky-400 uppercase tracking-widest block">Meet the Founders</span>
           <h1 className="font-display text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
-            Helping Local Businesses Forge Stronger Growth
+            Meet the Local Team Behind LeadForge Local
           </h1>
           <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl mx-auto">
-            We believe small business owners are the absolute backbone of our communities. Our mission is to secure their digital footprints so they can compete—and win—against heavily-funded corporate franchises.
+            Real Texans helping local businesses grow through modern marketing, automation, and honest hard work.
           </p>
         </div>
       </section>
 
-      {/* Core Narrative / Compelling story */}
+      {/* Core Narrative / About Us Section */}
       <section className="bg-slate-950 py-20 border-b border-slate-900" id="about-narrative">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
-            {/* Story text */}
+            {/* Left side: Couple Photo */}
+            <div className="lg:col-span-5 relative">
+              <div className="absolute top-0 right-0 h-32 w-32 bg-sky-505/10 blur-2xl pointer-events-none rounded-full" />
+              <div className="relative rounded-3xl border border-slate-800 overflow-hidden shadow-2xl group max-w-md mx-auto">
+                <img 
+                  src="/src/assets/images/founders_couple_1781310137852.jpg" 
+                  alt="Matthew and Heather Eisan" 
+                  referrerPolicy="no-referrer"
+                  className="w-full h-auto object-cover max-h-[500px] transition-transform duration-500 group-hover:scale-101"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80" />
+                <div className="absolute bottom-6 left-6 right-6">
+                  <span className="text-[10px] text-sky-450 font-bold uppercase tracking-widest block mb-1">Matthew & Heather Eisan</span>
+                  <span className="text-xs font-semibold text-white">Founders of LeadForge Local</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right side: Story text */}
             <div className="lg:col-span-7 space-y-6">
               <div className="inline-flex items-center gap-1.5 rounded-full bg-slate-900 border border-slate-800 px-3 py-1 text-[11px] font-bold text-sky-400">
                 <Building2 className="h-3.5 w-3.5 text-sky-400" />
-                Local Business Growth Service
+                Family-Owned & Local Operations
               </div>
 
               <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-white leading-tight">
-                Our Story: Why We Built LeadForge Local
+                Honest, Results-Driven Marketing for Local Trades
               </h2>
               
-              <div className="text-xs sm:text-sm text-slate-300 space-y-4 leading-relaxed">
+              <div className="text-xs sm:text-sm text-slate-300 space-y-5 leading-relaxed font-sans">
                 <p>
-                  Most digital marketing agencies talk in circle metrics. They charge $2,000+ per month retainers for abstract search keyword clusters, decorative social impressions, or 'click rates' that nobody can put in the bank. 
+                  LeadForge Local was founded by <strong>Matthew and Heather Eisan</strong>, lifelong Texans who understand the values of hard work, community, and taking care of local businesses.
                 </p>
                 <p>
-                  We saw honest, hardworking local business owners—plumbers, concrete builders, roofers, landscapers—getting overcharged by lazy agencies or lost in complex algorithms. Many were leaking dozens of high-paying calls simply because their Google maps pin was unoptimized or they missed client inquiries on active job sites.
+                  Born and raised in Texas and proudly serving the North Fort Worth and Alliance area, Matthew and Heather built LeadForge Local with one mission: help small businesses compete with larger companies by giving them access to affordable, powerful marketing tools.
                 </p>
                 <p>
-                  That's why we founded <strong>LeadForge Local</strong>. By combining advanced digital tools and automation setups with localized, hyper-targeted marketing copy, we designed a client-acquisition and visibility system that operates at a tiny segment of traditional agency overheads.
+                  Matthew brings years of contractor and oilfield experience along with a background in marketing, giving him firsthand knowledge of both the business side and the hard work that keeps local companies running. He understands the challenges business owners face because he has lived them.
                 </p>
                 <p>
-                  We don't build long, confusing tech contracts. We build simple, incredibly high-speed digital tools, optimize your maps pack directory properly, and install immediate call text-back systems that preserve incoming cash flow from day one.
+                  Heather is known for her strong work ethic, attention to detail, and dedication to helping others succeed. Her perseverance and commitment are reflected in every client relationship and project.
+                </p>
+                <p>
+                  After facing and overcoming breast cancer, Heather developed an even deeper appreciation for family, community, and supporting local businesses. That experience strengthened the values that drive LeadForge Local today: integrity, resilience, and service.
+                </p>
+                <p className="border-l-2 border-sky-500 pl-4 italic text-slate-400">
+                  "Together, Matthew and Heather believe local businesses deserve enterprise-level tools without enterprise-level prices."
                 </p>
               </div>
 
-              <div className="pt-4 flex gap-4">
+              <div className="pt-4 flex flex-col sm:flex-row gap-4">
                 <button
                   onClick={() => { setTab("audit"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-                  className="rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-3.5 px-6 shadow-md transition-all cursor-pointer"
+                  className="rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-3.5 px-6 shadow-md transition-all cursor-pointer text-center"
                 >
                   Get My Free Business Audit
                 </button>
                 <button
                   onClick={() => { setTab("contact"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-                  className="rounded-xl border border-slate-800 hover:bg-slate-900 text-slate-300 font-semibold text-xs py-3.5 px-5 transition-all cursor-pointer"
+                  className="rounded-xl border border-slate-800 hover:bg-slate-900 text-slate-300 font-semibold text-xs py-3.5 px-5 transition-all cursor-pointer text-center"
                 >
                   Book a Free Call
                 </button>
-              </div>
-            </div>
-
-            {/* Large visually polished side card representing standard details */}
-            <div className="lg:col-span-5 bg-slate-900 text-white rounded-2xl p-8 border border-slate-800 relative">
-              <div className="absolute top-0 right-0 h-24 w-24 bg-blue-600/10 blur-2xl pointer-events-none rounded-full" />
-              
-              <div className="space-y-6 relative z-10">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600 text-white shadow-lg">
-                  <Target className="h-6 w-6 text-white" />
-                </div>
-
-                <div className="space-y-2">
-                  <span className="text-[10px] text-sky-400 font-bold uppercase tracking-wider block">Professional Operations</span>
-                  <h3 className="font-display font-extrabold text-white text-lg">Optimized Technical Systems</h3>
-                  <p className="text-xs text-slate-300 leading-relaxed">
-                    LeadForge Local provides small businesses with access to premium cloud-hosting, secure communication pipelines, and certified SMS communication channels designed to support high reliability.
-                  </p>
-                </div>
-
-                <div className="space-y-3 pt-2 text-xs">
-                  <div className="flex items-start gap-2.5">
-                    <Check className="h-4.5 w-4.5 text-sky-400 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <strong className="text-white block font-semibold text-[11px]">99.9% Uptime SLA Commitment</strong>
-                      <span className="text-slate-400 block text-[10px]">Your web lead channels never go down.</span>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-2.5">
-                    <Check className="h-4.5 w-4.5 text-sky-400 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <strong className="text-white block font-semibold text-[11px]">HIPAA & Carrier Compliant SMS</strong>
-                      <span className="text-slate-400 block text-[10px]">Your missed call responses trigger safely 24/7.</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="pt-4 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-400 italic">
-                  <span>Reliable Growth Partnerships</span>
-                  <span>Est. 2026</span>
-                </div>
               </div>
             </div>
 
@@ -123,7 +106,7 @@ export default function AboutView({ setTab }: AboutViewProps) {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-            <span className="text-xs font-bold text-sky-400 uppercase tracking-widest block">The Foundation of Our Business</span>
+            <span className="text-xs font-bold text-sky-400 uppercase tracking-widest block">Our Foundation</span>
             <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
               Our Core Agency Operational Standards
             </h2>
@@ -162,45 +145,63 @@ export default function AboutView({ setTab }: AboutViewProps) {
         </div>
       </section>
 
-      {/* SECTION 3.5: MEET THE FOUNDERS */}
+      {/* SECTION 3.5: MEET THE FOUNDERS (BIO CARDS) */}
       <section className="bg-slate-950 py-20 border-b border-slate-900" id="about-founders">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
             <span className="text-xs font-bold text-sky-400 uppercase tracking-widest block">Direct Accountability</span>
             <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-              Meet Our Founders
+              Our Professional Backgrounds
             </h2>
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              We don't hide behind automated email response portals or outsourced customer centers. You get direct access to our founders, Matthew and Heather, focused on helping local businesses generate more leads, calls, and customers.
+              We don't hide behind automated templates or anonymous support tickets. You communicate directly with us—local business advocates focused on helping your company thrive.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             
-            {/* Heather Tucker Card */}
+            {/* Matthew Eisan Card */}
             <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 relative overflow-hidden group flex flex-col sm:flex-row gap-6 items-start">
               <div className="absolute top-0 left-0 h-1 bg-blue-600 w-full" />
-              <div className="h-20 w-20 rounded-2xl bg-slate-800 border border-slate-700 overflow-hidden flex items-center justify-center shrink-0">
+              <div className="h-28 w-28 rounded-2xl bg-slate-880 border border-slate-700 overflow-hidden flex-shrink-0">
                 <img 
-                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200&h=200" 
-                  alt="Heather Tucker" 
+                  src="/src/assets/images/matthew_bio_1781310266630.jpg" 
+                  alt="Matthew Eisan" 
                   referrerPolicy="no-referrer" 
                   className="h-full w-full object-cover" 
                 />
               </div>
-              <div className="space-y-4 flex-grow">
+              <div className="space-y-4 flex-grow w-full">
                 <div>
-                  <h3 className="font-display font-extrabold text-white text-lg">Heather Tucker</h3>
+                  <h3 className="font-display font-extrabold text-white text-lg">Matthew Eisan</h3>
                   <span className="text-xs text-sky-400 font-bold block uppercase tracking-wider mt-0.5">Co-Founder</span>
                 </div>
-                <p className="text-xs text-slate-350 leading-relaxed font-sans font-normal">
-                  Heather leads our lead management optimization, local review expansion, and customer success flows. She is focused entirely on helping small businesses turn online searches into paying customers and ensuring that every partner receives personalized support they can rely on.
+                
+                {/* Professional bullet credentials */}
+                <div className="space-y-1.5">
+                  {[
+                    "Texas Native",
+                    "Contractor Experience",
+                    "Oilfield Background",
+                    "Marketing Experience",
+                    "Local Business Advocate"
+                  ].map((bullet, idx) => (
+                    <div key={idx} className="flex items-center gap-2 text-xs text-slate-300">
+                      <span className="text-sky-400">•</span>
+                      <span>{bullet}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <p className="text-xs text-slate-350 leading-relaxed italic font-sans">
+                  "Matthew combines hands-on field experience with business and marketing knowledge to help local companies generate more leads and grow."
                 </p>
+
                 <div className="pt-3 border-t border-slate-800 space-y-2 text-xs font-medium">
-                  <a href="tel:4697517153" className="flex items-center gap-2.5 text-slate-300 hover:text-sky-400 transition-colors">
+                  <a href="tel:4693402871" className="flex items-center gap-2.5 text-slate-300 hover:text-sky-400 transition-colors">
                     <Phone className="h-4 w-4 text-sky-400" />
-                    <span>(469) 751-7153</span>
+                    <span>(469) 340-2871</span>
                   </a>
                   <a href="mailto:support@leadforgelocal.com" className="flex items-center gap-2.5 text-slate-300 hover:text-sky-400 transition-colors">
                     <Mail className="h-4 w-4 text-sky-400" />
@@ -210,29 +211,47 @@ export default function AboutView({ setTab }: AboutViewProps) {
               </div>
             </div>
 
-            {/* Matthew Tucker Card */}
+            {/* Heather Eisan Card */}
             <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 relative overflow-hidden group flex flex-col sm:flex-row gap-6 items-start">
               <div className="absolute top-0 left-0 h-1 bg-blue-600 w-full" />
-              <div className="h-20 w-20 rounded-2xl bg-slate-800 border border-slate-700 overflow-hidden flex items-center justify-center shrink-0">
+              <div className="h-28 w-28 rounded-2xl bg-slate-880 border border-slate-700 overflow-hidden flex-shrink-0">
                 <img 
-                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=200&h=200" 
-                  alt="Matthew Tucker" 
+                  src="/src/assets/images/heather_bio_1781310152485.jpg" 
+                  alt="Heather Eisan" 
                   referrerPolicy="no-referrer" 
                   className="h-full w-full object-cover" 
                 />
               </div>
-              <div className="space-y-4 flex-grow">
+              <div className="space-y-4 flex-grow w-full">
                 <div>
-                  <h3 className="font-display font-extrabold text-white text-lg">Matthew Tucker</h3>
+                  <h3 className="font-display font-extrabold text-white text-lg">Heather Eisan</h3>
                   <span className="text-xs text-sky-400 font-bold block uppercase tracking-wider mt-0.5">Co-Founder</span>
                 </div>
-                <p className="text-xs text-slate-355 leading-relaxed font-sans font-normal">
-                  Matthew leads our custom local search systems, Google Profile integrations, and automated call SMS responders. He engineered our Missed Call Text Back engine to capture lost revenue pipelines, ensuring small business owners never miss a high-paying customer call.
+
+                {/* Professional bullet credentials */}
+                <div className="space-y-1.5">
+                  {[
+                    "Texas Native",
+                    "Detail Oriented",
+                    "Client Success Focused",
+                    "Community Driven",
+                    "Breast Cancer Survivor"
+                  ].map((bullet, idx) => (
+                    <div key={idx} className="flex items-center gap-2 text-xs text-slate-300">
+                      <span className="text-sky-400">•</span>
+                      <span>{bullet}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <p className="text-xs text-slate-350 leading-relaxed italic font-sans">
+                  "Heather's dedication, resilience, and attention to detail help ensure every client receives exceptional support and care."
                 </p>
+
                 <div className="pt-3 border-t border-slate-800 space-y-2 text-xs font-medium">
-                  <a href="tel:4693402871" className="flex items-center gap-2.5 text-slate-300 hover:text-sky-400 transition-colors">
+                  <a href="tel:4697517153" className="flex items-center gap-2.5 text-slate-300 hover:text-sky-400 transition-colors">
                     <Phone className="h-4 w-4 text-sky-400" />
-                    <span>(469) 340-2871</span>
+                    <span>(469) 751-7153</span>
                   </a>
                   <a href="mailto:support@leadforgelocal.com" className="flex items-center gap-2.5 text-slate-300 hover:text-sky-400 transition-colors">
                     <Mail className="h-4 w-4 text-sky-400" />
@@ -247,7 +266,7 @@ export default function AboutView({ setTab }: AboutViewProps) {
           <div className="mt-12 bg-slate-901 rounded-2xl p-6 border border-slate-800 text-center max-w-2xl mx-auto bg-slate-900/50">
             <span className="text-[10px] text-sky-450 font-bold uppercase tracking-widest block mb-1">Our Location & Availability</span>
             <p className="text-xs font-semibold text-white">
-              Location: Dallas, Texas
+              Location: North Fort Worth/Alliance Area (Serving DFW)
             </p>
             <p className="text-[11px] text-slate-300 mt-1 leading-relaxed">
               We support local business owners nationwide, with centralized strategic hubs operating out of Texas. Schedule a direct callback session with Matthew or Heather today.
@@ -271,7 +290,7 @@ export default function AboutView({ setTab }: AboutViewProps) {
           </p>
           <button
             onClick={() => { setTab("audit"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-            className="inline-flex items-center gap-1.5 font-bold text-xs uppercase tracking-wider text-white bg-blue-600 hover:bg-blue-700 px-6 py-3.5 rounded-xl shadow-md cursor-pointer"
+            className="inline-flex items-center gap-1.5 font-bold text-xs uppercase tracking-wider text-white bg-blue-600 hover:bg-blue-700 px-6 py-3.5 rounded-xl shadow-md cursor-pointer text-center"
           >
             <span>Get My Free Business Audit</span>
           </button>

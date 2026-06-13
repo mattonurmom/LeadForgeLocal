@@ -93,7 +93,7 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
               </h1>
               
               <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl">
-                LeadForge Local helps small business owners improve their online presence, attract nearby customers, and turn online searches into booked jobs. 
+                LeadForge Local empowers small businesses to increase visibility, generate qualified local leads, and turn online traffic into booked jobs through affordable, results-driven digital marketing solutions that eliminate the high costs of traditional agencies.
               </p>
               
               <div className="py-2 space-y-1.5 text-slate-300 text-xs sm:text-sm font-medium">
@@ -259,19 +259,19 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
                 {[
                   {
                     title: "Not Enough Leads",
-                    desc: "Your phone lines are quiet, emails are empty, and you are relying entirely on volatile word-of-mouth recommendations."
+                    desc: "Your phone lines are quiet, emails are empty, and you are relying entirely on hit-or-miss word-of-mouth recommendations."
                   },
                   {
                     title: "Outdated, Slow Website",
-                    desc: "Your page loads slowly or is difficult to read on a mobile phone, causing prospects to close the screen instantly and hit 'back'."
+                    desc: "Your page loads slowly or is difficult to read on a mobile phone, causing potential customers to leave and move on to the next business."
                   },
                   {
                     title: "Weak Google Presence",
-                    desc: "Your business is invisible on the Google map pack. Competitors rank high on the map while your company sits on page 3."
+                    desc: "Your business is difficult to find in Google searches and Google Maps. Competitors appear prominently in Google search results while your business is difficult for customers to find."
                   },
                   {
                     title: "Poor Online Trust",
-                    desc: "Lacking a system to collect 5-star customer ratings makes you look unverified, causing buyers to question your capabilities."
+                    desc: "Lacking a system to collect 5-star customer ratings makes you look unverified, causing potential customers to wonder whether you are qualified."
                   },
                   {
                     title: "Deserted Social Channels",
@@ -279,7 +279,7 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
                   },
                   {
                     title: "Missed Customer Phone Calls",
-                    desc: "When you are on site doing diagnostic work and cannot answer. Calling prospects hang up instantly to contact the next company."
+                    desc: "When you are on the job and unable to answer incoming calls. Calling prospects hang up instantly to contact the next company."
                   }
                 ].map((prob, idx) => (
                   <div key={idx} className="bg-slate-950 border border-slate-800/80 rounded-xl p-5.5 shadow-sm hover:border-slate-705 transition-all relative overflow-hidden group">
@@ -449,7 +449,7 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
                   },
                   {
                     title: "Real People",
-                    desc: "No automated support tickets or overseas bots. You deal directly with our founders, Heather and Matthew Tucker, who care about your growth."
+                    desc: "No automated support tickets or overseas bots. You deal directly with our founders, Matthew and Heather Eisan, who care about your growth."
                   },
                   {
                     title: "Personalized Support",

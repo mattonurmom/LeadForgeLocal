@@ -352,7 +352,7 @@ function generateHeuristicAudit(businessName: string, category: string, website:
     const emergencyKeyword3 = isPlumbing ? "water heater replacement" : "same-day repair service";
 
     grade = "Critical Gaps";
-    summary = `Preliminary premium visibility analysis for ${businessName} (${category || "Home Services"}). We detected critical structural layout and high-intent local search gaps in your Dallas-area visibility profile. Correcting these items will help you capture immediate inbound phone calls and prevent local homeowners from choosing competitors who appear more established and easier to trust online.`;
+    summary = `Preliminary premium visibility analysis for ${businessName} (${category || "Home Services"}). We detected critical structural layout and high-intent local search gaps in your DFW-area visibility profile. Correcting these items will help you capture immediate inbound phone calls and prevent local homeowners from choosing competitors who appear more established and easier to trust online.`;
     recommendations = [
       {
         title: "Service Area Optimization & Location Landing Pages",
@@ -427,7 +427,7 @@ function generateHeuristicAudit(businessName: string, category: string, website:
       {
         title: "Case-Specific Practice Area Silo Pages",
         issueFound: "Your legal website groups multiple complex practice areas together on a single generic Page, rather than dedicating separate pages to each specific legal service you provide.",
-        whyThisMatters: "Individual clients search for highly specific solutions, such as 'child custody attorney in Dallas' or 'commercial truck accident lawyer'. If your website lacks detailed, separate pages for each service, search engines will evaluate your site as too generic, resulting in poor rankings and fewer qualified legal leads.",
+        whyThisMatters: "Individual clients search for highly specific solutions, such as 'child custody attorney in Fort Worth' or 'commercial truck accident lawyer'. If your website lacks detailed, separate pages for each service, search engines will evaluate your site as too generic, resulting in poor rankings and fewer qualified legal leads.",
         competitiveImpact: "Elite law firms with focused, comprehensive pages for every practice area dominate search results and capture individual clients facing urgent legal battles first.",
         recommendedSolution: "Expand your website layout to feature individual, deeply informative sub-pages for every legal practice area and case type you represent.",
         estimatedDifficulty: "Advanced",
@@ -809,7 +809,7 @@ const routesMeta: Record<string, RouteMeta> = {
   },
   "/about": {
     title: "About Us | LeadForge Local",
-    description: "Meet Heather & Matthew Tucker, founders of LeadForge Local. We build lightning-fast contractor websites & maps SEO systems that grow your trades business.",
+    description: "Meet Matthew & Heather Eisan, founders of LeadForge Local. We build lightning-fast contractor websites & maps SEO systems that grow your trades business.",
     image: "/src/assets/images/frustrated_laptop_1781286600083.jpg"
   },
   "/services": {
@@ -833,8 +833,8 @@ const routesMeta: Record<string, RouteMeta> = {
     image: "/src/assets/images/frustrated_laptop_1781286600083.jpg"
   },
   "/contact": {
-    title: "Contact LeadForge Local | Dallas, Texas",
-    description: "Ready to dominate your city's local search packs? Reach out to Heather & Matthew Tucker today for custom lead growth services.",
+    title: "Contact LeadForge Local | North Fort Worth/Alliance Area (Serving DFW)",
+    description: "Ready to dominate your city's local search packs? Reach out to Matthew & Heather Eisan today for custom lead growth services.",
     image: "/src/assets/images/tradesman_worker_1781286632167.jpg"
   },
   "/privacy": {

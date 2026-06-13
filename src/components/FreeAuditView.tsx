@@ -217,7 +217,7 @@ Direct Partner Support Hotline: (469) 751-7153.`;
       const emergencyKeyword3 = isPlumbing ? "water heater replacement" : "same-day repair service";
 
       grade = "Critical Gaps";
-      summary = `Preliminary premium visibility analysis for ${businessName} (${category || "Home Services"}). We detected critical structural layout and high-intent local search gaps in your Dallas-area visibility profile. Correcting these items will help you capture immediate inbound phone calls and prevent local homeowners from choosing competitors who appear more established and easier to trust online.`;
+      summary = `Preliminary premium visibility analysis for ${businessName} (${category || "Home Services"}). We detected critical structural layout and high-intent local search gaps in your DFW-area visibility profile. Correcting these items will help you capture immediate inbound phone calls and prevent local homeowners from choosing competitors who appear more established and easier to trust online.`;
       recommendations = [
         {
           title: "Service Area Optimization & Location Landing Pages",
@@ -292,7 +292,7 @@ Direct Partner Support Hotline: (469) 751-7153.`;
         {
           title: "Case-Specific Practice Area Silo Pages",
           issueFound: "Your legal website groups multiple complex practice areas together on a single generic Page, rather than dedicating separate pages to each specific legal service you provide.",
-          whyThisMatters: "Individual clients search for highly specific solutions, such as 'child custody attorney in Dallas' or 'commercial truck accident lawyer'. If your website lacks detailed, separate pages for each service, search engines will evaluate your site as too generic, resulting in poor rankings and fewer qualified legal leads.",
+          whyThisMatters: "Individual clients search for highly specific solutions, such as 'child custody attorney in Fort Worth' or 'commercial truck accident lawyer'. If your website lacks detailed, separate pages for each service, search engines will evaluate your site as too generic, resulting in poor rankings and fewer qualified legal leads.",
           competitiveImpact: "Elite law firms with focused, comprehensive pages for every practice area dominate search results and capture individual clients facing urgent legal battles first.",
           recommendedSolution: "Expand your website layout to feature individual, deeply informative sub-pages for every legal practice area and case type you represent.",
           estimatedDifficulty: "Advanced",
@@ -829,8 +829,8 @@ function InteractiveScheduler({ formData }: InteractiveSchedulerProps) {
         <div>
           <h5 className="font-display font-extrabold text-sm text-white">Your Strategy Session is Reserved!</h5>
           <p className="text-slate-300 text-[12px] leading-relaxed mt-1.5 font-sans">
-            We have locked in your Dallas strategy time slot for <strong>{selectedDate}</strong> at <strong>{selectedTime}</strong>. 
-            Heather or Matthew Tucker will personally call you at <strong>{bookingPhone}</strong> to conduct your strategic roadmap scan.
+            We have locked in your DFW strategy time slot for <strong>{selectedDate}</strong> at <strong>{selectedTime}</strong>. 
+            Matthew or Heather Eisan will personally call you at <strong>{bookingPhone}</strong> to conduct your strategic roadmap scan.
           </p>
         </div>
         <div className="text-[10px] font-mono text-emerald-400 font-semibold bg-emerald-950/40 py-1.5 px-3 rounded inline-block">
@@ -845,7 +845,7 @@ function InteractiveScheduler({ formData }: InteractiveSchedulerProps) {
       <div className="space-y-1 text-left">
         <h5 className="font-display font-bold text-white text-[13px] tracking-tight">Schedule Your 15-Minute Roadmap Consult</h5>
         <p className="text-slate-405 text-[11px] leading-normal font-sans">
-          Select a convenient day and time to receive a fully customized, professional checklist growth plan. No sales pressure, just actionable Dallas-area marketing advice.
+          Select a convenient day and time to receive a fully customized, professional checklist growth plan. No sales pressure, just actionable DFW-area marketing advice.
         </p>
       </div>
 

@@ -50,7 +50,7 @@ export default function App() {
     },
     "about": {
       title: "About Us | LeadForge Local",
-      desc: "Meet Heather & Matthew Tucker, founders of LeadForge Local. We build lightning-fast contractor websites & maps SEO systems that grow your trades business.",
+      desc: "Meet Matthew & Heather Eisan, founders of LeadForge Local. We build lightning-fast contractor websites & maps SEO systems that grow your trades business.",
       image: "/src/assets/images/frustrated_laptop_1781286600083.jpg"
     },
     "services": {
@@ -74,8 +74,8 @@ export default function App() {
       image: "/src/assets/images/frustrated_laptop_1781286600083.jpg"
     },
     "contact": {
-      title: "Contact LeadForge Local | Dallas, Texas",
-      desc: "Ready to dominate your city's local search packs? Reach out to Heather & Matthew Tucker today for custom lead growth services.",
+      title: "Contact LeadForge Local | North Fort Worth/Alliance Area (Serving DFW)",
+      desc: "Ready to dominate your city's local search packs? Reach out to Matthew & Heather Eisan today for custom lead growth services.",
       image: "/src/assets/images/tradesman_worker_1781286632167.jpg"
     },
     "privacy": {
@@ -212,11 +212,11 @@ export default function App() {
         "founder": [
           {
             "@type": "Person",
-            "name": "Heather Tucker"
+            "name": "Heather Eisan"
           },
           {
             "@type": "Person",
-            "name": "Matthew Tucker"
+            "name": "Matthew Eisan"
           }
         ]
       }
@@ -232,7 +232,7 @@ export default function App() {
         "email": "support@leadforgelocal.com",
         "address": {
           "@type": "PostalAddress",
-          "addressLocality": "Dallas",
+          "addressLocality": "North Fort Worth/Alliance Area",
           "addressRegion": "TX",
           "addressCountry": "US"
         },
