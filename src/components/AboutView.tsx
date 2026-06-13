@@ -29,72 +29,51 @@ export default function AboutView({ setTab }: AboutViewProps) {
       {/* Core Narrative / About Us Section */}
       <section className="bg-slate-950 py-20 border-b border-slate-900" id="about-narrative">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="max-w-3xl mx-auto space-y-6">
             
-            {/* Left side: Couple Photo */}
-            <div className="lg:col-span-5 relative">
-              <div className="absolute top-0 right-0 h-32 w-32 bg-sky-505/10 blur-2xl pointer-events-none rounded-full" />
-              <div className="relative rounded-3xl border border-slate-800 overflow-hidden shadow-2xl group max-w-md mx-auto">
-                <img 
-                  src="/src/assets/images/founders_couple_1781310137852.jpg" 
-                  alt="Matthew and Heather Eisan" 
-                  referrerPolicy="no-referrer"
-                  className="w-full h-auto object-cover max-h-[500px] transition-transform duration-500 group-hover:scale-101"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80" />
-                <div className="absolute bottom-6 left-6 right-6">
-                  <span className="text-[10px] text-sky-450 font-bold uppercase tracking-widest block mb-1">Matthew & Heather Eisan</span>
-                  <span className="text-xs font-semibold text-white">Founders of LeadForge Local</span>
-                </div>
-              </div>
+            <div className="inline-flex items-center gap-1.5 rounded-full bg-slate-900 border border-slate-800 px-3 py-1 text-[11px] font-bold text-sky-400">
+              <Building2 className="h-3.5 w-3.5 text-sky-400" />
+              Family-Owned & Local Operations
             </div>
 
-            {/* Right side: Story text */}
-            <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-1.5 rounded-full bg-slate-900 border border-slate-800 px-3 py-1 text-[11px] font-bold text-sky-400">
-                <Building2 className="h-3.5 w-3.5 text-sky-400" />
-                Family-Owned & Local Operations
-              </div>
+            <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-white leading-tight">
+              Honest, Results-Driven Marketing for Local Trades
+            </h2>
+            
+            <div className="text-xs sm:text-sm text-slate-300 space-y-5 leading-relaxed font-sans">
+              <p>
+                LeadForge Local was founded by <strong>Matthew and Heather Eisan</strong>, lifelong Texans who understand the values of hard work, community, and taking care of local businesses.
+              </p>
+              <p>
+                Born and raised in Texas and proudly serving the DFW area, Matthew and Heather built LeadForge Local with one mission: help small businesses compete with larger companies by giving them access to affordable, powerful marketing tools.
+              </p>
+              <p>
+                Matthew brings years of contractor and oilfield experience along with a background in marketing, giving him firsthand knowledge of both the business side and the hard work that keeps local companies running. He understands the challenges business owners face because he has lived them.
+              </p>
+              <p>
+                Heather is known for her strong work ethic, attention to detail, and dedication to helping others succeed. Her perseverance and commitment are reflected in every client relationship and project.
+              </p>
+              <p>
+                After facing and overcoming breast cancer, Heather developed an even deeper appreciation for family, community, and supporting local businesses. That experience strengthened the values that drive LeadForge Local today: integrity, resilience, and service.
+              </p>
+              <p className="border-l-2 border-sky-500 pl-4 italic text-slate-400">
+                "Together, Matthew and Heather believe local businesses deserve enterprise-level tools without enterprise-level prices."
+              </p>
+            </div>
 
-              <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-white leading-tight">
-                Honest, Results-Driven Marketing for Local Trades
-              </h2>
-              
-              <div className="text-xs sm:text-sm text-slate-300 space-y-5 leading-relaxed font-sans">
-                <p>
-                  LeadForge Local was founded by <strong>Matthew and Heather Eisan</strong>, lifelong Texans who understand the values of hard work, community, and taking care of local businesses.
-                </p>
-                <p>
-                  Born and raised in Texas and proudly serving the North Fort Worth and Alliance area, Matthew and Heather built LeadForge Local with one mission: help small businesses compete with larger companies by giving them access to affordable, powerful marketing tools.
-                </p>
-                <p>
-                  Matthew brings years of contractor and oilfield experience along with a background in marketing, giving him firsthand knowledge of both the business side and the hard work that keeps local companies running. He understands the challenges business owners face because he has lived them.
-                </p>
-                <p>
-                  Heather is known for her strong work ethic, attention to detail, and dedication to helping others succeed. Her perseverance and commitment are reflected in every client relationship and project.
-                </p>
-                <p>
-                  After facing and overcoming breast cancer, Heather developed an even deeper appreciation for family, community, and supporting local businesses. That experience strengthened the values that drive LeadForge Local today: integrity, resilience, and service.
-                </p>
-                <p className="border-l-2 border-sky-500 pl-4 italic text-slate-400">
-                  "Together, Matthew and Heather believe local businesses deserve enterprise-level tools without enterprise-level prices."
-                </p>
-              </div>
-
-              <div className="pt-4 flex flex-col sm:flex-row gap-4">
-                <button
-                  onClick={() => { setTab("audit"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-                  className="rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-3.5 px-6 shadow-md transition-all cursor-pointer text-center"
-                >
-                  Get My Free Business Audit
-                </button>
-                <button
-                  onClick={() => { setTab("contact"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-                  className="rounded-xl border border-slate-800 hover:bg-slate-900 text-slate-300 font-semibold text-xs py-3.5 px-5 transition-all cursor-pointer text-center"
-                >
-                  Book a Free Call
-                </button>
-              </div>
+            <div className="pt-4 flex flex-col sm:flex-row gap-4">
+              <button
+                onClick={() => { setTab("audit"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                className="rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-3.5 px-6 shadow-md transition-all cursor-pointer text-center"
+              >
+                Get My Free Business Audit
+              </button>
+              <button
+                onClick={() => { setTab("contact"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                className="rounded-xl border border-slate-800 hover:bg-slate-900 text-slate-300 font-semibold text-xs py-3.5 px-5 transition-all cursor-pointer text-center"
+              >
+                Book a Free Call
+              </button>
             </div>
 
           </div>
@@ -161,17 +140,9 @@ export default function AboutView({ setTab }: AboutViewProps) {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             
-            {/* Matthew Eisan Card */}
+            {/* Matthew Eisan Card (No Photo) */}
             <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 relative overflow-hidden group flex flex-col sm:flex-row gap-6 items-start">
               <div className="absolute top-0 left-0 h-1 bg-blue-600 w-full" />
-              <div className="h-28 w-28 rounded-2xl bg-slate-880 border border-slate-700 overflow-hidden flex-shrink-0">
-                <img 
-                  src="/src/assets/images/matthew_bio_1781310266630.jpg" 
-                  alt="Matthew Eisan" 
-                  referrerPolicy="no-referrer" 
-                  className="h-full w-full object-cover" 
-                />
-              </div>
               <div className="space-y-4 flex-grow w-full">
                 <div>
                   <h3 className="font-display font-extrabold text-white text-lg">Matthew Eisan</h3>
@@ -211,17 +182,9 @@ export default function AboutView({ setTab }: AboutViewProps) {
               </div>
             </div>
 
-            {/* Heather Eisan Card */}
+            {/* Heather Eisan Card (No Photo) */}
             <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 relative overflow-hidden group flex flex-col sm:flex-row gap-6 items-start">
               <div className="absolute top-0 left-0 h-1 bg-blue-600 w-full" />
-              <div className="h-28 w-28 rounded-2xl bg-slate-880 border border-slate-700 overflow-hidden flex-shrink-0">
-                <img 
-                  src="/src/assets/images/heather_bio_1781310152485.jpg" 
-                  alt="Heather Eisan" 
-                  referrerPolicy="no-referrer" 
-                  className="h-full w-full object-cover" 
-                />
-              </div>
               <div className="space-y-4 flex-grow w-full">
                 <div>
                   <h3 className="font-display font-extrabold text-white text-lg">Heather Eisan</h3>
