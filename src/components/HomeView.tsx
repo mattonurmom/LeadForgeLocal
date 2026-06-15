@@ -92,35 +92,44 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
                 </span>
               </h1>
               
-              <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl">
-                LeadForge Local empowers small businesses to increase visibility, generate qualified local leads, and turn online traffic into booked jobs through affordable, results-driven digital marketing solutions that eliminate the high costs of traditional agencies.
-              </p>
+              <div className="space-y-4 text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl">
+                <p>
+                  LeadForge Local helps small businesses improve their online presence, attract more local customers, and turn online searches into booked jobs.
+                </p>
+                <p className="text-sm sm:text-base text-slate-400">
+                  From Google Business Profile optimization and websites to review management and AI-powered automation, we provide affordable, results-driven solutions without expensive agency pricing.
+                </p>
+              </div>
               
               <div className="py-2 space-y-1.5 text-slate-300 text-xs sm:text-sm font-medium">
-                <p className="text-sky-400 font-bold block pb-1">LeadForge Local helps businesses secure:</p>
+                <p className="text-sky-400 font-bold block pb-1">Our goal is simple:</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2">
                   <div className="flex items-center gap-2">
-                    <span className="h-2 w-2 rounded-full bg-sky-400"></span>
+                    <span className="text-sky-400 font-bold text-lg leading-none">•</span>
                     <span>More Calls</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="h-2 w-2 rounded-full bg-sky-400"></span>
+                    <span className="text-sky-400 font-bold text-lg leading-none">•</span>
                     <span>More Leads</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="h-2 w-2 rounded-full bg-sky-400"></span>
+                    <span className="text-sky-400 font-bold text-lg leading-none">•</span>
                     <span>More Customers</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="h-2 w-2 rounded-full bg-sky-400"></span>
-                    <span>Stronger Online Visibility</span>
+                    <span className="text-sky-400 font-bold text-lg leading-none">•</span>
+                    <span>Better Online Visibility</span>
                   </div>
                   <div className="col-span-1 sm:col-span-2 flex items-center gap-2">
-                    <span className="h-2 w-2 rounded-full bg-sky-400"></span>
+                    <span className="text-sky-400 font-bold text-lg leading-none">•</span>
                     <span>A More Professional Online Presence</span>
                   </div>
                 </div>
               </div>
+
+              <p className="text-sm sm:text-base text-slate-300 font-medium italic border-l-2 border-sky-500 pl-3">
+                Get a Free Business Audit today and discover what's holding your business back online.
+              </p>
 
               {/* CTAs */}
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4">
@@ -233,25 +242,11 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
             <div className="lg:col-span-6 space-y-6">
               <span className="text-xs font-bold text-sky-400 uppercase tracking-widest block">The Local Marketing Challenge</span>
               <h2 className="font-display text-3xl font-extrabold tracking-tight text-white sm:text-4xl leading-tight">
-                Are You Losing Clientele To Competitors Online?
+                Are You Losing Customers to Competitors Online?
               </h2>
-              <p className="text-sm text-slate-300 leading-relaxed">
-                Most local business owners are losing customer jobs because their online presence is incomplete, outdated, difficult to find on phone search, or slow to respond.
+              <p className="text-sm text-slate-300 leading-relaxed font-sans">
+                Most local businesses lose customers every day because their online presence is outdated, difficult to find, or slow to respond.
               </p>
-              
-              <div className="relative rounded-2xl overflow-hidden border border-slate-800 bg-slate-950/60 shadow-2xl max-w-lg aspect-video group">
-                <img 
-                  src="/src/assets/images/frustrated_laptop_1781286600083.jpg" 
-                  alt="Frustrated small business owner looking at computer screen" 
-                  className="w-full h-full object-cover opacity-90 group-hover:scale-102 transition-transform duration-500"
-                  referrerPolicy="no-referrer"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent flex items-end p-4">
-                  <p className="text-xs text-slate-300 font-medium">
-                    💻 <strong className="text-white font-bold">Stressed with tech?</strong> We remove the complexity and deliver calls directly to your phone.
-                  </p>
-                </div>
-              </div>
             </div>
 
             <div className="lg:col-span-6">
@@ -259,27 +254,27 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
                 {[
                   {
                     title: "Not Enough Leads",
-                    desc: "Your phone lines are quiet, emails are empty, and you are relying entirely on hit-or-miss word-of-mouth recommendations."
+                    desc: "Your phone isn't ringing consistently, and you're relying on word-of-mouth to keep business flowing."
                   },
                   {
-                    title: "Outdated, Slow Website",
-                    desc: "Your page loads slowly or is difficult to read on a mobile phone, causing potential customers to leave and move on to the next business."
+                    title: "Outdated Website",
+                    desc: "A slow or outdated website drives potential customers to competitors."
                   },
                   {
                     title: "Weak Google Presence",
-                    desc: "Your business is difficult to find in Google searches and Google Maps. Competitors appear prominently in Google search results while your business is difficult for customers to find."
+                    desc: "If customers can't find you on Google or Google Maps, they're finding someone else."
                   },
                   {
                     title: "Poor Online Trust",
-                    desc: "Lacking a system to collect 5-star customer ratings makes you look unverified, causing potential customers to wonder whether you are qualified."
+                    desc: "Without strong reviews and an active online presence, customers may question your credibility."
                   },
                   {
-                    title: "Deserted Social Channels",
-                    desc: "Your Facebook corporate profile looks abandoned, hinting to potential neighborhood buyers that you might be out of business."
+                    title: "Inactive Social Media",
+                    desc: "An outdated Facebook page can make customers think your business is no longer active."
                   },
                   {
-                    title: "Missed Customer Phone Calls",
-                    desc: "When you are on the job and unable to answer incoming calls. Calling prospects hang up instantly to contact the next company."
+                    title: "Missed Calls",
+                    desc: "When you're busy on the job and miss a call, many customers simply call the next company."
                   }
                 ].map((prob, idx) => (
                   <div key={idx} className="bg-slate-950 border border-slate-800/80 rounded-xl p-5.5 shadow-sm hover:border-slate-705 transition-all relative overflow-hidden group">
@@ -316,10 +311,13 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
             <div className="max-w-2xl space-y-3">
               <span className="text-xs font-bold text-sky-400 uppercase tracking-widest block">Our Core Services</span>
               <h2 className="font-display text-3xl font-extrabold tracking-tight text-white">
-                Our Core Local Growth Systems
+                Local Growth Systems Built for Small Businesses
               </h2>
               <p className="text-sm text-slate-300 leading-relaxed">
-                Simple, straightforward tactical packages built specifically to turn local searches into direct cashflow. No long-term locked commitments.
+                Simple, affordable solutions designed to help local businesses generate more calls, leads, and customers—without expensive agency contracts.
+              </p>
+              <p className="text-xs text-sky-400 font-semibold">
+                No long-term commitments. Just results.
               </p>
             </div>
             
@@ -327,7 +325,7 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
               onClick={() => { setTab("services"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
               className="text-xs font-bold text-sky-400 hover:text-sky-350 flex items-center gap-1.5 cursor-pointer whitespace-nowrap self-start"
             >
-              <span>Explore All 25 Local Services</span>
+              <span>Explore All 25 Services</span>
               <ArrowRight className="h-4.5 w-4.5" />
             </button>
           </div>
@@ -335,24 +333,24 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                title: "Google Business Cleanup",
-                badge: "Starting under $150",
-                desc: "Correct verification issues, fix secondary categories, sync operating hours & eliminate rival pins."
+                title: "Google Business Profile Optimization",
+                badge: "Starting Under $150",
+                desc: "Improve your visibility on Google Search and Maps by optimizing categories, hours, services, photos, and business information to help customers find you faster."
               },
               {
                 title: "Website Creation",
-                badge: "Starting under $500",
-                desc: "High-speed mobile trade layout designed specifically to capture tap click calls."
+                badge: "Starting Under $500",
+                desc: "Fast, mobile-friendly websites built to convert visitors into customers with clear calls-to-action and lead capture tools."
               },
               {
-                title: "Review & Reputation Setup",
-                badge: "Starting under $49/mo",
-                desc: "Generate consistent 5-star Google feedback easily using customized print-ready vehicle QR codes."
+                title: "Review & Reputation Management",
+                badge: "Starting Under $49/month",
+                desc: "Build customer trust and generate more 5-star reviews with automated review requests and custom QR code solutions."
               },
               {
                 title: "Missed Call Text Back",
-                badge: "Starting under $100",
-                desc: "Instantly text busy unanswered incoming ringer signals, locking jobs before they call rivals."
+                badge: "Starting Under $100",
+                desc: "Never lose another lead. Automatically send a text message to customers when you miss a call, helping you capture jobs before they contact a competitor."
               }
             ].map((ser, i) => (
               <div key={i} className="bg-slate-900/55 hover:bg-slate-900 border border-slate-800 rounded-2xl p-5.5 transition-all shadow-sm flex flex-col justify-between">
@@ -365,7 +363,7 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
                   onClick={() => { setTab("services"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
                   className="text-xs font-bold text-slate-300 hover:text-sky-405 flex items-center gap-1 text-left cursor-pointer"
                 >
-                  <span>Learn details</span>
+                  <span>Learn More</span>
                   <ArrowRight className="h-3 w-3" />
                 </button>
               </div>
@@ -385,7 +383,7 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
               Our 4-Step Business Growth Blueprint
             </h2>
             <p className="text-sm text-slate-300 leading-relaxed">
-              We focus on speed and immediate results. We set up critical foundations to generate fast client wins from week 1.
+              We focus on practical solutions that deliver results quickly. Our systems are designed to help local businesses generate more calls, leads, and customers as efficiently as possible.
             </p>
           </div>
 
@@ -393,20 +391,20 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
             
             {[
               {
-                title: "1. Free Business Audit",
-                desc: "We analyze your regional citations, speed profiles, local keywords, and response vulnerabilities completely free."
+                title: "Free Business Audit",
+                desc: "We analyze your Google Business Profile, website performance, online reviews, local SEO, and customer response systems to identify opportunities for growth."
               },
               {
-                title: "2. Custom Growth Strategy",
-                desc: "We deliver a clear, affordable blueprint outlining priority channels to unlock steady local customer bookings."
+                title: "Custom Growth Strategy",
+                desc: "Every business is different. We create a customized action plan based on your industry, goals, competition, and local market."
               },
               {
-                title: "3. Rapid Implementation",
-                desc: "We optimize your maps, activate review QR tools, launch your website, and enable text fallbacks in under two weeks."
+                title: "Implementation & Optimization",
+                desc: "We optimize your Google Business Profile, improve your website, implement review systems, and set up automation tools like missed-call text back and AI chat."
               },
               {
-                title: "4. Accelerated Local Growth",
-                desc: "Your communications streamline, customer reviews grow, and your business enhances its local map pack visibility and search presence."
+                title: "Growth & Ongoing Support",
+                desc: "As your online presence improves, you'll gain more visibility, stronger customer trust, and more opportunities to generate leads and bookings."
               }
             ].map((step, idx) => (
               <div key={idx} className="bg-slate-950 border border-slate-800 p-6 rounded-2xl hover:border-blue-500/50 transition-colors relative z-10">
@@ -434,30 +432,30 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
                 Why Business Owners Trust LeadForge Local
               </h2>
               <p className="text-sm text-slate-300 leading-relaxed">
-                We are local business specialists ourselves. We are not interested in fluffy corporate jargon, generic social media likes, or vanity metrics. We focus 100% on delivering more leads, calls, and customers to local firms.
+                We focus on what matters most: helping local businesses generate more calls, leads, and customers.
               </p>
 
               <div className="space-y-4 pt-2">
                 {[
                   {
                     title: "No Long-Term Contracts",
-                    desc: "You are never locked into long annual legal bindings. We earn your business month-to-month based on real local performance and phone traffic."
+                    desc: "We earn your business month-to-month. No long-term contracts or hidden commitments."
                   },
                   {
                     title: "Affordable Pricing",
-                    desc: "Our services are clean, upfront, and budget-friendly. Choose simple packages designed specifically for small business owners."
+                    desc: "Transparent, budget-friendly solutions designed specifically for small businesses."
                   },
                   {
                     title: "Real People",
-                    desc: "No automated support tickets or overseas bots. You deal directly with our founders, Matthew and Heather Eisan, who care about your growth."
+                    desc: "Work directly with founders Matthew and Heather Eisan—not overseas call centers or automated support systems."
                   },
                   {
                     title: "Personalized Support",
-                    desc: "We understand your local area, your services, and your unique goals. You get individual attention and hand-crafted optimizations."
+                    desc: "We take the time to understand your business, your market, and your goals to create solutions tailored to your needs."
                   },
                   {
                     title: "Local Business Focus",
-                    desc: "We don't work with giant conglomerates. Our entire system is engineered for local physical shops, hometown services, and independent contractors."
+                    desc: "We specialize in helping local businesses, contractors, and service providers grow their online presence and attract more customers."
                   }
                 ].map((edge, idx) => (
                   <div key={idx} className="flex gap-4">
@@ -481,17 +479,13 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
                   </span>
                 </div>
                 
-                <p className="text-slate-305 font-normal text-sm leading-relaxed">
-                  "Before working with optimized setups, running our service trade was a stressful cycle of expensive home ads that led to shared tire-kickers. They claimed our Google Business profile, corrected our categories, and set up our missed-call SMS responder. Within a reasonable period, this secured consistent direct calls and saved several immediate emergency requests."
+                <p className="text-slate-300 font-normal text-sm leading-relaxed">
+                  "Before improving our online presence, we relied heavily on word-of-mouth and expensive lead services. LeadForge Local optimized our Google Business Profile, improved our visibility, and set up missed-call text back automation. We began receiving more direct calls and capturing leads we previously would have missed."
                 </p>
 
                 <div className="flex items-center gap-3 pt-4 border-t border-slate-800/80 text-xs">
-                  <div className="bg-slate-950 text-slate-400 rounded px-2 py-0.5 font-mono text-[10px] border border-slate-800">
-                    Demonstration Model
-                  </div>
                   <div>
-                    <span className="font-semibold text-white block">Typical Home Service Trade Scenario</span>
-                    <span className="text-slate-500 text-[10px] block mt-0.5">Illustrative setup targeting local visibility leaks</span>
+                    <span className="text-slate-500 text-[10px] block mt-0.5">Example scenario provided for demonstration purposes. Individual results vary.</span>
                   </div>
                 </div>
               </div>
@@ -500,24 +494,27 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
           </div>
 
           {/* Trust Badges Grid */}
-          <div className="mt-16 pt-10 border-t border-slate-800/85 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            {[
-              { label: "Secure Forms", icon: ShieldCheck, desc: "Encrypted & Spam-Protected" },
-              { label: "No Long-Term Contracts", icon: CheckCircle2, desc: "Flexible Month-To-Month" },
-              { label: "Small Business Focused", icon: Users, desc: "100% Dedicated to Local Firms" },
-              { label: "Transparent Pricing", icon: DollarSign, desc: "No Hidden Costs or Surcharges" }
-            ].map((badge, idx) => {
-              const Icon = badge.icon;
-              return (
-                <div key={idx} className="bg-slate-900/50 border border-slate-800/60 rounded-2xl p-5 hover:border-slate-700/70 transition-all flex flex-col items-center">
-                  <div className="h-10 w-10 bg-blue-600/10 rounded-xl flex items-center justify-center text-sky-400 mb-3 border border-blue-500/15">
-                    <Icon className="h-5 w-5" />
+          <div className="mt-16 pt-10 border-t border-slate-800/85">
+            <h3 className="font-display font-bold text-slate-400 text-xs uppercase tracking-widest text-center mb-8">Built for Local Businesses</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+              {[
+                { label: "Secure Forms", icon: ShieldCheck, desc: "Encrypted and spam-protected submissions." },
+                { label: "No Long-Term Contracts", icon: CheckCircle2, desc: "Flexible month-to-month service." },
+                { label: "Small Business Focused", icon: Users, desc: "Built specifically for local businesses and contractors." },
+                { label: "Transparent Pricing", icon: DollarSign, desc: "Clear pricing with no hidden fees or surprises." }
+              ].map((badge, idx) => {
+                const Icon = badge.icon;
+                return (
+                  <div key={idx} className="bg-slate-900/50 border border-slate-800/60 rounded-2xl p-5 hover:border-slate-700/70 transition-all flex flex-col items-center">
+                    <div className="h-10 w-10 bg-blue-600/10 rounded-xl flex items-center justify-center text-sky-400 mb-3 border border-blue-500/15">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <h4 className="font-display font-extrabold text-white text-sm mb-1">{badge.label}</h4>
+                    <p className="text-[10px] text-slate-400 font-medium leading-relaxed">{badge.desc}</p>
                   </div>
-                  <h4 className="font-display font-extrabold text-white text-sm mb-1">{badge.label}</h4>
-                  <p className="text-[10px] text-slate-400 font-medium">{badge.desc}</p>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
 
         </div>
