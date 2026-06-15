@@ -524,59 +524,143 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
       <section className="bg-slate-900 py-20 border-b border-slate-800" id="home-community-gallery">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-            <span className="text-xs font-bold text-sky-400 uppercase tracking-widest block">Illustrative Target Verticals</span>
+            <span className="text-xs font-bold text-sky-400 uppercase tracking-widest block">Industries We Serve</span>
             <h2 className="font-display text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-              Engineered For Hardworking Teams In Our Communities
+              Built for the Hardworking Businesses That Keep Our Communities Running
             </h2>
-            <p className="text-sm text-slate-350 leading-relaxed font-normal text-slate-300">
-              We focus on local visibility systems and direct response setups for physical commerce, hometown services, and local trade operations.
-            </p>
+            <div className="space-y-3 text-sm text-slate-300 leading-relaxed font-normal">
+              <p>
+                We help local businesses improve their online visibility, attract more customers, and turn searches into booked jobs through websites, Google optimization, reviews, and automation.
+              </p>
+              <p className="text-xs text-slate-400">
+                From hometown restaurants to skilled trades and professional services, our systems are designed to help local businesses grow.
+              </p>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {/* Owner card 1 */}
-            <div className="relative group overflow-hidden rounded-2xl border border-slate-800 bg-slate-950/65 p-6 flex flex-col md:flex-row gap-6 items-center">
-              <div className="w-32 h-32 md:w-36 md:h-36 rounded-xl overflow-hidden flex-shrink-0 border border-slate-800 shadow-md">
-                <img 
-                  src="/src/assets/images/restaurant_owner_1781286617140.jpg" 
-                  alt="Cozy bistro restaurant owner" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  referrerPolicy="no-referrer"
-                />
+            {[
+              {
+                badge: "Restaurants, Cafes & Hospitality",
+                badgeClass: "bg-emerald-500/10 text-emerald-400",
+                title: "Turn online searches into full tables and repeat customers.",
+                desc: "We help restaurants, cafes, coffee shops, and bars improve their Google presence, collect more reviews, and make it easier for customers to find menus, directions, reservations, and contact information online.",
+                quote: "When hungry customers search nearby, make sure your business is the first one they find.",
+                img: "/src/assets/images/restaurant_owner_1781286617140.jpg",
+                alt: "Cozy bistro restaurant owner"
+              },
+              {
+                badge: "Home Services & Contractors",
+                badgeClass: "bg-blue-500/10 text-sky-400",
+                title: "Generate more calls, capture more leads, and book more jobs.",
+                desc: "Whether you're an HVAC company, plumber, electrician, landscaper, or contractor, we help you rank higher on Google, improve customer trust, and capture leads—even when you're busy on the job.",
+                quote: "Missed calls shouldn't mean missed revenue. Our systems help you capture customers before they call the competition.",
+                img: "/src/assets/images/tradesman_worker_1781286632167.jpg",
+                alt: "Tradesman plumber contractor crew"
+              },
+              {
+                badge: "Home Improvement & Specialty Trades",
+                badgeClass: "bg-amber-500/10 text-amber-400",
+                title: "Showcase your work and win more projects.",
+                desc: "From fence companies and foundation repair to concrete and garage doors, we help specialty contractors generate more leads and build trust.",
+                quote: "Great work deserves to be seen.",
+                img: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=300&h=300&q=85",
+                alt: "Specialty construction contractor"
+              },
+              {
+                badge: "Auto Services & Repair",
+                badgeClass: "bg-red-500/10 text-red-400",
+                title: "Keep your schedule full and your phones ringing.",
+                desc: "We help auto shops, mobile mechanics, towing companies, and collision centers attract more customers through Google and local search.",
+                quote: "When drivers need help, they're searching online first.",
+                img: "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=300&h=300&q=85",
+                alt: "Mechanic working on sports car"
+              },
+              {
+                badge: "Retail & Local Shops",
+                badgeClass: "bg-pink-500/10 text-pink-400",
+                title: "Increase visibility and bring more customers through the door.",
+                desc: "From boutiques and smoke shops to specialty retailers, we help local businesses stand out online and drive foot traffic.",
+                quote: "Your online presence should work as hard as you do.",
+                img: "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=300&h=300&q=85",
+                alt: "Local boutique retail store"
+              },
+              {
+                badge: "Salons, Barbers & Beauty",
+                badgeClass: "bg-indigo-500/10 text-indigo-400",
+                title: "Grow your client list and keep chairs full.",
+                desc: "We help salons, barbershops, nail salons, and beauty professionals attract new customers and encourage repeat visits.",
+                quote: "When customers search for their next stylist, make sure they find you first.",
+                img: "https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=300&h=300&q=85",
+                alt: "Hair stylist working in beauty salon"
+              },
+              {
+                badge: "Fitness & Personal Training",
+                badgeClass: "bg-teal-500/10 text-teal-400",
+                title: "Turn searches into memberships and appointments.",
+                desc: "We help gyms, trainers, and fitness studios attract new members and build stronger communities online.",
+                quote: "Your next member is already searching for you.",
+                img: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=300&h=300&q=85",
+                alt: "Fitness trainer working out"
+              },
+              {
+                badge: "Medical & Dental Practices",
+                badgeClass: "bg-cyan-500/10 text-cyan-400",
+                title: "Build trust and attract more patients.",
+                desc: "We help doctors, dentists, and medical practices strengthen their online reputation, improve visibility, and generate more appointments.",
+                quote: "Patients often choose the provider they trust most online.",
+                img: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=300&h=300&q=85",
+                alt: "Medical professional in dental practice clinic"
+              },
+              {
+                badge: "Chiropractors, Wellness & Med Spas",
+                badgeClass: "bg-violet-500/10 text-violet-400",
+                title: "Turn online visibility into booked appointments.",
+                desc: "We help wellness clinics, chiropractors, and med spas build trust through reviews, websites, and automated lead capture.",
+                quote: "A strong online presence helps patients choose you with confidence.",
+                img: "https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=300&h=300&q=85",
+                alt: "Wellness clinical massage therapist"
+              },
+              {
+                badge: "Pet Services & Veterinary Clinics",
+                badgeClass: "bg-orange-500/10 text-orange-400",
+                title: "Build trust with pet owners and increase bookings.",
+                desc: "We help veterinarians, groomers, pet resorts, and boarding facilities attract new clients and strengthen customer loyalty.",
+                quote: "Pet owners choose businesses they trust—and trust starts online.",
+                img: "https://images.unsplash.com/photo-1581888227599-779811939961?auto=format&fit=crop&w=300&h=300&q=85",
+                alt: "Caring vet with golden retriever"
+              },
+              {
+                badge: "Legal & Professional Services",
+                badgeClass: "bg-purple-500/10 text-purple-400",
+                title: "Establish authority and generate qualified leads.",
+                desc: "We help attorneys, accountants, consultants, and professional firms improve visibility and convert searches into clients.",
+                quote: "Professional services deserve a professional online presence.",
+                img: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=300&h=300&q=85",
+                alt: "Professional business counselor or lawyer"
+              }
+            ].map((card, idx) => (
+              <div key={idx} className="relative group overflow-hidden rounded-2xl border border-slate-800 bg-slate-950/65 p-6 flex flex-col md:flex-row gap-6 items-center">
+                <div className="w-32 h-32 md:w-36 md:h-36 rounded-xl overflow-hidden flex-shrink-0 border border-slate-800 shadow-md">
+                  <img 
+                    src={card.img} 
+                    alt={card.alt} 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+                <div className="space-y-2 text-center md:text-left flex-1 col-span-1">
+                  <span className={`rounded px-2 py-0.5 text-[9.5px] font-bold uppercase tracking-wider inline-block ${card.badgeClass}`}>
+                    {card.badge}
+                  </span>
+                  <h3 className="font-display font-extrabold text-white text-sm">{card.title}</h3>
+                  <p className="text-xs text-slate-400 leading-relaxed">
+                    {card.desc}
+                  </p>
+                  <div className="text-[10px] text-slate-500 italic mt-2">"{card.quote}"</div>
+                </div>
               </div>
-              <div className="space-y-2 text-center md:text-left flex-1">
-                <span className="rounded bg-emerald-500/10 px-2 py-0.5 text-[9.5px] font-bold text-emerald-400 uppercase tracking-wider inline-block">
-                  Example Cafe Scenario
-                </span>
-                <h3 className="font-display font-extrabold text-white text-sm">Typical Local Visibility Layout</h3>
-                <p className="text-xs text-slate-400 leading-relaxed">
-                  "Our maps listing coordinates menu highlights and direct booking links. Local visibility changes can significantly assist venue traffic."
-                </p>
-                <div className="text-[10px] text-slate-500 font-mono mt-2">Example Hospitality Concept Layout</div>
-              </div>
-            </div>
-
-            {/* Owner card 2 */}
-            <div className="relative group overflow-hidden rounded-2xl border border-slate-850 bg-slate-950/65 p-6 flex flex-col md:flex-row gap-6 items-center">
-              <div className="w-32 h-32 md:w-36 md:h-36 rounded-xl overflow-hidden flex-shrink-0 border border-slate-800 shadow-md">
-                <img 
-                  src="/src/assets/images/tradesman_worker_1781286632167.jpg" 
-                  alt="Tradesman plumber contractor crew" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  referrerPolicy="no-referrer"
-                />
-              </div>
-              <div className="space-y-2 text-center md:text-left flex-1">
-                <span className="rounded bg-blue-500/10 px-2 py-0.5 text-[9.5px] font-bold text-sky-400 uppercase tracking-wider inline-block">
-                  Example HVAC Scenario
-                </span>
-                <h3 className="font-display font-extrabold text-white text-sm">Direct Pipeline Response Flow</h3>
-                <p className="text-xs text-slate-400 leading-relaxed">
-                  "Estimating jobs we own without paying massive lead hubs. A missed-call fallback solution secures emergency calls while busy on site."
-                </p>
-                <div className="text-[10px] text-slate-500 font-mono mt-2">Example Service Trade Concept Layout</div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
