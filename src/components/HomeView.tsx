@@ -51,6 +51,7 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
   const [ticketSize, setTicketSize] = useState<number>(450);
   const [additionalJobs, setAdditionalJobs] = useState<number>(4);
   const [adSpend, setAdSpend] = useState<number>(500);
+  const [growthRetainer, setGrowthRetainer] = useState<number>(499);
 
   // Default values mapping to trades with statistically realistic Cost Per Lead (CPL) based on local search market averages
   const tradeDefaults: { [key: string]: { ticket: number, name: string, shortName?: string, cpl: number } } = {
@@ -102,7 +103,6 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
 
   const totalAddedJobs = baseJobs + adJobs;
   const estimatedRevenue = totalAddedJobs * ticketSize;
-  const growthRetainer = 499;
   const totalInvestment = growthRetainer + adSpend;
 
   const netValueCreated = estimatedRevenue - totalInvestment;
@@ -192,7 +192,7 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
               </div>
 
               <p className="text-sm sm:text-base text-slate-300 font-medium italic border-l-2 border-sky-500 pl-3">
-                Get a Free Business Audit today and discover what's holding your business back online.
+                Get a Free Online Visibility Review today and discover what's holding your business back online.
               </p>
 
               {/* CTAs */}
@@ -202,7 +202,7 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
                   id="hero-primary-cta"
                   className="flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-7 py-4 text-sm font-bold text-white shadow-lg shadow-blue-500/20 hover:bg-blue-700 hover:shadow-blue-600/30 transition-all cursor-pointer active:scale-98"
                 >
-                  <span>Get My Free Business Audit</span>
+                  <span>Get My Free Online Visibility Review</span>
                   <ArrowRight className="h-4.5 w-4.5" />
                 </button>
                 
@@ -296,153 +296,235 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
 
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* INTERACTIVE SALES ROI CALCULATOR SECTION */}
-      <section className="bg-slate-950 text-white py-20 sm:py-24 border-b border-slate-900 relative" id="pricing-roi-calc">
-        <div className="absolute top-0 right-0 h-48 w-48 bg-blue-600/10 blur-3xl pointer-events-none rounded-full" />
-        
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10 font-sans">
-          
-          <div className="text-center max-w-2xl mx-auto mb-16 space-y-4 font-sans">
-            <div className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-blue-600/20 text-blue-400">
-              <Calculator className="h-5 w-5" />
-            </div>
-            <span className="text-xs font-bold text-sky-400 uppercase tracking-widest block font-sans">Diagnostic Profit Tool</span>
-            <h2 className="font-display text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-              Calculate Your Direct Local Marketing ROI
-            </h2>
-            <p className="text-sm text-slate-350 leading-relaxed max-w-lg mx-auto font-sans">
-              Select your trade, adjust your typical invoice ticket size, organic monthly job count, and paid ads budget below to calculate your compounding local search ROI.
-            </p>
-          </div>
+          {/* DESIGNER DIVIDER */}
+          <div className="my-16 border-t border-slate-900" />
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch max-w-5xl mx-auto">
-            
-            {/* Calculator controls */}
-            <div className="lg:col-span-6 bg-slate-900 border border-slate-800 p-8 rounded-3xl space-y-6">
-              <h3 className="font-display font-bold text-white text-base flex items-center gap-2">
-                <Sliders className="h-4.5 w-4.5 text-blue-400" />
-                Adjust Your Parameters
-              </h3>
-
-              {/* Trade Selector */}
-              <div>
-                <label className="block text-xs font-bold text-slate-300 mb-2">1. Choose Your Industry Focus</label>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                  {Object.keys(tradeDefaults).map((key) => (
-                    <button
-                      key={key}
-                      onClick={() => handleTradeChange(key)}
-                      className={`px-3 py-2 rounded-xl text-xs font-bold transition-all border text-center cursor-pointer ${
-                        selectedTrade === key 
-                          ? "bg-blue-600 border-blue-500 text-white shadow-md shadow-blue-500/10" 
-                          : "bg-slate-950 border-slate-850 text-slate-455 hover:text-white"
-                      }`}
-                    >
-                      {tradeDefaults[key].shortName || tradeDefaults[key].name}
-                    </button>
-                  ))}
-                </div>
+          {/* INTERACTIVE SALES ROI CALCULATOR PANEL */}
+          <div className="relative font-sans" id="pricing-roi-calc">
+            <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
+              <div className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600/20 text-blue-400">
+                <Calculator className="h-4.5 w-4.5" />
               </div>
-
-              {/* Average Job Value slider */}
-              <div>
-                <div className="flex items-center justify-between gap-2 mb-2">
-                  <label className="text-xs font-bold text-slate-300">2. Average Ticket Value per Job</label>
-                  <span className="text-sm font-mono font-bold text-sky-400 bg-sky-950/60 px-2 py-0.5 rounded border border-sky-900/30">
-                    ${ticketSize}
-                  </span>
-                </div>
-                <input
-                  type="range"
-                  min="50"
-                  max="5000"
-                  step="50"
-                  value={ticketSize}
-                  onChange={(e) => setTicketSize(Number(e.target.value))}
-                  className="w-full h-1.5 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-blue-500 focus:outline-none"
-                />
-                <div className="flex justify-between text-[10px] text-slate-500 font-mono mt-1">
-                  <span>$50</span>
-                  <span>$2,500</span>
-                  <span>$5,000</span>
-                </div>
-              </div>
-
-              {/* Additional Monthly Organic Jobs (Base) */}
-              <div>
-                <div className="flex items-center justify-between gap-2 mb-2">
-                  <label className="text-xs font-bold text-slate-300">3. Monthly Organic Jobs (SEO & Automation)</label>
-                  <span className="text-sm font-mono font-bold text-sky-400 bg-sky-950/60 px-2 py-0.5 rounded border border-sky-900/30">
-                    +{additionalJobs} jobs / mo
-                  </span>
-                </div>
-                <input
-                  type="range"
-                  min="1"
-                  max="30"
-                  step="1"
-                  value={additionalJobs}
-                  onChange={(e) => setAdditionalJobs(Number(e.target.value))}
-                  className="w-full h-1.5 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-blue-500 focus:outline-none"
-                />
-                <p className="text-[10px] text-slate-400 mt-1 italic">
-                  * Generated through organic search improvements and Missed-Call Auto Text Back.
-                </p>
-              </div>
-
-              {/* Monthly Paid Ads Budget */}
-              <div>
-                <div className="flex items-center justify-between gap-2 mb-2">
-                  <label className="text-xs font-bold text-slate-300">4. Monthly Paid Ads Budget (Optional)</label>
-                  <span className="text-sm font-mono font-bold text-sky-400 bg-sky-950/60 px-2 py-0.5 rounded border border-sky-900/30">
-                    ${adSpend.toLocaleString()} / mo
-                  </span>
-                </div>
-                <input
-                  type="range"
-                  min="0"
-                  max="10000"
-                  step="100"
-                  value={adSpend}
-                  onChange={(e) => setAdSpend(Number(e.target.value))}
-                  className="w-full h-1.5 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-blue-500 focus:outline-none"
-                />
-                <div className="flex justify-between text-[10px] text-slate-500 font-mono mt-1">
-                  <span>$0</span>
-                  <span>$5,000</span>
-                  <span>$10,000</span>
-                </div>
-                
-                {/* Stats helper card indicating cost-per-lead and acquisition metrics */}
-                {adSpend > 0 && (
-                  <div className="mt-4 bg-slate-955 border border-slate-800/80 rounded-xl p-4 space-y-2">
-                    <div className="flex items-center justify-between text-[11px]">
-                      <span className="text-slate-400 font-medium">Industry Avg Cost-Per-Lead (CPL):</span>
-                      <span className="font-bold text-slate-200 font-mono">${currentCpl} / lead</span>
-                    </div>
-                    <div className="flex items-center justify-between text-[11px]">
-                      <span className="text-slate-400 font-medium">Estimated Monthly Inbound Leads:</span>
-                      <span className="font-extrabold text-sky-400 font-mono">{Math.floor(adLeads)} leads</span>
-                    </div>
-                    <div className="flex items-center justify-between text-[11px]">
-                      <span className="text-slate-400 font-medium font-sans">Google Ad Booking Conversion (40% close):</span>
-                      <span className="font-extrabold text-green-400 font-mono">+{adJobs} Booked Jobs</span>
-                    </div>
-                    <p className="text-[10px] text-slate-450 leading-relaxed pt-2 border-t border-slate-800">
-                      📊 Benchmarked against verified search marketing acquisition databases. {tradeDefaults[selectedTrade].shortName || tradeDefaults[selectedTrade].name} leads generally range from ${currentCpl-10} to ${currentCpl+15} depending on regional density.
-                    </p>
-                  </div>
-                )}
-              </div>
-
+              <span className="text-xs font-bold text-sky-400 uppercase tracking-widest block">Diagnostic Profit Tool</span>
+              <h2 className="font-display text-2xl font-extrabold tracking-tight text-white sm:text-3xl">
+                Calculate Your Direct Local Marketing ROI
+              </h2>
+              <p className="text-xs text-slate-350 leading-relaxed max-w-md mx-auto">
+                Adjust your industry focus, invoice ticket size, organic monthly jobs, search advertising budget, and LeadForge service retainer to calculate your compounding local ROI.
+              </p>
             </div>
 
-            {/* Calculations results display block */}
-            <div className="lg:col-span-6 bg-gradient-to-br from-blue-950 via-slate-900 to-slate-950 border border-blue-900/40 p-8 rounded-3xl flex flex-col justify-between">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch max-w-5xl mx-auto text-left">
               
+              {/* Calculator controls */}
+              <div className="lg:col-span-6 bg-slate-900 border border-slate-850 p-6 sm:p-8 rounded-3xl space-y-6">
+                <h3 className="font-display font-bold text-white text-sm flex items-center gap-2">
+                  <Sliders className="h-4 w-4 text-blue-400" />
+                  Adjust Your Parameters
+                </h3>
+
+                {/* Trade Selector */}
+                <div>
+                  <label className="block text-[11px] font-bold text-slate-300 mb-2">1. Choose Your Industry Focus</label>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    {Object.keys(tradeDefaults).map((key) => (
+                      <button
+                        key={key}
+                        onClick={() => handleTradeChange(key)}
+                        className={`px-2.5 py-1.5 rounded-lg text-[10.5px] font-bold transition-all border text-center cursor-pointer ${
+                          selectedTrade === key 
+                            ? "bg-blue-600 border-blue-500 text-white shadow-md shadow-blue-500/10" 
+                            : "bg-slate-950 border-slate-850 text-slate-400 hover:text-white"
+                        }`}
+                      >
+                        {tradeDefaults[key].shortName || tradeDefaults[key].name}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Average Job Value slider */}
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <label className="text-[11px] font-bold text-slate-300">2. Average Ticket Value per Job</label>
+                    <span className="text-xs font-mono font-bold text-sky-400 bg-sky-955/80 px-2 py-0.5 rounded border border-sky-900/30">
+                      ${ticketSize}
+                    </span>
+                  </div>
+                  <input
+                    type="range"
+                    min="50"
+                    max="5000"
+                    step="50"
+                    value={ticketSize}
+                    onChange={(e) => setTicketSize(Number(e.target.value))}
+                    className="w-full h-1.5 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-blue-500 focus:outline-none"
+                  />
+                  <div className="flex justify-between text-[9px] text-slate-500 font-mono mt-1">
+                    <span>$50</span>
+                    <span>$2,500</span>
+                    <span>$5,000</span>
+                  </div>
+                </div>
+
+                {/* Additional Monthly Organic Jobs (Base) */}
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <label className="text-[11px] font-bold text-slate-300 font-sans font-sans font-sans">3. Monthly Organic Jobs (SEO & Automation)</label>
+                    <span className="text-xs font-mono font-bold text-sky-400 bg-sky-955/80 px-2 py-0.5 rounded border border-sky-900/30">
+                      +{additionalJobs} jobs / mo
+                    </span>
+                  </div>
+                  <input
+                    type="range"
+                    min="1"
+                    max="30"
+                    step="1"
+                    value={additionalJobs}
+                    onChange={(e) => setAdditionalJobs(Number(e.target.value))}
+                    className="w-full h-1.5 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-blue-500 focus:outline-none"
+                  />
+                  <p className="text-[9px] text-slate-400 mt-1 italic">
+                    * Bookings generated through organic search visibility improvements and Missed-Call Auto Text Back responses.
+                  </p>
+                </div>
+
+                {/* Monthly Paid Ads Budget */}
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <label className="text-[11px] font-bold text-slate-300 font-sans">4. Monthly Paid Ads Budget (Optional)</label>
+                    <span className="text-xs font-mono font-bold text-sky-400 bg-sky-955/80 px-2 py-0.5 rounded border border-sky-900/30">
+                      ${adSpend.toLocaleString()} / mo
+                    </span>
+                  </div>
+                  <input
+                    type="range"
+                    min="0"
+                    max="10000"
+                    step="100"
+                    value={adSpend}
+                    onChange={(e) => setAdSpend(Number(e.target.value))}
+                    className="w-full h-1.5 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-blue-500 focus:outline-none"
+                  />
+                  <div className="flex justify-between text-[9px] text-slate-500 font-mono mt-1">
+                    <span>$0</span>
+                    <span>$5,000</span>
+                    <span>$10,000</span>
+                  </div>
+                  
+                  {/* Stats helper card indicating cost-per-lead and acquisition metrics */}
+                  {adSpend > 0 && (
+                    <div className="mt-4 bg-slate-955 border border-slate-805/80 rounded-xl p-4 space-y-2 text-left">
+                      <div className="flex items-center justify-between text-[11px]">
+                        <span className="text-slate-400 font-medium">Industry Avg Cost-Per-Lead (CPL):</span>
+                        <span className="font-bold text-slate-200 font-mono">${currentCpl} / lead</span>
+                      </div>
+                      <div className="flex items-center justify-between text-[11px]">
+                        <span className="text-slate-400 font-medium font-sans">Estimated Monthly Inbound Leads:</span>
+                        <span className="font-extrabold text-sky-400 font-mono font-mono">{Math.floor(adLeads)} leads</span>
+                      </div>
+                      <div className="flex items-center justify-between text-[11px]">
+                        <span className="text-slate-400 font-medium font-sans font-sans">Google Ad Booking Conversion (40% close):</span>
+                        <span className="font-extrabold text-green-400 font-mono">+{adJobs} Booked Jobs</span>
+                      </div>
+                      <p className="text-[9.5px] text-slate-450 leading-relaxed pt-2 border-t border-slate-800 italic">
+                        📊 Benchmarked against verified local search acquisition databases. {tradeDefaults[selectedTrade].shortName || tradeDefaults[selectedTrade].name} leads generally cost around ${currentCpl} depending on regional density.
+                      </p>
+                    </div>
+                  )}
+                </div>
+
+                {/* LeadForge Managed Service Retainer dial */}
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <label className="text-[11px] font-bold text-slate-300 font-sans">5. LeadForge Managed Service Retainer</label>
+                    <span className="text-xs font-mono font-bold text-sky-400 bg-sky-955/80 px-2 py-0.5 rounded border border-sky-900/30">
+                      ${growthRetainer} / mo
+                    </span>
+                  </div>
+                  <input
+                    type="range"
+                    min="100"
+                    max="3000"
+                    step="50"
+                    value={growthRetainer}
+                    onChange={(e) => setGrowthRetainer(Number(e.target.value))}
+                    className="w-full h-1.5 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-blue-500 focus:outline-none"
+                  />
+                  <div className="flex justify-between text-[9px] text-slate-500 font-mono mt-1">
+                    <span>$100</span>
+                    <span>$1,500</span>
+                    <span>$3,000</span>
+                  </div>
+                  <p className="text-[9px] text-slate-400 mt-1.5 italic font-sans font-sans">
+                    * The professional monthly fee paid to LeadForge for maintaining your campaigns, listings optimization, websites & reviews.
+                  </p>
+                </div>
+
+              </div>
+
+              {/* Calculations results display block */}
+              <div className="lg:col-span-6 bg-gradient-to-br from-blue-950/45 via-slate-900 to-slate-950 border border-blue-900/30 p-6 sm:p-8 rounded-3xl flex flex-col justify-between">
+                
+                <div className="space-y-6">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[9.5px] font-bold tracking-wider text-sky-400 uppercase bg-blue-950/60 px-2 py-1 rounded">
+                      Estimated Gross Return
+                    </span>
+                    <span className="text-[10px] text-slate-400 font-mono">
+                      {totalAddedJobs} jobs total / mo
+                    </span>
+                  </div>
+
+                  <div className="space-y-1">
+                    <span className="text-slate-300 text-xs font-semibold block">Estimated New Monthly Revenue</span>
+                    <span className="text-4xl sm:text-5xl font-display font-extrabold text-white tracking-tight">
+                      ${estimatedRevenue.toLocaleString()}
+                    </span>
+                    <span className="text-[10px] text-sky-400 block font-mono">
+                      Formula: {totalAddedJobs} jobs ({baseJobs} organic + {adJobs} paid) × ${ticketSize} avg ticket
+                    </span>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4 border-t border-slate-800 pt-6">
+                    <div>
+                      <span className="text-[9.5px] text-slate-400 font-bold block mb-0.5 uppercase tracking-wide">Investment cost</span>
+                      <span className="text-sm font-bold text-white block">
+                        ${totalInvestment.toLocaleString()} / mo
+                      </span>
+                      <span className="text-[9px] text-slate-400 block leading-tight">
+                        ${growthRetainer} retainer {adSpend > 0 && `+ $${adSpend.toLocaleString()} ad budget`}
+                      </span>
+                    </div>
+                    <div>
+                      <span className="text-[9.5px] text-slate-400 font-bold block mb-0.5 uppercase tracking-wide font-sans">ROI Factor</span>
+                      <span className={`text-sm font-extrabold block ${Number(roiMultiplier) >= 3 ? 'text-green-400' : 'text-sky-400'}`}>
+                        {roiMultiplier}x return
+                      </span>
+                      <span className="text-[9px] text-slate-400 block leading-tight">
+                        Net: +${netValueCreated.toLocaleString()} profit
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-6 border-t border-slate-850 mt-6 text-center shadow-lg">
+                  <button
+                    onClick={handleAuditCta}
+                    className="w-full font-bold text-xs py-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                  >
+                    <span>Get My Free Online Visibility Review</span>
+                    <ArrowRight className="h-4 w-4" />
+                  </button>
+                  <span className="block text-[10px] text-slate-500 mt-2.5">
+                    Calculate and customize your 1-Page proposal inside our client dashboard
+                  </span>
+                </div>
+
+              </div>
+            </div>
+            <div className="hidden">
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] font-bold tracking-wider text-sky-400 uppercase bg-blue-950/60 px-2 py-1 rounded">
@@ -490,7 +572,7 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
                   onClick={handleAuditCta}
                   className="w-full font-bold text-xs py-4.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white shadow-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                 >
-                  <span>Get My Free Business Audit</span>
+                  <span>Get My Free Online Visibility Review</span>
                   <ArrowRight className="h-4 w-4" />
                 </button>
                 <span className="block text-[10px] text-slate-500 mt-2.5">
@@ -499,9 +581,7 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
               </div>
 
             </div>
-
           </div>
-
         </div>
       </section>
             {/* SECTION 2: COMMON PROBLEMS SECTION - Visual alert indicators with frustrated owner photo */}
@@ -565,7 +645,7 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
               onClick={handleAuditCta}
               className="inline-flex items-center gap-1.5 font-bold text-xs uppercase tracking-wider text-sky-400 hover:text-sky-355 bg-slate-950 border border-slate-800 px-6 py-3 rounded-xl shadow-sm hover:bg-slate-900 transition-all cursor-pointer"
             >
-              <span>Get My Free Business Audit</span>
+              <span>Get My Free Online Visibility Review</span>
               <ArrowRight className="h-4 w-4" />
             </button>
           </div>
@@ -661,7 +741,7 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
             
             {[
               {
-                title: "Free Business Audit",
+                title: "Free Online Visibility Review",
                 desc: "We analyze your Google Business Profile, website performance, online reviews, local SEO, and customer response systems to identify opportunities for growth."
               },
               {
@@ -1004,7 +1084,7 @@ export default function HomeView({ setTab, setShowAdminHub }: HomeViewProps) {
               onClick={handleAuditCta}
               className="w-full sm:w-auto font-extrabold text-xs tracking-wide py-3.5 px-7 rounded-xl bg-blue-600 hover:bg-blue-700 text-white transition-all cursor-pointer shadow-lg active:scale-95 flex items-center justify-center gap-1"
             >
-              <span>Get My Free Business Audit</span>
+              <span>Get My Free Online Visibility Review</span>
               <ArrowRight className="h-3.5 w-3.5" />
             </button>
             <button

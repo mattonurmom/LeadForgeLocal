@@ -4,7 +4,7 @@ import {
   ChevronRight, Phone, Mail, Globe, CheckSquare, Layers, 
   Eye, Download, RefreshCw, Sparkles, Building, Play, Star, AlertCircle, Search
 } from "lucide-react";
-import { AuditLead, ContactLead, OutreachTemplate } from "../types";
+import { AuditLead, ContactLead, OutreachTemplate, ChatSessionLead } from "../types";
 import { 
   SERVICES, PACKAGES, FAQ, OUTREACH_TEMPLATES, 
   LOGO_CONCEPTS, BRAND_GUIDE, AUDIT_TEMPLATE, 
@@ -14,10 +14,11 @@ import {
 interface AdminHubProps {
   auditLeads: AuditLead[];
   contactLeads: ContactLead[];
+  chatLeads?: ChatSessionLead[];
   onClearLeads: () => void;
 }
 
-export default function AdminHub({ auditLeads, contactLeads, onClearLeads }: AdminHubProps) {
+export default function AdminHub({ auditLeads, contactLeads, chatLeads = [], onClearLeads }: AdminHubProps) {
   // Security Locks states
   const [isAdminUnlocked, setIsAdminUnlocked] = useState<boolean>(false);
   const [passcode, setPasscode] = useState<string>("");
@@ -782,6 +783,116 @@ export default function AdminHub({ auditLeads, contactLeads, onClearLeads }: Adm
                       ))}
                     </tbody>
                   </table>
+                </div>
+              )}
+            </div>
+
+            {/* AI Assistant Chat Leads List */}
+            <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden mt-6">
+              <div className="px-6 py-5 border-b border-slate-800">
+                <h2 className="text-lg font-bold text-white flex items-center gap-2">
+                  <span className="h-2 w-2 rounded-full bg-indigo-500 animate-pulse"></span>
+                  AI Customer Success Transcripts & Notes
+                </h2>
+                <p className="text-xs text-slate-400 mt-1">
+                  Real-time conversation logs and AI-generated consultation notes recorded from the floating client assistant.
+                </p>
+              </div>
+
+              {chatLeads.length === 0 ? (
+                <div className="p-12 text-center text-slate-400 text-sm">
+                  No active AI conversation sessions recorded yet.
+                </div>
+              ) : (
+                <div className="divide-y divide-slate-800">
+                  {chatLeads.map((session) => (
+                    <div key={session.id} className="p-6 hover:bg-slate-800/20 transition-all space-y-4">
+                      {/* Session Summary Header */}
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div className="flex items-start gap-3">
+                          <div className="p-2.5 bg-indigo-950 border border-indigo-800/50 rounded-xl text-indigo-400">
+                            <MessageSquare className="h-5 w-5" />
+                          </div>
+                          <div>
+                            <div className="flex items-center gap-2 flex-wrap">
+                              <h3 className="font-bold text-sm text-white">
+                                {session.businessContext || "Local Business Prospect"}
+                              </h3>
+                              <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                                session.leadScore === "Hot" 
+                                  ? "bg-red-500/20 text-red-300 border border-red-500/30" 
+                                  : session.leadScore === "Warm" 
+                                    ? "bg-amber-500/20 text-amber-300 border border-amber-500/30" 
+                                    : "bg-slate-500/20 text-slate-300 border border-slate-700"
+                              }`}>
+                                {session.leadScore || "Warm"} Lead
+                              </span>
+                            </div>
+                            <p className="text-xs text-slate-500 mt-0.5">
+                              Started: {new Date(session.startedAt).toLocaleString()} | Message Exchange: {session.messagesCount} lines
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={() => {
+                              setSelectedLead({
+                                name: "AI Chat Lead",
+                                businessName: session.businessContext || "Local Prospect",
+                                email: "Extracted via Chat",
+                                phone: "Extracted via Chat",
+                                message: `Notes summary: ${session.businessContext}`,
+                                type: "Contact"
+                              });
+                              handleSelectLeadForOutreach({
+                                name: "AI Chat Lead",
+                                businessName: session.businessContext || "Local Prospect",
+                                email: "Parsed from chat",
+                                phone: "Parsed from chat",
+                                message: `Summary Notes:\n${session.summaryNotes}`,
+                                type: "Contact"
+                              });
+                            }}
+                            className="px-2.5 py-1.5 bg-yellow-500/15 text-yellow-300 hover:bg-yellow-500 hover:text-slate-950 rounded font-bold transition-all text-[11px] flex items-center gap-1 cursor-pointer"
+                          >
+                            <Sparkles className="h-3 w-3" />
+                            <span>AI Copilot Outreach</span>
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Main Dynamic Summary Notes Section */}
+                      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+                        {/* Dynamic AI-extracted notes */}
+                        <div className="lg:col-span-7 bg-slate-950/60 rounded-xl border border-slate-800 p-4 font-normal text-xs text-slate-300">
+                          <span className="text-[10px] font-bold text-indigo-400 uppercase tracking-widest block mb-1 font-mono flex items-center gap-1">
+                            <Sparkles className="h-3 w-3 animate-pulse" /> AI Summary & Consultation Notes
+                          </span>
+                          <div className="markdown-body prose prose-invert max-w-full text-xs leading-relaxed">
+                            {renderPlaybookContent(session.summaryNotes || "*Conversations logs logged successfully*")}
+                          </div>
+                        </div>
+
+                        {/* Recent conversation history snippet */}
+                        <div className="lg:col-span-5 bg-slate-950/30 rounded-xl border border-slate-850 p-4 flex flex-col space-y-2 max-h-[220px] overflow-y-auto w-full">
+                          <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest block font-mono">
+                            Recent Dialogue Snippet
+                          </span>
+                          <div className="space-y-2 mt-1">
+                            {session.messages && session.messages.slice(-4).map((m, i) => (
+                              <div key={i} className="text-[11px] leading-relaxed">
+                                <span className={`font-semibold ${m.sender === "user" ? "text-blue-400" : "text-green-400"}`}>
+                                  {m.sender === "user" ? "Client" : "Assistant"}:
+                                </span>{" "}
+                                <span className="text-slate-300 opacity-90">{m.text}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               )}
             </div>

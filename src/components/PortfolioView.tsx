@@ -168,7 +168,7 @@ export default function PortfolioView({ setTab }: PortfolioViewProps) {
                       onClick={handleAuditCta}
                       className="text-xs font-bold text-sky-450 hover:text-sky-305 flex items-center gap-1 cursor-pointer self-start sm:self-auto"
                     >
-                      <span>Get My Free Business Audit</span>
+                      <span>Get My Free Online Visibility Review</span>
                       <ArrowRight className="h-3.5 w-3.5" />
                     </button>
                   </div>
@@ -189,13 +189,13 @@ export default function PortfolioView({ setTab }: PortfolioViewProps) {
             Want To Uncover Your Discovered Revenue Gaps?
           </h2>
           <p className="text-xs text-slate-300 leading-relaxed max-w-lg mx-auto">
-            Our free Audit checks every zip code citation, page index loading performance, and mobile layout. No obligations required.
+            Our free Online Visibility Review checks every zip code citation, page index loading performance, and mobile layout. No obligations required.
           </p>
           <button
             onClick={handleAuditCta}
             className="font-extrabold text-xs py-3.5 px-6 rounded-xl bg-blue-600 hover:bg-blue-700 text-white shadow-md cursor-pointer transition-all uppercase tracking-wider inline-flex items-center gap-1"
           >
-            <span>Get My Free Business Audit</span>
+            <span>Get My Free Online Visibility Review</span>
             <ArrowRight className="h-4 w-4" />
           </button>
         </div>

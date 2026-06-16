@@ -369,7 +369,7 @@ Direct Partner Support Hotline: (469) 751-7153.`;
         <div className="text-center max-w-2xl mx-auto mb-12 space-y-3 font-sans">
           <span className="text-xs font-bold text-sky-400 uppercase tracking-widest block font-sans">Quick & Friendly Diagnostic Check</span>
           <h1 className="font-display text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-            Get My Free Simple Online Audit
+            Get My Free Online Visibility Review
           </h1>
           <p className="text-sm text-slate-300 leading-relaxed font-sans">
             A quick, easy-to-understand check of how your business appears on phones, Google Maps, and search queries—without any complicated tech jargon.
@@ -387,7 +387,7 @@ Direct Partner Support Hotline: (469) 751-7153.`;
                 </div>
                 <div>
                   <span className="text-[10px] uppercase font-bold text-slate-400 block tracking-wider font-mono">Checklist Scan Completed</span>
-                  <h3 className="font-display font-extrabold text-sky-450 text-lg">Your Report is Ready!</h3>
+                  <h3 className="font-display font-extrabold text-sky-450 text-lg">Your Visibility Review is Ready!</h3>
                 </div>
               </div>
 
@@ -408,7 +408,7 @@ Direct Partner Support Hotline: (469) 751-7153.`;
                   }}
                   className="rounded-lg border border-slate-800 bg-slate-950 hover:bg-slate-900 text-slate-350 font-semibold text-xs px-3 py-2 cursor-pointer transition-all animate-fadeIn"
                 >
-                  Restart Audit
+                  Restart Review
                 </button>
               </div>
             </div>
@@ -563,7 +563,7 @@ Direct Partner Support Hotline: (469) 751-7153.`;
                   <div className="space-y-2">
                     <span className="text-emerald-450 font-extrabold block uppercase tracking-wider text-[11px] font-mono">📅 Expert Roadmap Action Plan</span>
                     <p className="font-sans text-slate-200 text-sm leading-relaxed">
-                      Your audit identified several opportunities that could improve online visibility, customer trust, and lead generation. If you would like expert assistance implementing these recommendations, schedule a strategy session with LeadForge Local to receive a customized growth plan tailored to your business.
+                      Your visibility review identified several opportunities that could improve online visibility, customer trust, and lead generation. If you would like expert assistance implementing these recommendations, schedule a strategy session with LeadForge Local to receive a customized growth plan tailored to your business.
                     </p>
                   </div>
                   
@@ -737,7 +737,7 @@ Direct Partner Support Hotline: (469) 751-7153.`;
                     </>
                   ) : (
                     <>
-                      <span>Get My Free Business Audit</span>
+                      <span>Get My Free Online Visibility Review</span>
                       <ArrowRight className="h-4.5 w-4.5" />
                     </>
                   )}

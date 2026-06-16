@@ -69,3 +69,14 @@ export interface OutreachTemplate {
   content: string;
   tips: string;
 }
+
+export interface ChatSessionLead {
+  id: string;
+  startedAt: string;
+  lastActive: string;
+  messagesCount: number;
+  businessContext?: string;
+  summaryNotes?: string;
+  leadScore?: "Hot" | "Warm" | "Cold";
+  messages: { sender: "user" | "bot"; text: string; timestamp: string }[];
+}

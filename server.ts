@@ -334,6 +334,304 @@ Here is our top sales recommendations to close this client:
   }
 });
 
+// Helper: Visitor chat heuristic selector
+function getClientChatHeuristic(message: string): string {
+  const query = message.toLowerCase();
+  
+  if (query.includes("pricing") || query.includes("price") || query.includes("cost") || query.includes("plan") || query.includes("package") || query.includes("how much") || query.includes("subscription")) {
+    return `### 💳 LeadForge Local Pricing Plans
+
+We offer transparent, simple, and high-performing packages with zero hidden fees:
+
+1. **Starter Local Package ($299 One-Time)**:
+   - Google Business Profile Cleanup & Optimization
+   - Facebook Page Cleanup & Alignment
+   - Review Automation Link & custom QR Card
+   - Beautiful 1-Page Click-to-Call Landing Page
+   
+2. **Premium Growth Package ($499/mo) — *Most Popular!***:
+   - High-Converting 5-Page Local Trade Website
+   - Google Business Profile Active Monthly Management
+   - **Missed Call Text Back Integration** (auto-respond instantly)
+   - SMS Lead Alerts straight to your phone
+   - Google Maps promotion
+
+3. **Premium Marketing Package ($999/mo)**:
+   - Premium 5-page trade website with interactive scheduling
+   - Social media management (Facebook + Instagram)
+   - Advanced multi-city location SEO pages
+   - Built-in AI Lead Qualification Assistant
+
+Would you like to start with our Starter Package or run a **Free 3-Point Online Visibility Review** first to inspect your current search ranking? Let me know!`;
+  }
+  
+  if (query.includes("missed") || query.includes("text") || query.includes("sms") || query.includes("call") || query.includes("text-back") || query.includes("unanswered")) {
+    return `### 📞 Missed Call Auto-Text Back
+
+Did you know that over **62% of calls to local contractors and service businesses go unanswered** when you're busy on a job? When a homeowner gets a voicemail, they don't leave a message—they hang up and call the next business online.
+
+Our **Missed Call Text-Back System** solves this instantly:
+- When you miss a call, our system automatically texts them within 30 seconds: *"Hi, sorry we missed your call! We are on a quick service call—how can we help you today?"*
+- This starts an immediate conversational thread, locking in the client before they look at competitor businesses.
+- It is fully automated and included in our popular **$499/mo Premium Growth Package** or as an add-on.
+
+It acts like a 24/7 client finder that works while you run your tools! Would you like help configuring this for your business phone?`;
+  }
+  
+  if (query.includes("maps") || query.includes("rank") || query.includes("pack") || query.includes("seo") || query.includes("profile") || query.includes("gbp")) {
+    return `### 📍 Google Maps 3-Pack SEO Optimization
+
+Over **80% of local service queries** start with a Google Maps search (e.g. *"plumber near me"* or *"roofing contractor Fort Worth"*). If your business isn't inside the top three maps results, you are missing out on the majority of organic calls!
+
+At **LeadForge Local**, we improve your map rankings by:
+- Cleaning up and verifying your listing's categorization.
+- Syncing Name, Address, and Phone (NAP) details across directories.
+- Setting up a frictionless **Google Review system** with short links and custom flyers/QR codes.
+- Managing weekly high-engagement photo uploads and local updates.
+
+To see exactly what's holding your listing back, you can run our **Free 3-Point Online Visibility Review** right from our main navigation bar!`;
+  }
+  
+  if (query.includes("website") || query.includes("design") || query.includes("site") || query.includes("page")) {
+    return `### 💻 Professional, High-Converting Web Design
+
+Your website is your ultimate customer-finding machine. Old, slow sites leak clients to your competitors.
+
+We design and host beautiful, lightning-fast, and mobile-friendly websites:
+- **Mobile-First Structure**: Optimized for thumb clicks, clear Call Now buttons, and simple scheduling fields.
+- **Extreme Loading Speeds**: Built to load in under 1 second on mobile networks, maximizing conversion.
+- Included as a gorgeous custom landing page in our **$299 Starter Package** or as a full 5-page agency-grade site in our **$499/mo Premium Growth Package**.
+
+We handle all the technical setups, domains, and design! What industry is your business in? I can suggest some great templates!`;
+  }
+  
+  if (query.includes("about") || query.includes("who are") || query.includes("founders") || query.includes("eisan") || query.includes("heather") || query.includes("matthew")) {
+    return `### 🌸 Meet Our Founders
+
+**LeadForge Local** was founded by **Matthew & Heather Eisan**, right here in the North Fort Worth area! 
+
+Matthew and Heather are deeply passionate about small business development. They saw firsthand how local tradesmen, contractors, and health clinics struggle with complicated, expensive, and slow-moving web design agencies. 
+
+We created LeadForge to change that—offering **flat, transparent, upfront rates, simple setups, and direct, day-to-day access to your coordinators**. No complicated legal contracts or corporate circles. Just clean work that gets you more service calls!`;
+  }
+  
+  if (query.includes("audit") || query.includes("scan") || query.includes("free audit") || query.includes("analyse") || query.includes("check")) {
+    return `### 📊 Get Your Free Online Visibility Review!
+
+We can check your Google Maps listing and mobile speed right now completely for free!
+
+Just click the **Visibility Review** button in our main navigation menu, or fill out the short form on our home screen:
+1. Enter your Name and Business Email.
+2. Provide your Business Name.
+3. Our intelligence system will run a diagnostic scan and produce a custom, detailed PDF visibility review report pinpointing exactly where your business is losing leads and maps placements.
+
+It takes less than 60 seconds. Would you like me to guide you to the visibility review page?`;
+  }
+
+  // Default helpful greeting/context
+  return `### 👋 Welcome to LeadForge Local!
+
+I am your friendly client growth companion here to help you understand our services and how we can grow your local business! 
+
+We specialize in helping home service contractors, trade professionals, legal practices, and medical clinics win more business through:
+* **Google Maps 3-Pack Rank Optimization** (Get seen first)
+* **Missed Call Auto-Text Back System** (Saving every unanswered ringer call)
+* **Lightning-Fast Web Design** (Convert visitors into paying jobs)
+* **5-Star Review Automation** (Build ultimate local trust)
+
+What type of business do you run (e.g., plumbing, roofing, landscaping, AC/HVAC, dental)? Let me know and I will share exactly how we can help you get more jobs!`;
+}
+
+// Helper: Analyze client conversation history and return a report summary/notes
+async function generateConversationNotes(history: any[], latestMessage: string, apiKey: string | undefined): Promise<{ summaryNotes: string; businessContext: string; leadScore: "Hot" | "Warm" | "Cold" }> {
+  let fullConversation = "";
+  if (Array.isArray(history)) {
+    history.slice(-10).forEach((msg: any) => {
+      fullConversation += `${msg.sender}: ${msg.text}\n\n`;
+    });
+  }
+  fullConversation += `user: ${latestMessage}`;
+
+  const getHeuristicNotes = () => {
+    const textLower = fullConversation.toLowerCase();
+    let interestMatches: string[] = [];
+    if (textLower.includes("pricing") || textLower.includes("price") || textLower.includes("cost") || textLower.includes("how much") || textLower.includes("package")) interestMatches.push("Pricing Plans");
+    if (textLower.includes("missed") || textLower.includes("text") || textLower.includes("sms")) interestMatches.push("Missed Call Auto-Text Back");
+    if (textLower.includes("maps") || textLower.includes("rank") || textLower.includes("seo") || textLower.includes("gbp") || textLower.includes("google")) interestMatches.push("Google Maps SEO");
+    if (textLower.includes("site") || textLower.includes("web") || textLower.includes("design")) interestMatches.push("Professional Web Design");
+    if (textLower.includes("audit") || textLower.includes("scan") || textLower.includes("review") || textLower.includes("visibility")) interestMatches.push("Visibility Review");
+
+    let extractedContext = "Local Business Owner";
+    const industries = ["plumber", "plumbing", "roofer", "roofing", "electrician", "electrical", "hvac", "ac repair", "landscaper", "landscaping", "drywall", "dentist", "dental", "lawyer", "legal", "clinic", "contractor", "painter", "painting"];
+    for (const ind of industries) {
+      if (textLower.includes(ind)) {
+        extractedContext = ind.charAt(0).toUpperCase() + ind.slice(1) + " Service Prospect";
+        break;
+      }
+    }
+
+    let score: "Hot" | "Warm" | "Cold" = "Cold";
+    const hotKeywords = ["hire", "buy", "starter", "premium", "growth", "package", "interested", "book", "meeting", "call", "appointment", "sign up", "sign-up", "start tomorrow", "telephone", "phone number"];
+    const warmKeywords = ["how much", "can you", "does it", "about", "founders", "work", "where", "phone", "review", "audit", "scan", "visibility", "details", "website"];
+    
+    const hasHot = hotKeywords.some(kw => textLower.includes(kw));
+    const hasWarm = warmKeywords.some(kw => textLower.includes(kw));
+
+    if (hasHot) score = "Hot";
+    else if (hasWarm) score = "Warm";
+
+    const notes = `### 📋 Conversation Insights (Heuristic Analysis)
+- **Primary Interests**: ${interestMatches.length > 0 ? interestMatches.join(", ") : "General Inquiry"}
+- **Identified Needs**: Customer looking to verify pricing options and local visibility optimization.
+- **Engagement Activity**: Active query response on LeadForge Local setups.
+- **Next Sales Action**: Suggest doing direct local visibility outreach or proposing a live 3-pack search demonstration.`;
+
+    return {
+      summaryNotes: notes,
+      businessContext: extractedContext,
+      leadScore: score
+    };
+  };
+
+  if (!apiKey) {
+    return getHeuristicNotes();
+  }
+
+  try {
+    const ai = new GoogleGenAI({
+      apiKey: apiKey,
+      httpOptions: { headers: { 'User-Agent': 'aistudio-build' } }
+    });
+
+    const analysisPrompt = `
+You are an expert sales analyst and prospect lead intelligence compiler. Your task is to analyze the following client-assistant chatbot conversation and extract neat, concise, and professional sales notes to help on outreach.
+
+Conversation Transcript:
+${fullConversation}
+
+Return a valid raw JSON object matching this TypeScript interface EXACTLY. Do not add any backticks, markdown markers, or explanatory text around it. Just return the JSON object:
+{
+  "summaryNotes": "Markdown formatted summary containing: short bullet list detailing exactly what was discussed, what specific topics the user asked about, what concerns or roadblocks they have, and recommended sales strategy lines.",
+  "businessContext": "A brief 2-5 word descriptor of their business sector as mentioned (e.g. 'HVAC Contractor Fort Worth', 'Dental Clinic Owner', 'General Trades Prospect')",
+  "leadScore": "Hot" | "Warm" | "Cold"
+}
+
+Guide for 'leadScore':
+- Use 'Hot': if they explicitly asked how to purchase, which packages to choose, requested an email/call setup, or showed strong, immediate buying intent.
+- Use 'Warm': if they asked detailed questions about specific services (like missed-call textback, how maps work, or where you're located) but haven't said they want to buy yet.
+- Use 'Cold': if they just said simple greetings, test phrases, spam, or showed low/basic interest.
+`;
+
+    const response = await ai.models.generateContent({
+      model: "gemini-3.5-flash",
+      contents: analysisPrompt,
+    });
+
+    const cleanRes = response.text.trim().replace(/^```json\s*/i, "").replace(/```$/, "").trim();
+    const result = JSON.parse(cleanRes);
+    return {
+      summaryNotes: result.summaryNotes || "Discussions logged.",
+      businessContext: result.businessContext || "Local Prospect",
+      leadScore: result.leadScore || "Warm"
+    };
+  } catch (error) {
+    console.warn("[LeadForge Server] Gemini error analyzing chat session - fallback to heuristics:", error);
+    return getHeuristicNotes();
+  }
+}
+
+// API: Visitor AI chat support desk
+app.post("/api/client-ai-chat", async (req, res) => {
+  const { message = "", history = [], pageContext = "home" } = req.body;
+  try {
+    const apiKey = process.env.GEMINI_API_KEY;
+
+    if (!apiKey) {
+      const text = getClientChatHeuristic(message);
+      const insights = await generateConversationNotes(history, message, undefined);
+      return res.json({ 
+        status: "optimized_heuristic", 
+        text,
+        summaryNotes: insights.summaryNotes,
+        businessContext: insights.businessContext,
+        leadScore: insights.leadScore
+      });
+    }
+
+    // Initialize Gemini Client
+    const ai = new GoogleGenAI({
+      apiKey: apiKey,
+      httpOptions: {
+        headers: {
+          'User-Agent': 'aistudio-build',
+        }
+      }
+    });
+
+    // Format chat history transcript for high reliability
+    let transcript = "";
+    if (Array.isArray(history)) {
+      history.slice(-8).forEach((msg: any) => {
+        transcript += `${msg.sender === "user" ? "Client" : "LeadForge Helper"}: ${msg.text}\n\n`;
+      });
+    }
+    transcript += `Client: ${message}\n\nLeadForge Helper:`;
+
+    const promptText = `
+You are the elite friendly customer success coordinator, conversion writer, and lead consultant for LeadForge Local (founding owners: Matthew & Heather Eisan). Your goal is to guide prospective visitors (tradespeople, local service shop owners, medical/legal offices, plumbers, roofers, etc.) and answer their questions about how LeadForge Local can double their service calls, reviews, and client bookings.
+
+Current Page Context the client is viewing: "${pageContext}"
+
+LeadForge Local Key Service Facts:
+1. Google Maps 3-Pack Rank SEO Upgrade: Optimize categories, claims, citations, NAP, and reviews to appear in primary map views.
+2. Missed-Call Auto-Text Back Integration: Automatically texts missed ringer callers within 30 seconds ("Sorry we missed you - we are on a call - how can we help?"). Over 62% of calls go unanswered - this locks in warm clients instantly.
+3. Fast Mobile-First Web Design: 1-page landing pages or full 5-page trade sites built mobile-first and loading under a second.
+4. google Review Management: customized shortcuts/links, print stickers, magnets with QR codes, text script templates.
+
+Pricing Plans:
+- Starter Local Package: $299 One-Time Setup. Essential Maps cleanup, Facebook setup, 1-page click-to-call site, review setup.
+- Premium Growth Package: $499/mo (Most Popular!). Gorgeous 5-Page trade website, GBP monthly updates, Missed Call Text-back loop, SMS owner alerts.
+- Premium Marketing Package: $999/mo. Web customizations, social media marketing 3x/week, multi-suburb targeted landing pages, advanced SEO.
+
+Writing Tone & Rules:
+- Highly warm, responsive, encouraging, practical, and neighborly.
+- Limit output to 140 words max.
+- Be extremely scannable: use bullet points and clean headers where appropriate.
+- If the visitor asks to request a review, suggest running our 'Free Online Visibility Review' or filling out the 'Contact Us' form.
+
+Conversation Playbook:
+${transcript}
+`;
+
+    const response = await ai.models.generateContent({
+      model: "gemini-3.5-flash",
+      contents: promptText,
+    });
+
+    const insights = await generateConversationNotes(history, message, apiKey);
+
+    return res.json({ 
+      status: "live_gemini", 
+      text: response.text,
+      summaryNotes: insights.summaryNotes,
+      businessContext: insights.businessContext,
+      leadScore: insights.leadScore
+    });
+
+  } catch (error: any) {
+    console.error("Gemini Client Chat API error:", error);
+    const fallbackText = getClientChatHeuristic(message);
+    const insights = await generateConversationNotes(history, message, undefined);
+    return res.json({
+      status: "fallback_heuristic",
+      text: `${fallbackText}\n\n*(Note: Our live AI link is temporarily operating on heuristic lookup due to a network or rate limit adjustment. We are fully available to assist!)*`,
+      summaryNotes: insights.summaryNotes,
+      businessContext: insights.businessContext,
+      leadScore: insights.leadScore
+    });
+  }
+});
+
 // Helper: Heuristic local audit generator
 function generateHeuristicAudit(businessName: string, category: string, website: string, gbpLink: string) {
   const cat = (category || "").toLowerCase();

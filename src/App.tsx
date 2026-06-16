@@ -11,7 +11,8 @@ import AdminHub from "./components/AdminHub";
 import Footer from "./components/Footer";
 import TermsView from "./components/TermsView";
 import PrivacyView from "./components/PrivacyView";
-import { AuditLead, ContactLead } from "./types";
+import ClientChatbox from "./components/ClientChatbox";
+import { AuditLead, ContactLead, ChatSessionLead } from "./types";
 import { initGA4 } from "./utils/analytics";
 
 export default function App() {
@@ -352,6 +353,36 @@ export default function App() {
     ];
   });
 
+  // Load and save client chat sessions leads
+  const [chatLeads, setChatLeads] = useState<ChatSessionLead[]>(() => {
+    const saved = localStorage.getItem("leadforge_chat_leads");
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        console.error("Failed to parse chat session leads:", e);
+      }
+    }
+    // Return sample chat session for excellent design display value
+    return [
+      {
+         id: "sample-chat-1",
+         startedAt: new Date(Date.now() - 3600000).toISOString(),
+         lastActive: new Date(Date.now() - 1200000).toISOString(),
+         messagesCount: 4,
+         businessContext: "Fort Worth Roofing Shop",
+         summaryNotes: "### 📋 Conversation Insights\n\n- **Client Inquiry**: Asked about the Premium Growth Plan ($499/mo) and automated missed-call SMS lookup.\n- **Pain Points**: Owner is often on site and misses about 5 phone calls a day, losing client quotes.\n- **Sales Match**: Highly interested in Missed Call Auto-Text Back.\n- **Lead Rating**: **Hot** - Prompt a callback with sample contract drafts immediately.",
+         leadScore: "Hot" as const,
+         messages: [
+           { sender: "user", text: "how much is the automated missed call text back?", timestamp: new Date(Date.now() - 3600000).toISOString() },
+           { sender: "bot", text: "Our Missed Call Auto-Text Back system is fully included in our Premium Growth Package at $499/mo!", timestamp: new Date(Date.now() - 3500000).toISOString() },
+           { sender: "user", text: "i miss like 5 calls a day when i am on a roof so this sounds perfect", timestamp: new Date(Date.now() - 3400000).toISOString() },
+           { sender: "bot", text: "Yes that is exactly what it is designed for! It texts the owner within 30 seconds so they do not go to your competitor. Would you like to get set up?", timestamp: new Date(Date.now() - 3300000).toISOString() }
+         ]
+      }
+    ];
+  });
+
   useEffect(() => {
     localStorage.setItem("leadforge_audit_leads", JSON.stringify(auditLeads));
   }, [auditLeads]);
@@ -359,6 +390,23 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem("leadforge_contact_leads", JSON.stringify(contactLeads));
   }, [contactLeads]);
+
+  useEffect(() => {
+    localStorage.setItem("leadforge_chat_leads", JSON.stringify(chatLeads));
+  }, [chatLeads]);
+
+  const handleSyncChatSession = (session: ChatSessionLead) => {
+    setChatLeads(prev => {
+      const idx = prev.findIndex(x => x.id === session.id);
+      if (idx !== -1) {
+        const copy = [...prev];
+        copy[idx] = session;
+        return copy;
+      } else {
+        return [session, ...prev];
+      }
+    });
+  };
 
   const handleAddAuditLead = (lead: Omit<AuditLead, "id" | "submittedAt" | "status">) => {
     const newLead: AuditLead = {
@@ -394,6 +442,7 @@ export default function App() {
   const handleClearLeads = () => {
     localStorage.removeItem("leadforge_audit_leads");
     localStorage.removeItem("leadforge_contact_leads");
+    localStorage.removeItem("leadforge_chat_leads");
     // Reload standard sample leads
     setAuditLeads([
       {
@@ -430,6 +479,23 @@ export default function App() {
         submittedAt: "2026-06-07 10:20"
       }
     ]);
+    setChatLeads([
+      {
+         id: "sample-chat-1",
+         startedAt: new Date(Date.now() - 3600000).toISOString(),
+         lastActive: new Date(Date.now() - 1200000).toISOString(),
+         messagesCount: 4,
+         businessContext: "Fort Worth Roofing Shop",
+         summaryNotes: "### 📋 Conversation Insights\n\n- **Client Inquiry**: Asked about the Premium Growth Plan ($499/mo) and automated missed-call SMS lookup.\n- **Pain Points**: Owner is often on site and misses about 5 phone calls a day, losing client quotes.\n- **Sales Match**: Highly interested in Missed Call Auto-Text Back.\n- **Lead Rating**: **Hot** - Prompt a callback with sample contract drafts immediately.",
+         leadScore: "Hot" as const,
+         messages: [
+           { sender: "user", text: "how much is the automated missed call text back?", timestamp: new Date(Date.now() - 3600000).toISOString() },
+           { sender: "bot", text: "Our Missed Call Auto-Text Back system is fully included in our Premium Growth Package at $499/mo!", timestamp: new Date(Date.now() - 3500000).toISOString() },
+           { sender: "user", text: "i miss like 5 calls a day when i am on a roof so this sounds perfect", timestamp: new Date(Date.now() - 3400000).toISOString() },
+           { sender: "bot", text: "Yes that is exactly what it is designed for! It texts the owner within 30 seconds so they do not go to your competitor. Would you like to get set up?", timestamp: new Date(Date.now() - 3300000).toISOString() }
+         ]
+      }
+    ]);
   };
 
   const renderActiveView = () => {
@@ -438,6 +504,7 @@ export default function App() {
         <AdminHub 
           auditLeads={auditLeads} 
           contactLeads={contactLeads} 
+          chatLeads={chatLeads}
           onClearLeads={handleClearLeads}
         />
       );
@@ -488,6 +555,11 @@ export default function App() {
         setTab={setTab} 
         setShowAdminHub={handleSetShowAdminHub} 
       />
+
+      {/* Floating AI Client Chatbox */}
+      {!showAdminHub && (
+        <ClientChatbox setTab={setTab} currentTab={currentTab} onSyncChatSession={handleSyncChatSession} />
+      )}
 
     </div>
   );

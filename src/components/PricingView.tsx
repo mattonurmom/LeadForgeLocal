@@ -1,13 +1,42 @@
-import React from "react";
-import { PACKAGES } from "../data";
-import { Check, Star } from "lucide-react";
+import React, { useState } from "react";
+import { PACKAGES, FAQ } from "../data";
+import { Check, Star, HelpCircle, ChevronDown, ChevronUp, Search, SlidersHorizontal } from "lucide-react";
 
 interface PricingViewProps {
   setTab: (tab: string) => void;
 }
 
 export default function PricingView({ setTab }: PricingViewProps) {
-  
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [expandedFaqs, setExpandedFaqs] = useState<Record<string, boolean>>({});
+
+  const toggleFaq = (id: string) => {
+    setExpandedFaqs(prev => ({
+      ...prev,
+      [id]: !prev[id]
+    }));
+  };
+
+  const toggleAllFaqs = (expand: boolean) => {
+    const newExpanded: Record<string, boolean> = {};
+    if (expand) {
+      filteredFaqs.forEach(faq => {
+        newExpanded[faq.id] = true;
+      });
+    }
+    setExpandedFaqs(newExpanded);
+  };
+
+  const categories = ["All", "General", "Web Design", "Social Media", "Marketing", "Lead Generation"];
+
+  const filteredFaqs = FAQ.filter(faq => {
+    const matchesCategory = selectedCategory === "All" || faq.category === selectedCategory;
+    const matchesSearch = faq.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                          faq.answer.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
+
   const handleCta = () => {
     setTab("audit");
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -107,7 +136,7 @@ export default function PricingView({ setTab }: PricingViewProps) {
                         : "bg-slate-950 hover:bg-slate-850 hover:border-slate-705 border border-slate-800 text-white"
                     }`}
                   >
-                    Get My Free Business Audit
+                    Get My Free Visibility Review
                   </button>
                   <span className="text-[10px] text-slate-450 block">Or book free call above</span>
                 </div>
@@ -115,6 +144,141 @@ export default function PricingView({ setTab }: PricingViewProps) {
               </div>
             ))}
           </div>
+
+        </div>
+      </section>
+
+      {/* SECTION 3: THE COMPREHENSIVE 25 FAQ VAULT */}
+      <section className="bg-slate-900 border-t border-slate-850 py-20 sm:py-24" id="faq-vault-section">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          
+          <div className="text-center space-y-4 mb-16">
+            <div className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600/20 text-sky-400">
+              <HelpCircle className="h-4.5 w-4.5" />
+            </div>
+            <span className="text-xs font-bold text-sky-400 uppercase tracking-widest block font-sans">Complete Transparency</span>
+            <h2 className="font-display text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-xs text-slate-300 leading-relaxed max-w-2xl mx-auto font-sans">
+              What does LeadForge Local actually do to help your business? Look through our complete 25-point Q&A vault covering Google maps setups, reviews, and missed-call text-back systems.
+            </p>
+          </div>
+
+          {/* Interactive controls */}
+          <div className="bg-slate-950/70 border border-slate-850 p-6 rounded-3xl mb-10 space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+              {/* Search Bar */}
+              <div className="relative">
+                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+                <input
+                  type="text"
+                  placeholder="Search all 25 questions & answers..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full bg-slate-900 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-xs text-slate-200 outline-none focus:border-blue-500 transition-colors"
+                />
+              </div>
+
+              {/* Toggle Controls */}
+              <div className="flex gap-2 justify-end text-right">
+                <button
+                  type="button"
+                  onClick={() => toggleAllFaqs(true)}
+                  className="px-3.5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-850 border border-slate-800 text-[11px] font-bold text-slate-300 transition-all cursor-pointer"
+                >
+                  Expand All
+                </button>
+                <button
+                  type="button"
+                  onClick={() => toggleAllFaqs(false)}
+                  className="px-3.5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-850 border border-slate-800 text-[11px] font-bold text-slate-300 transition-all cursor-pointer"
+                >
+                  Collapse All
+                </button>
+              </div>
+            </div>
+
+            {/* Category Filter Pills */}
+            <div className="flex flex-wrap gap-1.5 pt-2 border-t border-slate-800">
+              <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400 self-center mr-2">Filter Category:</span>
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`px-3 py-1.5 rounded-lg text-[10px] font-bold transition-all border cursor-pointer ${
+                    selectedCategory === cat
+                      ? "bg-blue-600 border-blue-500 text-white shadow-md shadow-blue-500/10"
+                      : "bg-slate-900 border-slate-850 text-slate-400 hover:text-white"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Interactive matched results status */}
+          <div className="flex justify-between items-center mb-6">
+            <span className="text-[11px] text-slate-400 font-mono">
+              Showing <strong className="text-white font-semibold">{filteredFaqs.length}</strong> of 25 directory items
+            </span>
+          </div>
+
+          {/* FAQ Accordion List */}
+          {filteredFaqs.length > 0 ? (
+            <div className="space-y-4">
+              {filteredFaqs.map((faq) => {
+                const isExpanded = !!expandedFaqs[faq.id];
+                return (
+                  <div
+                    key={faq.id}
+                    className={`bg-slate-950 rounded-2xl border transition-all duration-300 ${
+                      isExpanded
+                        ? "border-blue-600/50 shadow-md shadow-blue-500/5"
+                        : "border-slate-850 hover:border-slate-800"
+                    }`}
+                  >
+                    <button
+                      onClick={() => toggleFaq(faq.id)}
+                      className="w-full text-left p-5 flex items-start justify-between gap-4 cursor-pointer focus:outline-none"
+                    >
+                      <div className="flex gap-3 items-start">
+                        <span className="text-[10px] font-mono text-slate-500 font-semibold mt-0.5 whitespace-nowrap">
+                          {faq.id.replace("faq-", "#")}
+                        </span>
+                        <div className="space-y-1">
+                          <span className="text-[9.5px] uppercase font-bold text-sky-400 tracking-wider">
+                            {faq.category}
+                          </span>
+                          <h3 className="font-display font-bold text-sm text-white leading-snug">
+                            {faq.question}
+                          </h3>
+                        </div>
+                      </div>
+                      <div className="bg-slate-950 p-1.5 rounded-lg border border-slate-850 text-slate-450 flex-shrink-0 mt-1">
+                        {isExpanded ? <ChevronUp className="h-4 w-4 text-slate-300" /> : <ChevronDown className="h-4 w-4 text-slate-450" />}
+                      </div>
+                    </button>
+
+                    {isExpanded && (
+                      <div className="px-5 pb-5 pt-1 border-t border-slate-850">
+                        <div className="text-slate-300 text-[12.5px] leading-relaxed pl-7 italic font-sans">
+                          {faq.answer}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="bg-slate-950 rounded-3xl p-12 text-center border border-slate-850">
+              <HelpCircle className="h-10 w-10 text-slate-600 mx-auto mb-4" />
+              <h4 className="font-display font-bold text-white text-sm mb-1">No FAQ entries match your exact query</h4>
+              <p className="text-xs text-slate-400 font-sans">Try modifying your search text or switching the category filter.</p>
+            </div>
+          )}
 
         </div>
       </section>

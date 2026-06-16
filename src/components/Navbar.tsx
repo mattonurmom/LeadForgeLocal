@@ -19,7 +19,7 @@ export default function Navbar({ currentTab, setTab, showAdminHub, setShowAdminH
     { id: "services", label: "Services" },
     { id: "pricing", label: "Pricing Packages" },
     { id: "portfolio", label: "Sample Work" },
-    { id: "audit", label: "Free Audit" },
+    { id: "audit", label: "Visibility Review" },
     { id: "contact", label: "Contact" },
   ];
 
@@ -90,11 +90,11 @@ export default function Navbar({ currentTab, setTab, showAdminHub, setShowAdminH
           </a>
 
           <button
-            onClick={() => handleNav("audit", "Get My Free Business Audit CTA")}
+            onClick={() => handleNav("audit", "Get My Free Visibility Review CTA")}
             id="nav-cta"
             className="flex items-center gap-1.5 rounded-xl bg-blue-600 px-4.5 py-2.5 text-xs font-bold text-white shadow-lg shadow-blue-500/25 hover:bg-blue-700 hover:shadow-blue-600/30 active:scale-95 transition-all cursor-pointer"
           >
-            <span>Get My Free Business Audit</span>
+            <span>Get My Free Visibility Review</span>
             <ArrowRight className="h-3.5 w-3.5" />
           </button>
         </div>
@@ -161,7 +161,7 @@ export default function Navbar({ currentTab, setTab, showAdminHub, setShowAdminH
                   onClick={() => handleNav("audit", "mobile_dropdown_audit_cta")}
                   className="flex items-center justify-center gap-2 w-full rounded-xl bg-blue-600 text-white font-bold py-3.5 text-sm shadow-lg shadow-blue-500/25 active:scale-95 touch-manipulation"
                 >
-                  <span>Get My Free Business Audit</span>
+                  <span>Get My Free Visibility Review</span>
                   <ArrowRight className="h-4 w-4" />
                 </button>
               </div>
